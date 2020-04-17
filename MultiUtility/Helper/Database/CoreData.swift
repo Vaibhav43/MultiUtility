@@ -16,6 +16,14 @@ class CoreData{
     
     //MARK:- initiate
     
+    func createNewContext(mergeWithParent: Bool) -> NSManagedObjectContext{
+        
+        let managedContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        managedContext.parent = CoreData.shared.persistentContainer.viewContext
+        managedContext.automaticallyMergesChangesFromParent = mergeWithParent
+        return managedContext
+    }
+    
     func initiaze(){
         managedContext = persistentContainer.viewContext
     }
@@ -49,11 +57,10 @@ class CoreData{
         return container
     }()
     
-    // MARK: - Core Data Saving support
-    
     func saveContext () {
         if managedContext.hasChanges {
             do {
+                
                 try managedContext.save()
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
@@ -67,11 +74,11 @@ class CoreData{
 
 extension NSManagedObject{
     
-    class func create<T: NSManagedObject>() -> T {
+    class func create<T: NSManagedObject>(context: NSManagedObjectContext? = nil) -> T {
         
-        guard let entityDescription = NSEntityDescription.entity(forEntityName: T.entityName, in: CoreData.shared.managedContext) else { fatalError("Unable to create \(T.entityName) NSEntityDescription") }
+        guard let entityDescription = NSEntityDescription.entity(forEntityName: T.entityName, in: context ?? CoreData.shared.managedContext) else { fatalError("Unable to create \(T.entityName) NSEntityDescription") }
         
-        guard let object = NSManagedObject(entity: entityDescription, insertInto: CoreData.shared.managedContext) as? T else { fatalError("Unable to create \(T.entityName) NSManagedObject")}
+        guard let object = NSManagedObject(entity: entityDescription, insertInto: context ?? CoreData.shared.managedContext) as? T else { fatalError("Unable to create \(T.entityName) NSManagedObject")}
         
         return object
     }
@@ -82,34 +89,24 @@ extension NSManagedObject{
         return name
     }
     
-    func save(){
+    func delete(context: NSManagedObjectContext? = nil){
         
-//        guard let name = self.entity.name, let entityDesc = NSEntityDescription.entity(forEntityName: name, in: CoreData.shared.managedContext) else {return}
-//        let obj = NSManagedObject.init(entity: entityDesc, insertInto: CoreData.shared.managedContext)
-//
-//        for property in entityDesc.propertiesByName{
-//
-//            if let value = self.value(forKey: property.key){
-//                obj.setValue(value, forKey: property.key)
-//            }
-//        }
-        
-        CoreData.shared.saveContext()
-    }
-    
-    func delete(){
-        CoreData.shared.managedContext.delete(self)
-        CoreData.shared.saveContext()
+        if context != nil{
+            context?.delete(self)
+            context?.saveContext()
+        }
+        else{
+            CoreData.shared.managedContext.delete(self)
+            CoreData.shared.managedContext.saveContext()
+            
+        }
     }
     
     class func fetch<T: NSManagedObject>(sort: [NSSortDescriptor]? = nil, predicate: NSPredicate?) -> [T]? {
         
-        let request = NSFetchRequest<T>(entityName: entityName)
-        request.returnsObjectsAsFaults = false
-        request.sortDescriptors = sort
-        request.predicate = predicate
+        let request: NSFetchRequest<T> = fetch_request(sort: sort, predicate: predicate)
+        
         do {
-            
             let result = try CoreData.shared.managedContext.fetch(request)
             return result
         } catch {
@@ -117,22 +114,29 @@ extension NSManagedObject{
             return nil
         }
     }
-}
-
-extension Dictionary where Key == String{
     
-    static func fetch<T: NSManagedObject>(name: String, sort: [NSSortDescriptor]? = nil) -> [T]? {
+    class func fetch_request<T: NSManagedObject>(sort: [NSSortDescriptor]? = nil, predicate: NSPredicate?) -> NSFetchRequest<T> {
         
-        let request = NSFetchRequest<T>(entityName: name)
+        let request = NSFetchRequest<T>(entityName: entityName)
         request.returnsObjectsAsFaults = false
         request.sortDescriptors = sort
+        request.predicate = predicate
+        return request
+    }
+}
+
+// MARK: - Core Data Saving support
+extension NSManagedObjectContext{
+    
+    func saveContext () {
+        guard self.hasChanges else { return }
         do {
-            
-            let result = try CoreData.shared.managedContext.fetch(request)
-            return result
+            try self.save()
         } catch {
-            print(error.localizedDescription)
-            return nil
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
 }
@@ -169,15 +173,15 @@ extension Array{
         return arrayOrdered
     }
     
-//    func reset<T:Hashable>(variable: ((Element) -> (T)), value: T) -> [Element]{
-//
-//        var newArray = self
-//
-//        for (index, element) in self.enumerated(){
-//            variable(newArray[index])
-//            newArray[index](variable) = value
-//        }
-//
-//        return newArray
-//    }
+    //    func reset<T:Hashable>(variable: ((Element) -> (T)), value: T) -> [Element]{
+    //
+    //        var newArray = self
+    //
+    //        for (index, element) in self.enumerated(){
+    //            variable(newArray[index])
+    //            newArray[index](variable) = value
+    //        }
+    //
+    //        return newArray
+    //    }
 }

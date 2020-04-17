@@ -36,10 +36,7 @@ class AddAlarmViewController: VBVViewController {
     //MARK:- instance
     
     class func instance(controller: UIViewController){
-        
-        let vc = AddAlarmViewController.initFromNib
-        vc.addAlarmViewModel.delegate = controller as? AlarmAddedDelegate
-        vc.present()
+        AddAlarmViewController.initFromNib.present()
     }
     
     //MARK:- setup
@@ -56,11 +53,13 @@ class AddAlarmViewController: VBVViewController {
     }
     
     func setProperties(){
-        
+        addAlarmViewModel.initialize()
         addAlarmViewModel.reloadTable = { [weak self] in
             self?.tableView.reloadData()
         }
     }
+    
+    //MARK:- Actions
     
     @objc func saveClicked(){
         addAlarmViewModel.saveAlarm()

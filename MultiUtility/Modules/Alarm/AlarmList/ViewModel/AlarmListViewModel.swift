@@ -13,37 +13,32 @@ import CoreData
 
 class AlarmListViewModel: NSObject{
     
-    var reloadTable: (() -> ())?
+    //MARK:- Properties
+    
+    var managedContext = CoreData.shared.createNewContext(mergeWithParent: true)
     var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController<Reminder>()
-    var alarmList = GenericObserverDataSource<Reminder>()
+    
+    //MARK:- Delete
     
     func showDeletePopUp(index: Int){
         
         UIApplication.topViewController?.alert(title: Messages.AlarmM.alarm, message: Messages.AlarmM.delete_alarm, defaultButton: "Yes", cancelButton: "No", completion: { (success) in
             
+            if success{
+                guard let objects = self.fetchedResultController.fetchedObjects else {return}
+                objects[index].delete(context: self.managedContext)
+            }
         })
     }
     
-    func fetchData(){
-        let predicate = NSPredicate(format: "reminder_time >= %@ AND reminder_time <= %@", Date().startOfDay as CVarArg, Date().endOfDay as CVarArg)
-        
-        if let array: [Reminder] = Reminder.fetch(sort: [NSSortDescriptor(key: #keyPath(Reminder.reminder_time), ascending: true)], predicate: predicate){
-            alarmList.data.value = array
-        }
-    }
+    //MARK:- fetch
     
     func fetchResults() {
-        let fetchRequest = NSFetchRequest<Reminder>(entityName: Reminder.entityName)
-        let sortDescriptor = NSSortDescriptor(key: "reminder_time", ascending: true)
         
-        //AND reminderTime <= %@    , Date().endOfDay as CVarArg
-        let predicate = NSPredicate(format: "reminder_time >= %@", Date().startOfDay as CVarArg)
+        let fetchRequest: NSFetchRequest<Reminder> = Reminder.fetch_request(sort: [NSSortDescriptor(key: "reminder_time", ascending: true)], predicate: NSPredicate(format: "reminder_time >= %@", Date().startOfDay as CVarArg))
         
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        fetchRequest.predicate = predicate
+        fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
         
-        fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreData.shared.managedContext, sectionNameKeyPath: nil, cacheName: nil)
-        fetchedResultController.delegate = self
         do {
             try fetchedResultController.performFetch()
         }
@@ -52,25 +47,3 @@ class AlarmListViewModel: NSObject{
         }
     }
 }
-
-extension AlarmListViewModel: NSFetchedResultsControllerDelegate{
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        print("change happends")
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at     indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        
-        switch type {
-        case .insert:
-            
-            if let index = newIndexPath{
-                self.reloadTable?()
-            }
-            
-        default:
-            break
-        }
-    }
-}
-

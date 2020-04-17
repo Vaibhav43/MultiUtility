@@ -15,7 +15,7 @@ class AlarmViewModel{
     var resetAll: (()->())?
     var timerChanged: (()->())?
     
-    //MARK:- Variables
+    //MARK:- Properties
     
     var timeInterval: TimeInterval = 0
     

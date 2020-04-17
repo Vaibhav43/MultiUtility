@@ -21,7 +21,6 @@ class AlarmListViewController: UIViewController {
     
     var alarmListViewModel = AlarmListViewModel()
     
-    
     //MARK:- lifecycle
     
     override func viewDidLoad() {
@@ -33,23 +32,13 @@ class AlarmListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setHeader()
-        
     }
     
     //MARK:- Setup
     
     func setProperties(){
-        
-        alarmListViewModel.reloadTable = { [weak self] in
-            self?.tableView.reloadData()
-        }
-        
-//                alarmListViewModel.alarmList.data.addAndNotify(observer: self) { [weak self] (alarmList) in
-//                    self?.tableView.reloadData()
-//                }
-        
-//                alarmListViewModel.fetchData()
         alarmListViewModel.fetchResults()
+        alarmListViewModel.fetchedResultController.delegate = self
     }
     
     func setHeader(){
@@ -74,15 +63,12 @@ extension AlarmListViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            // handle delete (by removing the data from your array and updating the tableview)
-            self.alarmListViewModel.alarmList.data.value[indexPath.row].delete()
-            self.alarmListViewModel.alarmList.data.value.remove(at: indexPath.row)
+            self.alarmListViewModel.showDeletePopUp(index: indexPath.row)
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return alarmListViewModel.fetchedResultController.fetchedObjects?.count ?? 0//alarmListViewModel.alarmList.data.value.count
+        return alarmListViewModel.fetchedResultController.fetchedObjects?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -95,16 +81,40 @@ extension AlarmListViewController: UITableViewDelegate, UITableViewDataSource{
             return UITableViewCell()
         }
         
-        //        let alarm = alarmListViewModel.alarmList.data.value[indexPath.row]
         cell.reminder = objects[indexPath.row] //alarm
         return cell
     }
 }
 
-
-extension AlarmListViewController: AlarmAddedDelegate{
+extension AlarmListViewController: NSFetchedResultsControllerDelegate{
     
-    func alarmAdded(_ alarm: Reminder){
-        self.alarmListViewModel.alarmList.data.value.append(alarm)
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        print("change happens")
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at     indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        switch (type) {
+        case .insert:
+            
+            if let indexPath = newIndexPath {
+                tableView.insertRows(at: [indexPath], with: .automatic)
+            }
+            
+        case .delete:
+            
+            if let indexPath = indexPath {
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            
+        case .update:
+            
+            if let indexPath = indexPath {
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+            
+        default:
+            break
+        }
     }
 }

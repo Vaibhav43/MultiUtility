@@ -7,25 +7,31 @@
 //
 
 import Foundation
+import CoreData
 import UIKit
-
-protocol AlarmAddedDelegate {
-    func alarmAdded(_ alarm: Reminder)
-}
 
 class AddAlarmViewModel{
     
-    var delegate: AlarmAddedDelegate?
+    //MARK:- Properties
+    
+    var managedContext = CoreData.shared.createNewContext(mergeWithParent: true)
     var reloadTable: (() -> ())?
-    var alarm: Reminder = Reminder.create()
+    var alarm: Reminder = Reminder()
     let cellArray: [(String, String)] = [("Title", "Enter Title"), ("Message", "Enter Message"), ("Tasks", "Select Task"), ("Alarm", "Select Time")]
+    
+    //MARK:- setup
+    
+    func initialize(){
+        alarm = Reminder.create(context: managedContext)
+    }
+    
+    //MARK:- Save
     
     func saveAlarm(){
         
         alarm.created_time = Date()
-        alarm.save()
+        managedContext.saveContext()
         alarm.setReminder()
-        delegate?.alarmAdded(alarm)
     }
     
     //MARK:- UI
