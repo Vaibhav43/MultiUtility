@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="LineChartView" customModule="EvolkoPatientApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Uq-0t-IAG">
+                    <rect key="frame" x="187.5" y="25" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cxr-Ez-ROm">
+                    <rect key="frame" x="0.0" y="30" width="375" height="637"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4An-1v-Rht" customClass="LineChart" customModule="EvolkoPatientApp" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="573.5"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="375" id="SVd-4e-zXM"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="4An-1v-Rht" secondAttribute="trailing" id="GHe-y7-xOd"/>
+                        <constraint firstItem="4An-1v-Rht" firstAttribute="leading" secondItem="Cxr-Ez-ROm" secondAttribute="leading" id="Q9h-wk-K8y"/>
+                        <constraint firstAttribute="bottom" secondItem="4An-1v-Rht" secondAttribute="bottom" id="eXw-Sg-efh"/>
+                        <constraint firstItem="4An-1v-Rht" firstAttribute="top" secondItem="Cxr-Ez-ROm" secondAttribute="top" id="rzg-r0-0kY"/>
+                        <constraint firstItem="4An-1v-Rht" firstAttribute="height" secondItem="Cxr-Ez-ROm" secondAttribute="height" multiplier="0.9" id="sA8-Jp-chz"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Cxr-Ez-ROm" secondAttribute="bottom" id="3A1-en-3BA"/>
+                <constraint firstItem="1Uq-0t-IAG" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="5" id="LF0-1a-qtX"/>
+                <constraint firstItem="1Uq-0t-IAG" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Wdd-fa-U24"/>
+                <constraint firstItem="Cxr-Ez-ROm" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="hRD-q1-cZ9"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Cxr-Ez-ROm" secondAttribute="trailing" id="n6u-hO-rgj"/>
+                <constraint firstItem="Cxr-Ez-ROm" firstAttribute="top" secondItem="1Uq-0t-IAG" secondAttribute="bottom" constant="5" id="oxY-T4-6QE"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="headingLabel" destination="1Uq-0t-IAG" id="kJv-xC-Q3g"/>
+                <outlet property="lineChart" destination="4An-1v-Rht" id="g5q-K5-UtW"/>
+                <outlet property="lineChartWidth" destination="SVd-4e-zXM" id="9gq-P4-Hch"/>
+                <outlet property="scrollView" destination="Cxr-Ez-ROm" id="27R-53-uQQ"/>
+            </connections>
+        </view>
+    </objects>
+</document>
