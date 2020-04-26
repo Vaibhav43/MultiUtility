@@ -15,7 +15,7 @@ class AlarmListViewModel: NSObject{
     
     //MARK:- Properties
     
-    var managedContext = CoreData.shared.createNewContext(mergeWithParent: true)
+    var managedContext = CoreData.shared.persistentContainer.newBackgroundContext()
     var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController<Reminder>()
     
     //MARK:- Delete
@@ -34,8 +34,8 @@ class AlarmListViewModel: NSObject{
     //MARK:- fetch
     
     func fetchResults() {
-        
-        let fetchRequest: NSFetchRequest<Reminder> = Reminder.fetch_request(sort: [NSSortDescriptor(key: "reminder_time", ascending: true)], predicate: NSPredicate(format: "reminder_time >= %@", Date().startOfDay as CVarArg))
+        //NSPredicate(format: "reminder_time >= %@", Date().startOfDay as CVarArg)
+        let fetchRequest: NSFetchRequest<Reminder> = Reminder.fetch_request(sort: [NSSortDescriptor(key: "reminder_time", ascending: true)], predicate: nil)
         
         fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
         

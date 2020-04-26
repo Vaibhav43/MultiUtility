@@ -51,7 +51,7 @@ class AlarmListViewController: UIViewController {
     //MARK:- Action handling
     
     @IBAction func addClicked(_ sender: UIButton){
-        AddAlarmViewController.instance(controller: self)
+        AddAlarmViewController.instance(controller: self, context: alarmListViewModel.managedContext)
     }
 }
 

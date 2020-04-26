@@ -14,7 +14,7 @@ class AddAlarmViewModel{
     
     //MARK:- Properties
     
-    var managedContext = CoreData.shared.createNewContext(mergeWithParent: true)
+    var managedContext = CoreData.shared.managedContext
     var reloadTable: (() -> ())?
     var alarm: Reminder = Reminder()
     let cellArray: [(String, String)] = [("Title", "Enter Title"), ("Message", "Enter Message"), ("Tasks", "Select Task"), ("Alarm", "Select Time")]
@@ -31,7 +31,7 @@ class AddAlarmViewModel{
         
         alarm.created_time = Date()
         managedContext.saveContext()
-        alarm.setReminder()
+//        alarm.setReminder()
     }
     
     //MARK:- UI

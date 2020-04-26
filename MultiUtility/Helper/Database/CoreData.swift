@@ -16,14 +16,6 @@ class CoreData{
     
     //MARK:- initiate
     
-    func createNewContext(mergeWithParent: Bool) -> NSManagedObjectContext{
-        
-        let managedContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        managedContext.parent = CoreData.shared.persistentContainer.viewContext
-        managedContext.automaticallyMergesChangesFromParent = mergeWithParent
-        return managedContext
-    }
-    
     func initiaze(){
         managedContext = persistentContainer.viewContext
     }
@@ -98,7 +90,6 @@ extension NSManagedObject{
         else{
             CoreData.shared.managedContext.delete(self)
             CoreData.shared.managedContext.saveContext()
-            
         }
     }
     
@@ -128,6 +119,14 @@ extension NSManagedObject{
 // MARK: - Core Data Saving support
 extension NSManagedObjectContext{
     
+    func newContext(mergeWithParent: Bool) -> NSManagedObjectContext{
+        
+        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        context.parent = self
+        context.automaticallyMergesChangesFromParent = mergeWithParent
+        return context
+    }
+    
     func saveContext () {
         guard self.hasChanges else { return }
         do {
@@ -139,49 +138,4 @@ extension NSManagedObjectContext{
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
-}
-
-extension Array{
-    
-    func common<T:Hashable>(second: T, map: ((Element) -> (T)))  -> [Element] {
-        var set = Set<T>() //the unique list kept in a Set for fast retrieval
-        let set2 = Set<T>(arrayLiteral: second)
-        
-        var arrayOrdered = [Element]() //keeping the unique list of elements but ordered
-        
-        for value in self {
-            
-            if !set2.contains(map(value)) {
-                set.insert(map(value))
-                arrayOrdered.append(value)
-            }
-        }
-        
-        return arrayOrdered
-    }
-    
-    func unique<T:Hashable>(map: ((Element) -> (T)))  -> [Element] {
-        var set = Set<T>() //the unique list kept in a Set for fast retrieval
-        var arrayOrdered = [Element]() //keeping the unique list of elements but ordered
-        for value in self {
-            if !set.contains(map(value)) {
-                set.insert(map(value))
-                arrayOrdered.append(value)
-            }
-        }
-        
-        return arrayOrdered
-    }
-    
-    //    func reset<T:Hashable>(variable: ((Element) -> (T)), value: T) -> [Element]{
-    //
-    //        var newArray = self
-    //
-    //        for (index, element) in self.enumerated(){
-    //            variable(newArray[index])
-    //            newArray[index](variable) = value
-    //        }
-    //
-    //        return newArray
-    //    }
 }

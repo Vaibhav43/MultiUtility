@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AddAlarmViewController: VBVViewController {
     
@@ -35,8 +36,10 @@ class AddAlarmViewController: VBVViewController {
     
     //MARK:- instance
     
-    class func instance(controller: UIViewController){
-        AddAlarmViewController.initFromNib.present()
+    class func instance(controller: UIViewController, context: NSManagedObjectContext){
+        let vc = AddAlarmViewController.initFromNib
+        vc.addAlarmViewModel.managedContext = context.newContext(mergeWithParent: true)
+        vc.present()
     }
     
     //MARK:- setup
