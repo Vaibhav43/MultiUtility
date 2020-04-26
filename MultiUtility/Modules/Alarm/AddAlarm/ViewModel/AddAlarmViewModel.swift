@@ -48,7 +48,7 @@ class AddAlarmViewModel{
     
     func showDate(){
         
-        VBVDatePicker.shared.initiate(heading: "Select Reminder Date", mode: .dateAndTime, minimum: Date()) { (selectedDate) in
+        VBVDatePicker.shared.initiate(heading: "Select Reminder Date", mode: .dateAndTime, minimum: Date(), date: alarm.reminder_time) { (selectedDate) in
             guard let selectedDate = selectedDate else {return}
             self.alarm.reminder_time = selectedDate
             self.reloadTable?()

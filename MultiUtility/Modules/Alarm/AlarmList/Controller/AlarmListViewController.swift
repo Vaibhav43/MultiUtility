@@ -116,7 +116,7 @@ extension AlarmListViewController: NSFetchedResultsControllerDelegate{
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             }
             
-        case .update:
+        case .update, .move:
             
             if let indexPath = indexPath {
                 tableView.reloadRows(at: [indexPath], with: .automatic)
