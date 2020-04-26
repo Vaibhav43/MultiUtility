@@ -25,20 +25,25 @@ class AddAlarmViewController: VBVViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setProperties()
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setProperties()
         setHeader()
     }
     
     //MARK:- instance
     
-    class func instance(controller: UIViewController, context: NSManagedObjectContext){
+    class func instance(controller: UIViewController, context: NSManagedObjectContext, reminder: Reminder?){
         let vc = AddAlarmViewController.initFromNib
-        vc.addAlarmViewModel.managedContext = context.newContext(mergeWithParent: true)
+        vc.addAlarmViewModel.managedContext = context//.newContext(mergeWithParent: true)
+        
+        if let rem = reminder{
+            vc.addAlarmViewModel.alarm = rem
+        }
+        
         vc.present()
     }
     
@@ -56,7 +61,11 @@ class AddAlarmViewController: VBVViewController {
     }
     
     func setProperties(){
-        addAlarmViewModel.initialize()
+        
+        if addAlarmViewModel.alarm.managedObjectContext == nil{
+            addAlarmViewModel.initialize()
+        }
+        
         addAlarmViewModel.reloadTable = { [weak self] in
             self?.tableView.reloadData()
         }
@@ -65,6 +74,7 @@ class AddAlarmViewController: VBVViewController {
     //MARK:- Actions
     
     @objc func saveClicked(){
+        self.view.endEditing(true)
         addAlarmViewModel.saveAlarm()
         backPressed()
     }

@@ -51,7 +51,11 @@ class AlarmListViewController: UIViewController {
     //MARK:- Action handling
     
     @IBAction func addClicked(_ sender: UIButton){
-        AddAlarmViewController.instance(controller: self, context: alarmListViewModel.managedContext)
+        addAlarm(reminder: nil)
+    }
+    
+    func addAlarm(reminder: Reminder?){
+        AddAlarmViewController.instance(controller: self, context: alarmListViewModel.managedContext, reminder: reminder)
     }
 }
 
@@ -83,6 +87,11 @@ extension AlarmListViewController: UITableViewDelegate, UITableViewDataSource{
         
         cell.reminder = objects[indexPath.row] //alarm
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let reminder = alarmListViewModel.fetchedResultController.fetchedObjects?[indexPath.row]
+        addAlarm(reminder: reminder)
     }
 }
 
