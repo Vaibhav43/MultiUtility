@@ -66,13 +66,26 @@ extension AlarmListViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
         if (editingStyle == .delete) {
             self.alarmListViewModel.showDeletePopUp(index: indexPath.row)
         }
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return alarmListViewModel.fetchedResultController.sections?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        guard let sections = alarmListViewModel.fetchedResultController.sections else {return nil}
+        return sections[section].name
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return alarmListViewModel.fetchedResultController.fetchedObjects?.count ?? 0
+        
+        guard let sections = alarmListViewModel.fetchedResultController.sections else {return 0}
+        return sections[section].numberOfObjects
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -81,11 +94,11 @@ extension AlarmListViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: AlarmListTableViewCell.identifier) as? AlarmListTableViewCell, let objects = alarmListViewModel.fetchedResultController.fetchedObjects else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AlarmListTableViewCell.identifier) as? AlarmListTableViewCell, let sections = alarmListViewModel.fetchedResultController.sections, let object = sections[indexPath.section].objects?[indexPath.row] as? Reminder else {
             return UITableViewCell()
         }
         
-        cell.reminder = objects[indexPath.row] //alarm
+        cell.reminder = object
         return cell
     }
     

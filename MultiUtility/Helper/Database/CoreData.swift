@@ -93,7 +93,7 @@ extension NSManagedObject{
         }
     }
     
-    class func fetch<T: NSManagedObject>(sort: [NSSortDescriptor]? = nil, predicate: NSPredicate?) -> [T]? {
+    class func fetch<T: NSManagedObject>(sort: [NSSortDescriptor]? = nil, predicate: NSPredicate?, relationshipPath: [String]) -> [T]? {
         
         let request: NSFetchRequest<T> = fetch_request(sort: sort, predicate: predicate)
         
@@ -112,6 +112,8 @@ extension NSManagedObject{
         request.returnsObjectsAsFaults = false
         request.sortDescriptors = sort
         request.predicate = predicate
+        
+        
         return request
     }
 }

@@ -34,13 +34,14 @@ class AlarmListViewModel: NSObject{
     //MARK:- fetch
     
     func fetchResults() {
-        //NSPredicate(format: "reminder_time >= %@", Date().startOfDay as CVarArg)
-        let fetchRequest: NSFetchRequest<Reminder> = Reminder.fetch_request(sort: [NSSortDescriptor(key: "reminder_time", ascending: true)], predicate: nil)
+    
+        let fetchRequest: NSFetchRequest<Reminder> = Reminder.fetch_request(sort: [NSSortDescriptor(key: "reminder_time", ascending: true)], predicate: NSPredicate(format: "reminder_time >= %@", Date().startOfDay as CVarArg))
         
-        fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: "task", cacheName: nil)
         
         do {
             try fetchedResultController.performFetch()
+            print(fetchedResultController)
         }
         catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
