@@ -11,8 +11,35 @@ import UIKit
 
 extension AppDelegate{
     
+    static var rootWindow: UIWindow?{
+        
+        if #available(iOS 13.0, *){
+            SceneDelegate.instance.window?.overrideUserInterfaceStyle = .light
+            return SceneDelegate.instance.window
+        }
+        
+        return instance.window
+    }
+    
     static var instance: AppDelegate{
         return UIApplication.shared.delegate as! AppDelegate
+    }
+    
+    static var navigation: UINavigationController?{
+        
+        if #available(iOS 13.0, *){
+            return SceneDelegate.navigation
+        }
+        
+        return instance.window?.rootViewController as? UINavigationController
+    }
+}
+
+@available(iOS 13.0, *)
+extension SceneDelegate{
+    
+    static var instance: SceneDelegate{
+        return UIApplication.shared.connectedScenes.first!.delegate as! SceneDelegate
     }
     
     static var navigation: UINavigationController?{

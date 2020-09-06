@@ -137,8 +137,7 @@ extension UIView{
         self.clipsToBounds = true
     }
     
-    
-    func applyGradient(isVertical: Bool, colors: [UIColor]) {
+    func addGradient(isVertical: Bool, colors: [UIColor]) {
         
         ///remove all layers before adding new
         layer.sublayers?.forEach({ (layer) in
