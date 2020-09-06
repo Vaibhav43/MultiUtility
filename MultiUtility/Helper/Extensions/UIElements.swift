@@ -137,6 +137,35 @@ extension UIView{
         self.clipsToBounds = true
     }
     
+    
+    func applyGradient(isVertical: Bool, colors: [UIColor]) {
+        
+        ///remove all layers before adding new
+        layer.sublayers?.forEach({ (layer) in
+            
+            if layer is CAGradientLayer{
+                layer.removeFromSuperlayer()
+            }
+        })
+                 
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = colors.map({ $0.cgColor })
+        
+        if isVertical {
+            //top to bottom
+            gradientLayer.locations = [0.0, 1.0]
+        }
+        else {
+            //left to right
+            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+            gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+        }
+        
+        backgroundColor = .clear
+        gradientLayer.frame = bounds
+        layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
     func removeShadow() {
         
         self.layer.shadowOffset = CGSize(width: 0 , height: 0)
