@@ -94,7 +94,7 @@ extension UIStoryboard{
 
 extension UIBarButtonItem{
     
-    convenience init(title: String? = nil, attributed: NSMutableAttributedString? = nil, image: String? = nil, color: UIColor = UIColor.custom_appearance, target: AnyObject? = nil, action: Selector? = nil) {
+    convenience init(title: String? = nil, attributed: NSMutableAttributedString? = nil, image: String? = nil, color: UIColor = UIColor.Alarm.kappearance, target: AnyObject? = nil, action: Selector? = nil) {
         
         let button = UIButton()
         button.setTitle(title, for: .normal)

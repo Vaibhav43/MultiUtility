@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 extension Reminder {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Reminder> {
@@ -22,5 +21,4 @@ extension Reminder {
     @NSManaged public var task: String?
     @NSManaged public var created_time: Date?
     @NSManaged public var reminder_time: Date?
-
 }

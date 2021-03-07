@@ -284,7 +284,7 @@ extension UIViewController{
             navigation.modalPresentationStyle = .custom
         }
         
-        navigation.navigationBar.tintColor = UIColor.custom_appearance
+        navigation.navigationBar.tintColor = UIColor.Alarm.kappearance
         return navigation
     }
     
@@ -471,7 +471,7 @@ extension UIViewController{
             
             let action = UIAlertAction(title: string, style: .default, handler: closure)
             //  action.setValue(0, forKey: "titleTextAlignment")
-            action.setValue(UIColor.custom_appearance, forKey: "titleTextColor")
+            action.setValue(UIColor.Alarm.kappearance, forKey: "titleTextColor")
             
             if let images = images, images.count>i, let image = UIImage(named: images[i])?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal){
                 action.setValue(UIColor.black, forKey: "titleTextColor")

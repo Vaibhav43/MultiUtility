@@ -31,7 +31,7 @@ class AddAlarmViewModel{
         
         alarm?.created_time = Date()
         managedContext.saveContext()
-//        alarm.setReminder()
+        alarm?.setReminder()
     }
     
     //MARK:- UI

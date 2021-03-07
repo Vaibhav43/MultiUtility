@@ -351,7 +351,7 @@ open class LineChart: UIView {
             self.addSubview(label)
             label.font = UIFont.systemFont(ofSize: 10)
             label.textAlignment = .center
-            label.textColor = UIColor.custom_appearance
+            label.textColor = UIColor.Alarm.kappearance
             label.adjustsFontSizeToFitWidth = true
             
             var diff: CGFloat = 0
@@ -475,7 +475,7 @@ open class LineChart: UIView {
             let layer = CAShapeLayer()
             layer.frame = self.bounds
             layer.path = path.cgPath
-            layer.strokeColor = UIColor.custom_appearance.cgColor//colors[lineIndex].cgColor
+            layer.strokeColor = UIColor.Alarm.kappearance.cgColor//colors[lineIndex].cgColor
             layer.fillColor = nil
             layer.lineWidth = lineWidth
             self.layer.addSublayer(layer)

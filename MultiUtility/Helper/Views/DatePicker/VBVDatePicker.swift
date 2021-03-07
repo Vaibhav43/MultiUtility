@@ -70,7 +70,7 @@ class VBVDatePicker: UIView{
         toolBar = UIToolbar()
         toolBar.translatesAutoresizingMaskIntoConstraints = false
         toolBar.barStyle = UIBarStyle.default
-        toolBar.tintColor = UIColor.custom_appearance
+        toolBar.tintColor = UIColor.Alarm.kappearance
         toolBar.sizeToFit()
     }
     

@@ -94,6 +94,11 @@
 		DF13EE23244A2D93006E3BD0 /* AlarmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13EE0F244A2D93006E3BD0 /* AlarmViewModel.swift */; };
 		DF13EE24244A2D93006E3BD0 /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13EE11244A2D93006E3BD0 /* AlarmViewController.swift */; };
 		DF13EE27244A2D93006E3BD0 /* AlarmViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF13EE16244A2D93006E3BD0 /* AlarmViewController.xib */; };
+		DF805F8625F508C90021ADD3 /* AddNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805F8425F508C90021ADD3 /* AddNotesViewController.swift */; };
+		DF805F8725F508C90021ADD3 /* AddNotesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF805F8525F508C90021ADD3 /* AddNotesViewController.xib */; };
+		DF805F8B25F508DF0021ADD3 /* AddNotesViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805F8A25F508DF0021ADD3 /* AddNotesViewModal.swift */; };
+		DF805F9525F50A920021ADD3 /* Notes+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805F9325F50A920021ADD3 /* Notes+CoreDataClass.swift */; };
+		DF805F9625F50A920021ADD3 /* Notes+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805F9425F50A920021ADD3 /* Notes+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -187,6 +192,11 @@
 		DF13EE0F244A2D93006E3BD0 /* AlarmViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmViewModel.swift; sourceTree = "<group>"; };
 		DF13EE11244A2D93006E3BD0 /* AlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
 		DF13EE16244A2D93006E3BD0 /* AlarmViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlarmViewController.xib; sourceTree = "<group>"; };
+		DF805F8425F508C90021ADD3 /* AddNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesViewController.swift; sourceTree = "<group>"; };
+		DF805F8525F508C90021ADD3 /* AddNotesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddNotesViewController.xib; sourceTree = "<group>"; };
+		DF805F8A25F508DF0021ADD3 /* AddNotesViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesViewModal.swift; sourceTree = "<group>"; };
+		DF805F9325F50A920021ADD3 /* Notes+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notes+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DF805F9425F50A920021ADD3 /* Notes+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notes+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -418,6 +428,7 @@
 		DF13EDF2244A2D93006E3BD0 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				DF805F7E25F507D80021ADD3 /* Notes */,
 				DF13EDF3244A2D93006E3BD0 /* Alarm */,
 			);
 			path = Modules;
@@ -600,6 +611,58 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		DF805F7E25F507D80021ADD3 /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				DF805F7F25F507E10021ADD3 /* AddNotes */,
+			);
+			path = Notes;
+			sourceTree = "<group>";
+		};
+		DF805F7F25F507E10021ADD3 /* AddNotes */ = {
+			isa = PBXGroup;
+			children = (
+				DF805F8D25F509E30021ADD3 /* Modal */,
+				DF805F8325F507F90021ADD3 /* ViewModal */,
+				DF805F8225F507F40021ADD3 /* View */,
+				DF805F8125F507EE0021ADD3 /* Controller */,
+			);
+			path = AddNotes;
+			sourceTree = "<group>";
+		};
+		DF805F8125F507EE0021ADD3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DF805F8425F508C90021ADD3 /* AddNotesViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DF805F8225F507F40021ADD3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DF805F8525F508C90021ADD3 /* AddNotesViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DF805F8325F507F90021ADD3 /* ViewModal */ = {
+			isa = PBXGroup;
+			children = (
+				DF805F8A25F508DF0021ADD3 /* AddNotesViewModal.swift */,
+			);
+			path = ViewModal;
+			sourceTree = "<group>";
+		};
+		DF805F8D25F509E30021ADD3 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				DF805F9325F50A920021ADD3 /* Notes+CoreDataClass.swift */,
+				DF805F9425F50A920021ADD3 /* Notes+CoreDataProperties.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -664,6 +727,7 @@
 				DF13EDF1244A2D6D006E3BD0 /* breakTime.aiff in Resources */,
 				DF13EE1C244A2D93006E3BD0 /* AlarmListTableViewCell.xib in Resources */,
 				DF13EE1B244A2D93006E3BD0 /* AlarmListViewController.xib in Resources */,
+				DF805F8725F508C90021ADD3 /* AddNotesViewController.xib in Resources */,
 				DF13EDAE244A2823006E3BD0 /* CustomBarChartView.xib in Resources */,
 				DF13EE27244A2D93006E3BD0 /* AlarmViewController.xib in Resources */,
 				DF13EE18244A2D93006E3BD0 /* TabViewController.xib in Resources */,
@@ -690,6 +754,7 @@
 				DF13EE17244A2D93006E3BD0 /* TabViewController.swift in Sources */,
 				DF13ED5D244A2818006E3BD0 /* Session.swift in Sources */,
 				DF13EDE1244A2823006E3BD0 /* VBVButton.swift in Sources */,
+				DF805F9525F50A920021ADD3 /* Notes+CoreDataClass.swift in Sources */,
 				DF13EDE2244A2823006E3BD0 /* VBVTextfield.swift in Sources */,
 				DF13EDEB244A28F6006E3BD0 /* Reminder+CoreDataProperties.swift in Sources */,
 				DF13EDC9244A2823006E3BD0 /* SpinnerBallRotate.swift in Sources */,
@@ -721,6 +786,7 @@
 				DF13EDDC244A2823006E3BD0 /* ProgressView.swift in Sources */,
 				DF13EDE5244A2823006E3BD0 /* VBVViewController.swift in Sources */,
 				DF13EE1F244A2D93006E3BD0 /* AddAlarmViewController.swift in Sources */,
+				DF805F8B25F508DF0021ADD3 /* AddNotesViewModal.swift in Sources */,
 				DF13EE24244A2D93006E3BD0 /* AlarmViewController.swift in Sources */,
 				DF13EDAC244A2823006E3BD0 /* CustomBarChartCell.swift in Sources */,
 				DF13EDD9244A2823006E3BD0 /* CalendarPopUpVC.swift in Sources */,
@@ -730,6 +796,7 @@
 				DF13EDB6244A2823006E3BD0 /* Types.swift in Sources */,
 				DF13EDCC244A2823006E3BD0 /* PulsatingBall.swift in Sources */,
 				DF13EDAA244A2823006E3BD0 /* CoreData.swift in Sources */,
+				DF805F9625F50A920021ADD3 /* Notes+CoreDataProperties.swift in Sources */,
 				DF13EDC7244A2823006E3BD0 /* Spinner.swift in Sources */,
 				DF13EDD8244A2823006E3BD0 /* DateCVCell.swift in Sources */,
 				DF13EDB5244A2823006E3BD0 /* String.swift in Sources */,
@@ -752,6 +819,7 @@
 				DF13EDBE244A2823006E3BD0 /* Enums.swift in Sources */,
 				DF13EDCA244A2823006E3BD0 /* BouncingBall.swift in Sources */,
 				DF13EDC0244A2823006E3BD0 /* FileUtility.swift in Sources */,
+				DF805F8625F508C90021ADD3 /* AddNotesViewController.swift in Sources */,
 				DF13EDB4244A2823006E3BD0 /* UIDevice.swift in Sources */,
 				DF13EDDD244A2823006E3BD0 /* VBVDatePicker.swift in Sources */,
 				DF13EE23244A2D93006E3BD0 /* AlarmViewModel.swift in Sources */,

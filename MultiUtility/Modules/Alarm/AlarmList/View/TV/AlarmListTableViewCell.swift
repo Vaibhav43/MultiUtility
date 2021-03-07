@@ -12,7 +12,7 @@ class AlarmListTableViewCell: VBVTableViewCell {
     
     @IBOutlet weak var containerView: VBVView!{
         didSet{
-            containerView.backgroundColor = UIColor.custom_separatorGrey
+            containerView.backgroundColor = UIColor.Alarm.kseparatorGrey
         }
     }
     @IBOutlet weak var timeLabel: VBVLabel!{
@@ -25,7 +25,7 @@ class AlarmListTableViewCell: VBVTableViewCell {
     @IBOutlet weak var titleLabel: VBVLabel!{
         didSet{
             titleLabel.textAlignment = .left
-            titleLabel.textColor = UIColor.custom_text
+            titleLabel.textColor = UIColor.Alarm.ktext
             titleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
         }
     }

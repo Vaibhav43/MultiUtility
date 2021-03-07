@@ -124,7 +124,7 @@ extension VBVButton{
         setBackgroundImage(colorImage, for: state)
     }
     
-    func rendered(image: String, color: UIColor = UIColor.custom_appearance, state: UIControl.State = .normal){
+    func rendered(image: String, color: UIColor = UIColor.Alarm.kappearance, state: UIControl.State = .normal){
         
         guard let img = UIImage(named: image) else {return}
         

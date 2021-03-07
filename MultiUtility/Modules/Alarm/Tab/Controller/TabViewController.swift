@@ -28,7 +28,7 @@ class TabViewController: UITabBarController {
     //MARK:- Setup
     
     func setHeader(){
-        self.navigationController?.navigationBar.tintColor = UIColor.custom_appearance
+        self.navigationController?.navigationBar.tintColor = UIColor.Alarm.kappearance
     }
     
     func setup(){
@@ -41,7 +41,7 @@ class TabViewController: UITabBarController {
     
     func setItems(){
         
-        UITabBar.appearance().tintColor = UIColor.custom_appearance
+        UITabBar.appearance().tintColor = UIColor.Alarm.kappearance
         UITabBar.appearance().unselectedItemTintColor = UIColor.lightGray
         self.tabBar.items?.enumerated().forEach({ (item) in
             let tuple = self.array[item.offset]

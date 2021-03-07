@@ -23,7 +23,7 @@ class AlarmViewController: UIViewController {
     }
     @IBOutlet weak var startButton: UIButton!{
         didSet{
-            startButton.backgroundColor = UIColor.custom_theme
+            startButton.backgroundColor = UIColor.Alarm.ktheme
             startButton.setTitleColor(.white, for: .normal)
             startButton.titleLabel?.addObserver(self, forKeyPath: "text", options: [.new], context: nil)
         }
@@ -76,7 +76,7 @@ class AlarmViewController: UIViewController {
     }
     
     func setPulsating(){
-        timerView.pulsating = (self.homeViewModel.timeInterval == 0) ? nil : VBVView.Pulsating(fillColor: UIColor.custom_theme, animateTo: 1.2, animateFrom: 0.98, animateDuration: 1)
+        timerView.pulsating = (self.homeViewModel.timeInterval == 0) ? nil : VBVView.Pulsating(fillColor: UIColor.Alarm.ktheme, animateTo: 1.2, animateFrom: 0.98, animateDuration: 1)
     }
     
     //MARK:- Reset

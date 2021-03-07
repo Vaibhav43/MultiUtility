@@ -11,10 +11,17 @@ import UIKit
 
 extension UIColor{
     
-    static let custom_theme = UIColor.init(hex: "9CAFB7")
-    static let custom_separatorGrey = UIColor.init(hex: "f2f2f2")
-    static let custom_appearance =  UIColor.init(hex: "#764134")
-    static let custom_text = UIColor.init(hex: "33658A")
+    struct Alarm{
+        static let ktheme = UIColor.init(hex: "9CAFB7")
+        static let kseparatorGrey = UIColor.init(hex: "f2f2f2")
+        static let kappearance =  UIColor.init(hex: "#764134")
+        static let ktext = UIColor.init(hex: "33658A")
+    }
+
+    struct Notes{
+        
+    }
+    
     
     convenience init(hex:String) {
         
