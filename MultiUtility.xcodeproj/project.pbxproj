@@ -104,6 +104,9 @@
 		DF805FA925F534070021ADD3 /* ExpiredAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805FA725F534070021ADD3 /* ExpiredAlarmViewController.swift */; };
 		DF805FAA25F534070021ADD3 /* ExpiredAlarmViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF805FA825F534070021ADD3 /* ExpiredAlarmViewController.xib */; };
 		DF805FAF25F534190021ADD3 /* ExpiredAlarmViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805FAE25F534190021ADD3 /* ExpiredAlarmViewModal.swift */; };
+		DF805FB925F53D480021ADD3 /* OptionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805FB725F53D480021ADD3 /* OptionsListViewController.swift */; };
+		DF805FBA25F53D480021ADD3 /* OptionsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF805FB825F53D480021ADD3 /* OptionsListViewController.xib */; };
+		DF805FBE25F53DA70021ADD3 /* OptionsListViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805FBD25F53DA70021ADD3 /* OptionsListViewModal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -207,6 +210,9 @@
 		DF805FA725F534070021ADD3 /* ExpiredAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiredAlarmViewController.swift; sourceTree = "<group>"; };
 		DF805FA825F534070021ADD3 /* ExpiredAlarmViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpiredAlarmViewController.xib; sourceTree = "<group>"; };
 		DF805FAE25F534190021ADD3 /* ExpiredAlarmViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiredAlarmViewModal.swift; sourceTree = "<group>"; };
+		DF805FB725F53D480021ADD3 /* OptionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsListViewController.swift; sourceTree = "<group>"; };
+		DF805FB825F53D480021ADD3 /* OptionsListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionsListViewController.xib; sourceTree = "<group>"; };
+		DF805FBD25F53DA70021ADD3 /* OptionsListViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsListViewModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -439,6 +445,7 @@
 		DF13EDF2244A2D93006E3BD0 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				DF805FB225F53D200021ADD3 /* List */,
 				DF805F7E25F507D80021ADD3 /* Notes */,
 				DF13EDF3244A2D93006E3BD0 /* Alarm */,
 			);
@@ -718,6 +725,40 @@
 			path = ViewModal;
 			sourceTree = "<group>";
 		};
+		DF805FB225F53D200021ADD3 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				DF805FB625F53D370021ADD3 /* ViewModal */,
+				DF805FB425F53D2F0021ADD3 /* View */,
+				DF805FB325F53D2A0021ADD3 /* Controller */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		DF805FB325F53D2A0021ADD3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DF805FB725F53D480021ADD3 /* OptionsListViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DF805FB425F53D2F0021ADD3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DF805FB825F53D480021ADD3 /* OptionsListViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DF805FB625F53D370021ADD3 /* ViewModal */ = {
+			isa = PBXGroup;
+			children = (
+				DF805FBD25F53DA70021ADD3 /* OptionsListViewModal.swift */,
+			);
+			path = ViewModal;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -781,6 +822,7 @@
 				DF13EDDA244A2823006E3BD0 /* DateCVCell.xib in Resources */,
 				DF13EDF1244A2D6D006E3BD0 /* breakTime.aiff in Resources */,
 				DF13EE1C244A2D93006E3BD0 /* AlarmListTableViewCell.xib in Resources */,
+				DF805FBA25F53D480021ADD3 /* OptionsListViewController.xib in Resources */,
 				DF13EE1B244A2D93006E3BD0 /* AlarmListViewController.xib in Resources */,
 				DF805FAA25F534070021ADD3 /* ExpiredAlarmViewController.xib in Resources */,
 				DF805F8725F508C90021ADD3 /* AddNotesViewController.xib in Resources */,
@@ -810,6 +852,7 @@
 				DF13EDB9244A2823006E3BD0 /* Constants.swift in Sources */,
 				DF13EE17244A2D93006E3BD0 /* AlarmTabViewController.swift in Sources */,
 				DF13ED5D244A2818006E3BD0 /* Session.swift in Sources */,
+				DF805FBE25F53DA70021ADD3 /* OptionsListViewModal.swift in Sources */,
 				DF13EDE1244A2823006E3BD0 /* VBVButton.swift in Sources */,
 				DF805F9525F50A920021ADD3 /* Notes+CoreDataClass.swift in Sources */,
 				DF13EDE2244A2823006E3BD0 /* VBVTextfield.swift in Sources */,
@@ -844,6 +887,7 @@
 				DF13EDDC244A2823006E3BD0 /* ProgressView.swift in Sources */,
 				DF13EDE5244A2823006E3BD0 /* VBVViewController.swift in Sources */,
 				DF13EE1F244A2D93006E3BD0 /* AddAlarmViewController.swift in Sources */,
+				DF805FB925F53D480021ADD3 /* OptionsListViewController.swift in Sources */,
 				DF805F8B25F508DF0021ADD3 /* AddNotesViewModal.swift in Sources */,
 				DF805F9F25F51A4A0021ADD3 /* GlobalFunctions.swift in Sources */,
 				DF13EE24244A2D93006E3BD0 /* AlarmViewController.swift in Sources */,

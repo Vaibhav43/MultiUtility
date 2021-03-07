@@ -24,6 +24,14 @@ class AlarmTabViewController: UITabBarController {
         super.viewWillAppear(animated)
         setHeader()
     }
+    
+    //MARK:- Instance
+    
+    class func instance(navigation: UINavigationController){
+        
+        let vc = AlarmTabViewController()
+        navigation.pushViewController(vc, animated: true)
+    }
 
     //MARK:- Setup
     

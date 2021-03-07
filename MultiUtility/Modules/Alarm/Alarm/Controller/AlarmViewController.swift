@@ -49,6 +49,14 @@ class AlarmViewController: UIViewController {
         startButton.cornerRadius = .rounded
     }
     
+    //MARK:- Instance
+    
+    class func instance(navigation: UINavigationController){
+        
+        let vc = AlarmViewController()
+        navigation.pushViewController(vc, animated: true)
+    }
+    
     //MARK:- Setup
     
     func setHeader(){

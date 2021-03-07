@@ -13,13 +13,8 @@ class Session{
     
     static func initiate() -> UINavigationController{
         
-        let tabVC = AlarmTabViewController.initFromNib
-        let navigation = UINavigationController(rootViewController: tabVC)
+        let vc = OptionsListViewController.initFromNib
+        let navigation = UINavigationController(rootViewController: vc)
         return navigation
-    }
-    
-    class func updateEntities(){
-        
-//        GlobalFunctions.Reminder.updateReminders()
     }
 }

@@ -43,17 +43,18 @@ class AlarmListViewController: UIViewController {
     
     func setHeader(){
         
-        let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addClicked(_:)))
-        self.tabBarController?.navigationItem.rightBarButtonItem = addItem
-        self.tabBarController?.navigationItem.title = "List"
+        var rightItemsArray = [UIBarButtonItem]()
         
         if alarmListViewModel.expired_count > 0{
             let expiredItem = UIBarButtonItem(title: "Expired", style: .plain, target: self, action: #selector(expiredClicked(_:)))
-            self.tabBarController?.navigationItem.leftBarButtonItem = expiredItem
+            rightItemsArray.append(expiredItem)
         }
-        else{
-            self.tabBarController?.navigationItem.leftBarButtonItem = nil
-        }
+        
+        let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addClicked(_:)))
+        rightItemsArray.append(addItem)
+        
+        self.tabBarController?.navigationItem.rightBarButtonItems = rightItemsArray
+        self.tabBarController?.navigationItem.title = "Alarm List"
     }
     
     //MARK:- Action handling
