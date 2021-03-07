@@ -85,6 +85,8 @@ class AlarmViewController: UIViewController {
         startButton.setTitle("Start", for: .normal)
         setPulsating()
         self.resetButton.isHidden = true
+        UserDefaultsClass.delete(key: .alarmTime)
+        Notifications.shared.remove(type: Notifications.Identifiers.identifier)
     }
     
     //MARK:- Observer

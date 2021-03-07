@@ -19,11 +19,22 @@ class AlarmViewModel{
     
     var timeInterval: TimeInterval = 0
     
+    ///to fetch the scheduled alarm time
+    var scheduledTimeInterval: TimeInterval?{
+        
+        guard let date = UserDefaultsClass.get(key: .alarmTime) as? Date else{
+            return nil
+        }
+        
+        let interval = date.timeIntervalSince(Date())
+        return (interval > 0) ? interval : nil
+    }
+    
     //MARK:- Setup
     
     func setup(completion: ((Bool)->())){
         
-        guard let compo = Notifications.shared.scheduledTimeInterval else {
+        guard let compo = scheduledTimeInterval else {
             self.resetValues()
             completion(false)
             return
@@ -53,7 +64,6 @@ class AlarmViewModel{
     
     func resetValues(){
         self.timeInterval = 0
-        Notifications.shared.reset()
         self.resetAll?()
     }
 }

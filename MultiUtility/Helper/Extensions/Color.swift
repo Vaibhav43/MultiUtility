@@ -20,6 +20,9 @@ extension UIColor{
 
     struct Notes{
         
+        static let ktheme = UIColor.init(hex: "f3ae87")
+        static let background = UIColor.init(hex: "ddd3cf")
+        static let selected = UIColor.init(hex: "ee7943")
     }
     
     

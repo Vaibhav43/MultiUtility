@@ -119,7 +119,7 @@ extension AlarmListViewController: NSFetchedResultsControllerDelegate{
         
         case .insert:
             
-            if let indexPath = newIndexPath, indexPath.section == 0, indexPath.row == 0 {
+            if let indexPath = newIndexPath, indexPath.section != 0, indexPath.row != 0 {
                 tableView.insertRows(at: [indexPath], with: .automatic)
             }
             else{

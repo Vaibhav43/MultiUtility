@@ -37,7 +37,7 @@ class AlarmListTableViewCell: VBVTableViewCell {
         }
     }
     
-    var reminder = Reminder(){
+    var reminder: Reminder?{
         didSet{
             setData()
         }
@@ -65,8 +65,8 @@ class AlarmListTableViewCell: VBVTableViewCell {
     
     func setData(){
         
-        self.titleLabel.text = reminder.title
-        self.dateLabel.text = reminder.reminder_time?.toString(format: .dayDash)
-        self.timeLabel.text = reminder.reminder_time?.toString(format: .time)
+        self.titleLabel.text = reminder?.title
+        self.dateLabel.text = reminder?.reminder_time?.toString(format: .dayDash)
+        self.timeLabel.text = reminder?.reminder_time?.toString(format: .time)
     }
 }

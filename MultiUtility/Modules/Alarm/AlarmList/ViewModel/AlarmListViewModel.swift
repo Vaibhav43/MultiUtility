@@ -26,6 +26,12 @@ class AlarmListViewModel: NSObject{
             
             if success{
                 guard let objects = self.fetchedResultController.fetchedObjects else {return}
+                let objectAtIndex = objects[index]
+                
+                if let time = objectAtIndex.created_time?.milliseconds, let task = objectAtIndex.task{
+                    Notifications.shared.remove(type: task+time.description)
+                }
+                
                 objects[index].delete(context: self.managedContext)
             }
         })

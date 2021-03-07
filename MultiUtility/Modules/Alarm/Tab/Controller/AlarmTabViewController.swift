@@ -1,5 +1,5 @@
 //
-//  TabViewController.swift
+//  AlarmTabViewController.swift
 //  Alarm
 //
 //  Created by apple on 11/04/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TabViewController: UITabBarController {
+class AlarmTabViewController: UITabBarController {
     
     let array: [(name: String, image: String)] = [("Alarm", "clock"), ("List", "list_add")]
     

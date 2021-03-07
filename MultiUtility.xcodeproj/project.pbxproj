@@ -79,8 +79,8 @@
 		DF13EDEA244A28F6006E3BD0 /* Reminder+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13EDE8244A28F6006E3BD0 /* Reminder+CoreDataClass.swift */; };
 		DF13EDEB244A28F6006E3BD0 /* Reminder+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13EDE9244A28F6006E3BD0 /* Reminder+CoreDataProperties.swift */; };
 		DF13EDF1244A2D6D006E3BD0 /* breakTime.aiff in Resources */ = {isa = PBXBuildFile; fileRef = DF13EDF0244A2D6D006E3BD0 /* breakTime.aiff */; };
-		DF13EE17244A2D93006E3BD0 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13EDF5244A2D93006E3BD0 /* TabViewController.swift */; };
-		DF13EE18244A2D93006E3BD0 /* TabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF13EDF6244A2D93006E3BD0 /* TabViewController.xib */; };
+		DF13EE17244A2D93006E3BD0 /* AlarmTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13EDF5244A2D93006E3BD0 /* AlarmTabViewController.swift */; };
+		DF13EE18244A2D93006E3BD0 /* AlarmTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF13EDF6244A2D93006E3BD0 /* AlarmTabViewController.xib */; };
 		DF13EE19244A2D93006E3BD0 /* AlarmListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13EDF9244A2D93006E3BD0 /* AlarmListViewModel.swift */; };
 		DF13EE1A244A2D93006E3BD0 /* AlarmListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13EDFB244A2D93006E3BD0 /* AlarmListViewController.swift */; };
 		DF13EE1B244A2D93006E3BD0 /* AlarmListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF13EDFE244A2D93006E3BD0 /* AlarmListViewController.xib */; };
@@ -177,8 +177,8 @@
 		DF13EDE8244A28F6006E3BD0 /* Reminder+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reminder+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DF13EDE9244A28F6006E3BD0 /* Reminder+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reminder+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DF13EDF0244A2D6D006E3BD0 /* breakTime.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = breakTime.aiff; sourceTree = "<group>"; };
-		DF13EDF5244A2D93006E3BD0 /* TabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
-		DF13EDF6244A2D93006E3BD0 /* TabViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabViewController.xib; sourceTree = "<group>"; };
+		DF13EDF5244A2D93006E3BD0 /* AlarmTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmTabViewController.swift; sourceTree = "<group>"; };
+		DF13EDF6244A2D93006E3BD0 /* AlarmTabViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlarmTabViewController.xib; sourceTree = "<group>"; };
 		DF13EDF9244A2D93006E3BD0 /* AlarmListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmListViewModel.swift; sourceTree = "<group>"; };
 		DF13EDFB244A2D93006E3BD0 /* AlarmListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmListViewController.swift; sourceTree = "<group>"; };
 		DF13EDFE244A2D93006E3BD0 /* AlarmListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlarmListViewController.xib; sourceTree = "<group>"; };
@@ -598,7 +598,7 @@
 		DF805F7925F4C2300021ADD3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				DF13EDF5244A2D93006E3BD0 /* TabViewController.swift */,
+				DF13EDF5244A2D93006E3BD0 /* AlarmTabViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -606,7 +606,7 @@
 		DF805F7A25F4C2340021ADD3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DF13EDF6244A2D93006E3BD0 /* TabViewController.xib */,
+				DF13EDF6244A2D93006E3BD0 /* AlarmTabViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -730,7 +730,7 @@
 				DF805F8725F508C90021ADD3 /* AddNotesViewController.xib in Resources */,
 				DF13EDAE244A2823006E3BD0 /* CustomBarChartView.xib in Resources */,
 				DF13EE27244A2D93006E3BD0 /* AlarmViewController.xib in Resources */,
-				DF13EE18244A2D93006E3BD0 /* TabViewController.xib in Resources */,
+				DF13EE18244A2D93006E3BD0 /* AlarmTabViewController.xib in Resources */,
 				DF13EDAF244A2823006E3BD0 /* LineChartView.xib in Resources */,
 				DF13EE20244A2D93006E3BD0 /* AddAlarmViewController.xib in Resources */,
 				DF13ED53244A2786006E3BD0 /* LaunchScreen.storyboard in Resources */,
@@ -751,7 +751,7 @@
 				DF13EDCE244A2823006E3BD0 /* SpinnerDot.swift in Sources */,
 				DF13EDC6244A2823006E3BD0 /* BallClipRotate.swift in Sources */,
 				DF13EDB9244A2823006E3BD0 /* Constants.swift in Sources */,
-				DF13EE17244A2D93006E3BD0 /* TabViewController.swift in Sources */,
+				DF13EE17244A2D93006E3BD0 /* AlarmTabViewController.swift in Sources */,
 				DF13ED5D244A2818006E3BD0 /* Session.swift in Sources */,
 				DF13EDE1244A2823006E3BD0 /* VBVButton.swift in Sources */,
 				DF805F9525F50A920021ADD3 /* Notes+CoreDataClass.swift in Sources */,

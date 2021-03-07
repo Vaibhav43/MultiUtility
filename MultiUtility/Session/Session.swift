@@ -13,7 +13,7 @@ class Session{
     
     static func initiate() -> UINavigationController{
         
-        let tabVC = TabViewController.initFromNib
+        let tabVC = AlarmTabViewController.initFromNib
         let navigation = UINavigationController(rootViewController: tabVC)
         return navigation
     }

@@ -14,12 +14,14 @@ class AddNotesViewController: UIViewController {
         didSet{
             textView.text = ""
             textView.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+            textView.set(cornerRadius: .mild, borderWidth: 1, borderColor: UIColor.Notes.background, backgroundColor: UIColor.Notes.background)
         }
     }
     @IBOutlet weak var submitButton: UIButton!{
         didSet{
             submitButton.setTitle("Submit", for: .normal)
-            submitButton.backgroundColor = .black
+            submitButton.backgroundColor = UIColor.Notes.ktheme
+            submitButton.cornerRadius = .light
         }
     }
     
@@ -29,7 +31,7 @@ class AddNotesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.backgroundColor = UIColor.Notes.background
         // Do any additional setup after loading the view.
     }
     

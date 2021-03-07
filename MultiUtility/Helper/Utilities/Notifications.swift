@@ -49,16 +49,6 @@ extension Notifications{
         static let time = "time"
     }
     
-    var scheduledTimeInterval: TimeInterval?{
-        
-        guard let date = UserDefaultsClass.get(key: .alarmTime) as? Date else{
-            return nil
-        }
-        
-        let interval = date.timeIntervalSince(Date())
-        return (interval > 0) ? interval : nil
-    }
-    
     //MARK:- Setup
     
     func setup(){
@@ -78,6 +68,7 @@ extension Notifications{
         }
     }
     
+    ///schedule notifications for the alarm screen as per the hour
     func scheduleNotification(hour: Int) {
         
         let content = UNMutableNotificationContent()
@@ -86,7 +77,7 @@ extension Notifications{
         content.sound = UNNotificationSound(named: UNNotificationSoundName("breakTime.aiff"))
         content.categoryIdentifier = Identifiers.action
         
-        let timeInterval = hour*3600
+        let timeInterval = 10//hour*3600
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(timeInterval), repeats: false)
         let request = UNNotificationRequest(identifier: Identifiers.identifier, content: content, trigger: trigger)
         
@@ -107,47 +98,25 @@ extension Notifications{
     
     //MARK:- Reset
     
+    ///remove pending notification as per the type
+    func remove(type: String){
+        
+        UNUserNotificationCenter.current().getPendingNotificationRequests { (notificationRequests) in
+            var identifiers: [String] = []
+            
+            for notification:UNNotificationRequest in notificationRequests where notification.identifier == type {
+                identifiers.append(notification.identifier)
+            }
+            
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+        }
+    }
+    
+    ///remove all the pending notifications
     func reset(){
         
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         UserDefaultsClass.delete(key: .alarmTime)
-    }
-}
-
-extension Notifications{
-    
-    func createReminder(reminder: Reminder){
-        
-        let content = UNMutableNotificationContent()
-        content.title = reminder.title ?? ""
-        content.body = reminder.message ?? ""
-        content.sound = UNNotificationSound(named: UNNotificationSoundName("abc.aiff"))
-        
-        
-        if let task = reminder.task{
-            content.categoryIdentifier = task
-            
-            switch AlarmType(rawValue: task.lowercased()) {
-                
-            case .reminder:
-                
-                if let date = reminder.reminder_time{
-                    
-                    let component = Calendar.current.dateComponents([.day, .month, .year, .hour, .minute, .second], from: date)
-                    let trigger = UNCalendarNotificationTrigger.init(dateMatching: component, repeats: false)
-                    let request = UNNotificationRequest(identifier: task, content: content, trigger: trigger)
-                    
-                    notificationCenter.add(request) { (error) in
-                        if let error = error {
-                            print("Error \(error.localizedDescription)")
-                        }
-                    }
-                }
-                
-            default:
-                break
-            }
-        }
     }
 }
 
@@ -159,13 +128,13 @@ extension Notifications: UNUserNotificationCenterDelegate{
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         
-        guard response.notification.request.identifier == Identifiers.identifier else {
+        guard response.notification.request.content.categoryIdentifier == Identifiers.action else {
             completionHandler()
             return
         }
         
         switch response.actionIdentifier {
-            
+        
         case UNNotificationDismissActionIdentifier:
             print("Dismiss Action")
             
@@ -176,7 +145,7 @@ extension Notifications: UNUserNotificationCenterDelegate{
             scheduleNotification(hour: 1)
             
         case Identifiers.remove:
-            reset()
+            remove(type: response.notification.request.identifier)
             
         default:
             print("Unknown action")
