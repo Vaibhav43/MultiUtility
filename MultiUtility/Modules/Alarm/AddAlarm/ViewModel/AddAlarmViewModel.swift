@@ -16,7 +16,7 @@ class AddAlarmViewModel{
     
     var managedContext = CoreData.shared.managedContext
     var reloadTable: (() -> ())?
-    var alarm: Reminder = Reminder()
+    var alarm: Reminder?
     let cellArray: [(String, String)] = [("Title", "Enter Title"), ("Message", "Enter Message"), ("Tasks", "Select Task"), ("Alarm", "Select Time")]
     
     //MARK:- setup
@@ -29,7 +29,7 @@ class AddAlarmViewModel{
     
     func saveAlarm(){
         
-        alarm.created_time = Date()
+        alarm?.created_time = Date()
         managedContext.saveContext()
 //        alarm.setReminder()
     }
@@ -41,16 +41,16 @@ class AddAlarmViewModel{
         let tasks = AlarmType.fetchString()
         VBVPickerView.shared.initiate(heading: "Select Type", titles: tasks) { (index) in
             guard let index = index else {return}
-            self.alarm.task = tasks[index]
+            self.alarm?.task = tasks[index]
             self.reloadTable?()
         }
     }
     
     func showDate(){
         
-        VBVDatePicker.shared.initiate(heading: "Select Reminder Date", mode: .dateAndTime, minimum: Date(), date: alarm.reminder_time) { (selectedDate) in
+        VBVDatePicker.shared.initiate(heading: "Select Reminder Date", mode: .dateAndTime, minimum: Date(), date: alarm?.reminder_time) { (selectedDate) in
             guard let selectedDate = selectedDate else {return}
-            self.alarm.reminder_time = selectedDate
+            self.alarm?.reminder_time = selectedDate
             self.reloadTable?()
         }
     }

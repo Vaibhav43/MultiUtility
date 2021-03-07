@@ -37,8 +37,9 @@ class AddAlarmViewController: VBVViewController {
     //MARK:- instance
     
     class func instance(controller: UIViewController, context: NSManagedObjectContext, reminder: Reminder?){
+        
         let vc = AddAlarmViewController.initFromNib
-        vc.addAlarmViewModel.managedContext = context//.newContext(mergeWithParent: true)
+        vc.addAlarmViewModel.managedContext = context
         
         if let rem = reminder{
             vc.addAlarmViewModel.alarm = rem
@@ -62,7 +63,7 @@ class AddAlarmViewController: VBVViewController {
     
     func setProperties(){
         
-        if addAlarmViewModel.alarm.managedObjectContext == nil{
+        if addAlarmViewModel.alarm == nil{
             addAlarmViewModel.initialize()
         }
         
@@ -96,7 +97,11 @@ extension AddAlarmViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func textfieldCell(indexPath: IndexPath) -> UITableViewCell{
-        let cell = tableView.dequeueReusableCell(withIdentifier: AlarmNameTableViewCell.identifier) as! AlarmNameTableViewCell
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: AlarmNameTableViewCell.identifier) as? AlarmNameTableViewCell else{
+            return UITableViewCell()
+        }
+        
         let data = addAlarmViewModel.cellArray[indexPath.row]
         cell.setData(heading: data.0, placeHolder: data.1)
         cell.textField.vbvdelegate = self
@@ -111,6 +116,7 @@ extension AddAlarmViewController: VBVTextfieldDelegate{
         guard let indexPath = IndexPath.of(textField, objectView: tableView) else {return true}
         
         if indexPath.row == 2{
+            hideKeyboard()
             self.addAlarmViewModel.showPicker()
             return false
         }
@@ -132,16 +138,16 @@ extension AddAlarmViewController: VBVTextfieldDelegate{
         switch indexPath.row {
             
         case 0:
-            (fromCell) ? (textfield.text = addAlarmViewModel.alarm.title) : (addAlarmViewModel.alarm.title = text)
+            (fromCell) ? (textfield.text = addAlarmViewModel.alarm?.title) : (addAlarmViewModel.alarm?.title = text)
             
         case 1:
-            (fromCell) ? (textfield.text = addAlarmViewModel.alarm.message) : (addAlarmViewModel.alarm.message = text)
+            (fromCell) ? (textfield.text = addAlarmViewModel.alarm?.message) : (addAlarmViewModel.alarm?.message = text)
             
         case 2:
-            (textfield.text = addAlarmViewModel.alarm.task)
+            (textfield.text = addAlarmViewModel.alarm?.task)
             
         case 3:
-            (textfield.text = addAlarmViewModel.alarm.reminder_time?.toString(format: .dateTimeDotA))
+            (textfield.text = addAlarmViewModel.alarm?.reminder_time?.toString(format: .dateTimeDotA))
             
         default:
             break

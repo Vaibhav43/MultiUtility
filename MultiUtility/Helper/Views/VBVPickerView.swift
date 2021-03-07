@@ -68,7 +68,11 @@ class VBVPickerView: UIView{
         toolBar.barStyle = UIBarStyle.default
         toolBar.tintColor = UIColor.custom_appearance
         toolBar.sizeToFit()
+    }
+    
+    func setActionOnToolBar(){
         
+        toolBar.layoutIfNeeded()
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneClicked))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let headingButton = UIBarButtonItem(title: heading ?? "", color: .lightGray, target: nil, action: nil)
@@ -78,25 +82,26 @@ class VBVPickerView: UIView{
     }
     
     func showPicker(){
+        
         setToolBar()
+        
         guard let topController = UIApplication.topViewController else{return}
         topController.view.addSubview(self)
         self.addSubview(pickerView)
         self.addSubview(toolBar)
         
-        pickerView.translatesAutoresizingMaskIntoConstraints = false
         self.translatesAutoresizingMaskIntoConstraints = false
+        pickerView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             self.bottomAnchor.constraint(equalTo: topController.view.bottomAnchor),
             self.leadingAnchor.constraint(equalTo: topController.view.leadingAnchor),
             self.trailingAnchor.constraint(equalTo: topController.view.trailingAnchor),
-            self.heightAnchor.constraint(equalToConstant: topController.view.frame.height*0.4)
+            self.heightAnchor.constraint(equalToConstant: topController.view.frame.height*0.45)
         ])
         
         pickerView.delegate = self
         pickerView.dataSource = self
-        
         
         NSLayoutConstraint.activate([
             toolBar.heightAnchor.constraint(equalToConstant: 50),
@@ -109,8 +114,10 @@ class VBVPickerView: UIView{
             pickerView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             pickerView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             pickerView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            pickerView.topAnchor.constraint(equalTo: self.topAnchor, constant: 50),
+            pickerView.topAnchor.constraint(equalTo: toolBar.bottomAnchor, constant: 5),
         ])
+        
+        setActionOnToolBar()
     }
     
     func removePicker(){

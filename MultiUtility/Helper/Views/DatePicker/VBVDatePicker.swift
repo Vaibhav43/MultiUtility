@@ -72,7 +72,11 @@ class VBVDatePicker: UIView{
         toolBar.barStyle = UIBarStyle.default
         toolBar.tintColor = UIColor.custom_appearance
         toolBar.sizeToFit()
+    }
+    
+    func setActionOnToolbar(){
         
+        toolBar.layoutIfNeeded()
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneClicked))
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let headingButton = UIBarButtonItem(title: heading ?? "", color: .lightGray, target: nil, action: nil)
@@ -87,6 +91,10 @@ class VBVDatePicker: UIView{
         topController.view.addSubview(self)
         self.addSubview(datePicker)
         self.addSubview(toolBar)
+        
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        }
         
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -111,6 +119,8 @@ class VBVDatePicker: UIView{
             datePicker.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             datePicker.topAnchor.constraint(equalTo: self.topAnchor, constant: 50),
         ])
+        
+        setActionOnToolbar()
     }
     
     func removePicker(){
