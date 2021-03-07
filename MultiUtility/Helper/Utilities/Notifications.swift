@@ -47,7 +47,6 @@ extension Notifications{
         static let remove = "Remove"
         static let type = "Alarm"
         static let time = "time"
-        static let hour: Double = 10//*60
     }
     
     var scheduledTimeInterval: TimeInterval?{
@@ -79,15 +78,16 @@ extension Notifications{
         }
     }
     
-    func scheduleNotification() {
+    func scheduleNotification(hour: Int) {
         
         let content = UNMutableNotificationContent()
         content.title = Identifiers.type
         content.body = "You should take a break now. " + Identifiers.type
-        content.sound = UNNotificationSound(named: UNNotificationSoundName("abc.aiff"))
+        content.sound = UNNotificationSound(named: UNNotificationSoundName("breakTime.aiff"))
         content.categoryIdentifier = Identifiers.action
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Identifiers.hour , repeats: false)
+        let timeInterval = hour*3600
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(timeInterval), repeats: false)
         let request = UNNotificationRequest(identifier: Identifiers.identifier, content: content, trigger: trigger)
         
         notificationCenter.add(request) { (error) in
@@ -100,7 +100,7 @@ extension Notifications{
         let deleteAction = UNNotificationAction(identifier: Identifiers.remove, title: Identifiers.remove, options: [.destructive])
         let category = UNNotificationCategory(identifier: Identifiers.action, actions: [snoozeAction, deleteAction], intentIdentifiers: [], options: [])
         
-        let date = Date().generate(addbyUnit: .second, value: Identifiers.hour.toInt)
+        let date = Date().generate(addbyUnit: .second, value: timeInterval)
         UserDefaultsClass.save(key: .alarmTime, value: date)
         notificationCenter.setNotificationCategories([category])
     }
@@ -173,7 +173,7 @@ extension Notifications: UNUserNotificationCenterDelegate{
             print("Default")
             
         case Identifiers.reset:
-            scheduleNotification()
+            scheduleNotification(hour: 1)
             
         case Identifiers.remove:
             reset()

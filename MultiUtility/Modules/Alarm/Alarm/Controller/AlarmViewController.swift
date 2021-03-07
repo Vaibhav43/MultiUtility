@@ -99,8 +99,14 @@ class AlarmViewController: UIViewController {
     //MARK:- Action Handling
     
     @IBAction func startClicked(_ sender: UIButton){
-        Notifications.shared.scheduleNotification()
-        setup()
+        
+        let hourNumber = ["1", "2", "3", "4", "5", "6"]
+        
+        self.action_sheet(array: hourNumber, title: "Select Break Interval", completion: { (index) in
+            
+            Notifications.shared.scheduleNotification(hour: hourNumber[index].toInt)
+            self.setup()
+        })
     }
     
     @IBAction func resetClicked(_ sender: UIButton){
