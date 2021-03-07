@@ -449,7 +449,6 @@
 			children = (
 				DF13EDF8244A2D93006E3BD0 /* ViewModel */,
 				DF13EDFA244A2D93006E3BD0 /* Controller */,
-				DF13EDFC244A2D93006E3BD0 /* Model */,
 				DF13EDFD244A2D93006E3BD0 /* View */,
 			);
 			path = AlarmList;
@@ -469,13 +468,6 @@
 				DF13EDFB244A2D93006E3BD0 /* AlarmListViewController.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		DF13EDFC244A2D93006E3BD0 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		DF13EDFD244A2D93006E3BD0 /* View */ = {
