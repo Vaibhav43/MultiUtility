@@ -817,7 +817,7 @@ open class LinearScale {
     }
     
     fileprivate func interpolate(_ a: CGFloat, b: CGFloat) -> (_ c: CGFloat) -> CGFloat {
-        var diff = b - a
+        let diff = b - a
         func f(_ c: CGFloat) -> CGFloat {
             return (a + diff) * c
         }
@@ -826,7 +826,7 @@ open class LinearScale {
     
     fileprivate func uninterpolate(_ a: CGFloat, b: CGFloat) -> (_ c: CGFloat) -> CGFloat {
         let diff = b - a
-        var re = diff != 0 ? 1 / diff : 0
+        let re = diff != 0 ? 1 / diff : 0
         func f(_ c: CGFloat) -> CGFloat {
             return (c - a) * re
         }
@@ -834,8 +834,8 @@ open class LinearScale {
     }
     
     fileprivate func bilinear(_ domain: [CGFloat], range: [CGFloat], uninterpolate: (_ a: CGFloat, _ b: CGFloat) -> (_ c: CGFloat) -> CGFloat, interpolate: (_ a: CGFloat, _ b: CGFloat) -> (_ c: CGFloat) -> CGFloat) -> (_ c: CGFloat) -> CGFloat {
-        var u: (_ c: CGFloat) -> CGFloat = uninterpolate(domain[0], domain[1])
-        var i: (_ c: CGFloat) -> CGFloat = interpolate(range[0], range[1])
+        let u: (_ c: CGFloat) -> CGFloat = uninterpolate(domain[0], domain[1])
+        let i: (_ c: CGFloat) -> CGFloat = interpolate(range[0], range[1])
         func f(_ d: CGFloat) -> CGFloat {
             return i(u(d))
         }

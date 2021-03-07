@@ -99,6 +99,11 @@
 		DF805F8B25F508DF0021ADD3 /* AddNotesViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805F8A25F508DF0021ADD3 /* AddNotesViewModal.swift */; };
 		DF805F9525F50A920021ADD3 /* Notes+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805F9325F50A920021ADD3 /* Notes+CoreDataClass.swift */; };
 		DF805F9625F50A920021ADD3 /* Notes+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805F9425F50A920021ADD3 /* Notes+CoreDataProperties.swift */; };
+		DF805F9C25F51A2D0021ADD3 /* ReminderGlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805F9B25F51A2D0021ADD3 /* ReminderGlobalFunctions.swift */; };
+		DF805F9F25F51A4A0021ADD3 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805F9E25F51A4A0021ADD3 /* GlobalFunctions.swift */; };
+		DF805FA925F534070021ADD3 /* ExpiredAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805FA725F534070021ADD3 /* ExpiredAlarmViewController.swift */; };
+		DF805FAA25F534070021ADD3 /* ExpiredAlarmViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF805FA825F534070021ADD3 /* ExpiredAlarmViewController.xib */; };
+		DF805FAF25F534190021ADD3 /* ExpiredAlarmViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805FAE25F534190021ADD3 /* ExpiredAlarmViewModal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -197,6 +202,11 @@
 		DF805F8A25F508DF0021ADD3 /* AddNotesViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesViewModal.swift; sourceTree = "<group>"; };
 		DF805F9325F50A920021ADD3 /* Notes+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notes+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DF805F9425F50A920021ADD3 /* Notes+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notes+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DF805F9B25F51A2D0021ADD3 /* ReminderGlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReminderGlobalFunctions.swift; path = MultiUtility/Modules/Alarm/Alarm/ViewModel/ReminderGlobalFunctions.swift; sourceTree = SOURCE_ROOT; };
+		DF805F9E25F51A4A0021ADD3 /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
+		DF805FA725F534070021ADD3 /* ExpiredAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiredAlarmViewController.swift; sourceTree = "<group>"; };
+		DF805FA825F534070021ADD3 /* ExpiredAlarmViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpiredAlarmViewController.xib; sourceTree = "<group>"; };
+		DF805FAE25F534190021ADD3 /* ExpiredAlarmViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpiredAlarmViewModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,6 +343,7 @@
 				DF13ED7C244A2823006E3BD0 /* Notifications.swift */,
 				DF13ED7D244A2823006E3BD0 /* LocationManager.swift */,
 				DF13ED7E244A2823006E3BD0 /* Toast.swift */,
+				DF805F9E25F51A4A0021ADD3 /* GlobalFunctions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -437,7 +448,8 @@
 		DF13EDF3244A2D93006E3BD0 /* Alarm */ = {
 			isa = PBXGroup;
 			children = (
-				DF13EDF0244A2D6D006E3BD0 /* breakTime.aiff */,
+				DF805FA325F533DD0021ADD3 /* Resources */,
+				DF805FA225F533D60021ADD3 /* Expired */,
 				DF13EDF4244A2D93006E3BD0 /* Tab */,
 				DF13EDF7244A2D93006E3BD0 /* AlarmList */,
 				DF13EE02244A2D93006E3BD0 /* AddAlarm */,
@@ -583,6 +595,7 @@
 			children = (
 				DF13EDE8244A28F6006E3BD0 /* Reminder+CoreDataClass.swift */,
 				DF13EDE9244A28F6006E3BD0 /* Reminder+CoreDataProperties.swift */,
+				DF805F9B25F51A2D0021ADD3 /* ReminderGlobalFunctions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -663,6 +676,48 @@
 			path = Modal;
 			sourceTree = "<group>";
 		};
+		DF805FA225F533D60021ADD3 /* Expired */ = {
+			isa = PBXGroup;
+			children = (
+				DF805FA625F533F00021ADD3 /* ViewModal */,
+				DF805FA525F533ED0021ADD3 /* View */,
+				DF805FA425F533E80021ADD3 /* Controller */,
+			);
+			path = Expired;
+			sourceTree = "<group>";
+		};
+		DF805FA325F533DD0021ADD3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DF13EDF0244A2D6D006E3BD0 /* breakTime.aiff */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		DF805FA425F533E80021ADD3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DF805FA725F534070021ADD3 /* ExpiredAlarmViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DF805FA525F533ED0021ADD3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DF805FA825F534070021ADD3 /* ExpiredAlarmViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DF805FA625F533F00021ADD3 /* ViewModal */ = {
+			isa = PBXGroup;
+			children = (
+				DF805FAE25F534190021ADD3 /* ExpiredAlarmViewModal.swift */,
+			);
+			path = ViewModal;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -727,6 +782,7 @@
 				DF13EDF1244A2D6D006E3BD0 /* breakTime.aiff in Resources */,
 				DF13EE1C244A2D93006E3BD0 /* AlarmListTableViewCell.xib in Resources */,
 				DF13EE1B244A2D93006E3BD0 /* AlarmListViewController.xib in Resources */,
+				DF805FAA25F534070021ADD3 /* ExpiredAlarmViewController.xib in Resources */,
 				DF805F8725F508C90021ADD3 /* AddNotesViewController.xib in Resources */,
 				DF13EDAE244A2823006E3BD0 /* CustomBarChartView.xib in Resources */,
 				DF13EE27244A2D93006E3BD0 /* AlarmViewController.xib in Resources */,
@@ -749,6 +805,7 @@
 				DF13EDDB244A2823006E3BD0 /* VBVTableViewCell.swift in Sources */,
 				DF13EDAD244A2823006E3BD0 /* CustomGridView.swift in Sources */,
 				DF13EDCE244A2823006E3BD0 /* SpinnerDot.swift in Sources */,
+				DF805FAF25F534190021ADD3 /* ExpiredAlarmViewModal.swift in Sources */,
 				DF13EDC6244A2823006E3BD0 /* BallClipRotate.swift in Sources */,
 				DF13EDB9244A2823006E3BD0 /* Constants.swift in Sources */,
 				DF13EE17244A2D93006E3BD0 /* AlarmTabViewController.swift in Sources */,
@@ -782,12 +839,15 @@
 				DF13EDB2244A2823006E3BD0 /* Date.swift in Sources */,
 				DF13EDC5244A2823006E3BD0 /* BallClipPulsating.swift in Sources */,
 				DF13EDB3244A2823006E3BD0 /* Extensions.swift in Sources */,
+				DF805FA925F534070021ADD3 /* ExpiredAlarmViewController.swift in Sources */,
 				DF13ED44244A277F006E3BD0 /* AppDelegate.swift in Sources */,
 				DF13EDDC244A2823006E3BD0 /* ProgressView.swift in Sources */,
 				DF13EDE5244A2823006E3BD0 /* VBVViewController.swift in Sources */,
 				DF13EE1F244A2D93006E3BD0 /* AddAlarmViewController.swift in Sources */,
 				DF805F8B25F508DF0021ADD3 /* AddNotesViewModal.swift in Sources */,
+				DF805F9F25F51A4A0021ADD3 /* GlobalFunctions.swift in Sources */,
 				DF13EE24244A2D93006E3BD0 /* AlarmViewController.swift in Sources */,
+				DF805F9C25F51A2D0021ADD3 /* ReminderGlobalFunctions.swift in Sources */,
 				DF13EDAC244A2823006E3BD0 /* CustomBarChartCell.swift in Sources */,
 				DF13EDD9244A2823006E3BD0 /* CalendarPopUpVC.swift in Sources */,
 				DF13EDD3244A2823006E3BD0 /* Reachability.swift in Sources */,

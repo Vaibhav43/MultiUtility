@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import CoreData
 
-
 class AlarmListViewModel: NSObject{
     
     //MARK:- Properties
@@ -19,6 +18,21 @@ class AlarmListViewModel: NSObject{
     var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController<Reminder>()
     
     //MARK:- Delete
+    
+    var expired_count: Int{
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Reminder")
+        fetchRequest.predicate = NSPredicate(format: "reminder_time < %@", Date() as CVarArg)
+        do {
+            let count = try CoreData.shared.managedContext.count(for: fetchRequest)
+            return count
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+        
+        return 0
+    }
     
     func showDeletePopUp(index: Int){
         
@@ -40,9 +54,7 @@ class AlarmListViewModel: NSObject{
     //MARK:- fetch
     
     func fetchResults() {
-    
-        let fetchRequest: NSFetchRequest<Reminder> = Reminder.fetch_request(sort: [NSSortDescriptor(key: "reminder_time", ascending: true)], predicate: NSPredicate(format: "reminder_time >= %@", Date().startOfDay as CVarArg))
-        
+        let fetchRequest: NSFetchRequest<Reminder> = Reminder.fetch_request(sort: [NSSortDescriptor(key: "reminder_time", ascending: true)], predicate: NSPredicate(format: "reminder_time >= %@", Date() as CVarArg), groupBy: nil)
         fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: "task", cacheName: nil)
         
         do {

@@ -46,9 +46,21 @@ class AlarmListViewController: UIViewController {
         let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addClicked(_:)))
         self.tabBarController?.navigationItem.rightBarButtonItem = addItem
         self.tabBarController?.navigationItem.title = "List"
+        
+        if alarmListViewModel.expired_count > 0{
+            let expiredItem = UIBarButtonItem(title: "Expired", style: .plain, target: self, action: #selector(expiredClicked(_:)))
+            self.tabBarController?.navigationItem.leftBarButtonItem = expiredItem
+        }
+        else{
+            self.tabBarController?.navigationItem.leftBarButtonItem = nil
+        }
     }
     
     //MARK:- Action handling
+    
+    @IBAction func expiredClicked(_ sender: UIButton){
+        ExpiredAlarmViewController.instance(navigation: self.navigationController!)
+    }
     
     @IBAction func addClicked(_ sender: UIButton){
         addAlarm(reminder: nil)
@@ -103,8 +115,11 @@ extension AlarmListViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let reminder = alarmListViewModel.fetchedResultController.fetchedObjects?[indexPath.row]
-        addAlarm(reminder: reminder)
+        
+        guard let sections = alarmListViewModel.fetchedResultController.sections, let object = sections[indexPath.section].objects?[indexPath.row] as? Reminder else {
+            return
+        }
+        addAlarm(reminder: object)
     }
 }
 

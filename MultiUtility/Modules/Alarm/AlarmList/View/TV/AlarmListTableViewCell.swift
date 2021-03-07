@@ -68,5 +68,15 @@ class AlarmListTableViewCell: VBVTableViewCell {
         self.titleLabel.text = reminder?.title
         self.dateLabel.text = reminder?.reminder_time?.toString(format: .dayDash)
         self.timeLabel.text = reminder?.reminder_time?.toString(format: .time)
+        
+        if let date = reminder?.reminder_time, date < Date(){
+            expiredViews()
+        }
+    }
+    
+    func expiredViews() {
+        for subview in subviews {
+            subview.alpha = 0.4
+        }
     }
 }

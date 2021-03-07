@@ -17,4 +17,9 @@ class Session{
         let navigation = UINavigationController(rootViewController: tabVC)
         return navigation
     }
+    
+    class func updateEntities(){
+        
+//        GlobalFunctions.Reminder.updateReminders()
+    }
 }

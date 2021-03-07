@@ -93,9 +93,9 @@ extension NSManagedObject{
         }
     }
     
-    class func fetch<T: NSManagedObject>(sort: [NSSortDescriptor]? = nil, predicate: NSPredicate?, relationshipPath: [String]) -> [T]? {
+    class func fetch<T: NSManagedObject>(sort: [NSSortDescriptor]? = nil, predicate: NSPredicate?, relationshipPath: [String], groupBy: [String]) -> [T]? {
         
-        let request: NSFetchRequest<T> = fetch_request(sort: sort, predicate: predicate)
+        let request: NSFetchRequest<T> = fetch_request(sort: sort, predicate: predicate, groupBy: groupBy)
         
         do {
             let result = try CoreData.shared.managedContext.fetch(request)
@@ -106,13 +106,13 @@ extension NSManagedObject{
         }
     }
     
-    class func fetch_request<T: NSManagedObject>(sort: [NSSortDescriptor]? = nil, predicate: NSPredicate?) -> NSFetchRequest<T> {
+    class func fetch_request<T: NSManagedObject>(sort: [NSSortDescriptor]? = nil, predicate: NSPredicate?, groupBy: [String]?) -> NSFetchRequest<T> {
         
         let request = NSFetchRequest<T>(entityName: entityName)
         request.returnsObjectsAsFaults = false
         request.sortDescriptors = sort
         request.predicate = predicate
-        
+        request.propertiesToGroupBy = groupBy
         
         return request
     }

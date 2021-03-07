@@ -45,6 +45,6 @@ extension Notifications{
                 print("Error \(error.localizedDescription)")
             }
         }
-        
     }
 }
+
