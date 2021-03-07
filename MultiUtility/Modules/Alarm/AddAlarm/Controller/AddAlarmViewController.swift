@@ -75,7 +75,7 @@ class AddAlarmViewController: VBVViewController {
     //MARK:- Actions
     
     @objc func saveClicked(){
-        self.view.endEditing(true)
+        hideKeyboard()
         addAlarmViewModel.saveAlarm()
         backPressed()
     }

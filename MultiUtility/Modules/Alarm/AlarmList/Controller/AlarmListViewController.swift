@@ -111,22 +111,28 @@ extension AlarmListViewController: UITableViewDelegate, UITableViewDataSource{
 extension AlarmListViewController: NSFetchedResultsControllerDelegate{
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        print("change happens")
     }
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at     indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         switch (type) {
+        
         case .insert:
             
-            if let indexPath = newIndexPath {
+            if let indexPath = newIndexPath, indexPath.section == 0, indexPath.row == 0 {
                 tableView.insertRows(at: [indexPath], with: .automatic)
+            }
+            else{
+                tableView.reloadData()
             }
             
         case .delete:
             
-            if let indexPath = indexPath {
+            if let indexPath = indexPath, indexPath.row != 0 {
                 tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            else{
+                tableView.reloadData()
             }
             
         case .update, .move:

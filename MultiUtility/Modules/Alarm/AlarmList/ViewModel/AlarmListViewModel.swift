@@ -41,7 +41,6 @@ class AlarmListViewModel: NSObject{
         
         do {
             try fetchedResultController.performFetch()
-            print(fetchedResultController)
         }
         catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")

@@ -132,8 +132,6 @@ class LocationService: NSObject, CLLocationManagerDelegate {
                 self.location.state = placemarks?.first?.administrativeArea
                 self.location.country = placemarks?.first?.country
                 self.location.pincode = placemarks?.first?.postalCode
-                
-//                print(value: "====+++++++++\(self.location)")
                 self.delegate?.tracingLocation()
             }
         }
