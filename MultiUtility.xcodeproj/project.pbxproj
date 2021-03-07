@@ -438,8 +438,8 @@
 		DF13EDF4244A2D93006E3BD0 /* Tab */ = {
 			isa = PBXGroup;
 			children = (
-				DF13EDF5244A2D93006E3BD0 /* TabViewController.swift */,
-				DF13EDF6244A2D93006E3BD0 /* TabViewController.xib */,
+				DF805F7A25F4C2340021ADD3 /* View */,
+				DF805F7925F4C2300021ADD3 /* Controller */,
 			);
 			path = Tab;
 			sourceTree = "<group>";
@@ -588,6 +588,22 @@
 			isa = PBXGroup;
 			children = (
 				DF13EE16244A2D93006E3BD0 /* AlarmViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DF805F7925F4C2300021ADD3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DF13EDF5244A2D93006E3BD0 /* TabViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DF805F7A25F4C2340021ADD3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DF13EDF6244A2D93006E3BD0 /* TabViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
