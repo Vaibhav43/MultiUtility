@@ -11,14 +11,49 @@ import UIKit
 
 class AddNotesViewModal{
     
-    var managedContext = CoreData.shared.managedContext
     var reloadUI: (() -> ())?
-    var notes: Notes?
+    var managedContext = CoreData.shared.managedContext
+    var notes: Notes?{
+        didSet{
+            setNotes()
+        }
+    }
     
     var selectedBackgroundColor = UIColor.Notes.Background.kCream{
         didSet{
-            reloadUI?()
+            setColor()
         }
     }
-    lazy var colorArray = UIColor.Notes.Background.array
+    lazy var colorArray = [(UIColor, Bool)]()
+    
+    //MARK:- Setup
+    
+    func setColor(){
+        
+        colorArray.removeAll()
+        
+        for color in UIColor.Notes.Background.array{
+            colorArray.append((color, color == selectedBackgroundColor))
+        }
+        
+        reloadUI?()
+    }
+    
+    func setNotes(){
+        
+        if notes == nil{
+            notes = Notes(context: managedContext)
+        }
+    }
+    
+    //MARK:- Save
+    
+    func saveNotes(){
+        
+        notes?.color = selectedBackgroundColor.hexString
+        notes?.is_favorite = notes?.is_favorite ?? false
+        notes?.created_time = notes?.created_time ?? Date()
+        notes?.updated_time = notes?.updated_time ?? Date()
+        managedContext.saveContext()
+    }
 }

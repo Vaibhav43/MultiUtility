@@ -10,6 +10,16 @@ import UIKit
 
 class AddNotesViewController: BaseViewController {
     
+    @IBOutlet weak var titleTextfield: VBVTextfield!{
+        didSet{
+            titleTextfield.insetX = 5
+            titleTextfield.set(cornerRadius: .light, borderWidth: 1, borderColor: .lightGray, backgroundColor: .clear)
+            titleTextfield.vbvdelegate = self
+            titleTextfield.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+            titleTextfield.textColor = .black
+            titleTextfield.placeholder = "Enter title here"
+        }
+    }
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var collectionView: VBVCollectionView!{
         didSet{
@@ -21,6 +31,7 @@ class AddNotesViewController: BaseViewController {
     }
     @IBOutlet weak var textView: VBVTextView!{
         didSet{
+            textView.vbvDelegate = self
             textView.placeHolderColor = UIColor.darkGray
             textView.placeHolder = "Enter the notes here"
             textView.textColor = .black
@@ -28,15 +39,15 @@ class AddNotesViewController: BaseViewController {
             textView.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         }
     }
-    @IBOutlet weak var submitButton: UIButton!{
-        didSet{
-            submitButton.setTitle("Submit", for: .normal)
-            submitButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-            submitButton.setTitleColor(UIColor.Notes.kText, for: .normal)
-            submitButton.backgroundColor = UIColor.Notes.kElementBackground
-            submitButton.cornerRadius = .light
-        }
-    }
+//    @IBOutlet weak var submitButton: UIButton!{
+//        didSet{
+//            submitButton.setTitle("Submit", for: .normal)
+//            submitButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+//            submitButton.setTitleColor(UIColor.Notes.kText, for: .normal)
+//            submitButton.backgroundColor = UIColor.Notes.kElementBackground
+//            submitButton.cornerRadius = .light
+//        }
+//    }
     
     var addNotesViewModal = AddNotesViewModal()
     
@@ -59,41 +70,78 @@ class AddNotesViewController: BaseViewController {
     
     //MARK:- Instance
     
-    class func instance(navigation: UINavigationController){
+    class func instance(navigation: UINavigationController, notes: Notes){
         
         let vc = AddNotesViewController()
+        vc.addNotesViewModal.notes = notes
         navigation.pushViewController(vc, animated: true)
+    }
+    
+    class var instance: AddNotesViewController{
+        
+        let vc = AddNotesViewController()
+        vc.addNotesViewModal.notes = nil
+        return vc
     }
     
     //MARK:- Setup
     
     func setProperties(){
         self.view.backgroundColor = UIColor.Notes.kViewBG
-        setUI()
         
         addNotesViewModal.reloadUI = {
             self.setUI()
         }
+        
+        addNotesViewModal.setColor()
     }
     
     func setHeader(){
-        self.tabBarController?.navigationItem.title = "Add Notes"
+        
+        let isUpdate = !(addNotesViewModal.notes?.updated_time == nil)
+        let rightBarButtonItem = UIBarButtonItem(title: isUpdate ? "Update" : "Save", style: UIBarButtonItem.Style.done, target: self, action: #selector(submitClicked(_:)))
+        
+        if isUpdate{
+            self.navigationItem.title = "Add Notes"
+            self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        }
+        else{
+            self.tabBarController?.navigationItem.title = "Add Notes"
+            self.tabBarController?.navigationItem.rightBarButtonItem = rightBarButtonItem
+        }
+        
+        initiateKeyboard(onView: scrollView)
     }
     
     func setUI(){
         
+        titleTextfield.text = addNotesViewModal.notes?.title
+        textView.text = addNotesViewModal.notes?.notes
         textView.set(cornerRadius: .none, borderWidth: 2, borderColor: addNotesViewModal.selectedBackgroundColor, backgroundColor: addNotesViewModal.selectedBackgroundColor.withAlphaComponent(0.6))
+        collectionView.reloadData()
     }
     
     //MARK:- Action
     
     @IBAction func submitClicked(_ sender: UIButton){
-        
-        guard !textView.text.isEmpty else {
+        hideKeyboard()
+        guard !textView.text.isEmpty || (titleTextfield.text?.isEmpty ?? true) else {
             return
         }
         
-        
+        addNotesViewModal.saveNotes()
+        self.tabBarController?.selectedIndex = 0
+    }
+}
+
+extension AddNotesViewController: VBVTextfieldDelegate, VBVTextViewDelegate{
+    
+    func textfieldDidEndEditing(_ textField: VBVTextfield) {
+        addNotesViewModal.notes?.title = textField.text
+    }
+    
+    func textViewDidEndEditing(_ textView: VBVTextView) {
+        addNotesViewModal.notes?.notes = textView.text
     }
 }
 
@@ -121,12 +169,13 @@ extension AddNotesViewController: UICollectionViewDelegate, UICollectionViewData
             return UICollectionViewCell()
         }
         
-        cell.containerView.backgroundColor = addNotesViewModal.colorArray[indexPath.row]
+        let data = addNotesViewModal.colorArray[indexPath.row]
+        cell.containerView.backgroundColor = data.0
+        cell.isSelected = data.1
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        addNotesViewModal.selectedBackgroundColor = addNotesViewModal.colorArray[indexPath.row]
-        
+        addNotesViewModal.selectedBackgroundColor = addNotesViewModal.colorArray[indexPath.row].0
     }
 }

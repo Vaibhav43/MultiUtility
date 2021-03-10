@@ -8,28 +8,85 @@
 
 import Foundation
 
-
 enum DateFormat: String{
     
+    ///"hh:mm a"
     case time = "hh:mm a"
+    
+    ///"HH:mm"
     case time24 = "HH:mm"
+    
+    ///"EEEE"
+    case weekday = "EEEE"
+    
+    ///"dd-MMM"
     case date_month = "dd-MMM"
+    
+    ///"EEEE dd-MMM-yyyy"
+    case dayFullMonthYear = "EEEE dd-MMM-yyyy"
+    
+    ///"EEE, dd MMM yyyy"
+    case dayDateMonthYear = "EEE, dd MMM yyyy"
+    
+    ///"dd MMM, yyyy - hh:mm a"
     case full_date_time = "dd MMM, yyyy - hh:mm a"
+    
+    ///"MMM dd, yyyy hh:mm:ss a"
     case full_date_time2 = "MMM dd, yyyy hh:mm:ss a"
+    
+    ///"MMM dd, yyyy, hh:mm:ss a"
+    case full_date_time3 = "MMM dd, yyyy, hh:mm:ss a"
+    
+    ///"yyyy-MM-dd HH:mm:ss.SSSS"
     case service_format = "yyyy-MM-dd HH:mm:ss.SSSS"
+    
+    ///"yyyy-MM-dd"
     case yearDash = "yyyy-MM-dd"
+    
+    ///"dd-MM-yyyy"
     case dayDash = "dd-MM-yyyy"
+    
+    ///"dd-MMM-yyyy"
     case dayMonthNameDash = "dd-MMM-yyyy"
+    
+    ///"dd/MM/yyyy"
     case daySlash = "dd/MM/yyyy"
+    
+    ///"dd MMM, yyyy"
     case monthName = "dd MMM, yyyy"
+    
+    ///"dd MMM yyyy"
     case appointmentDate = "dd MMM yyyy"
+    
+    ///"dd.MMM.yyyy"
     case dateDot = "dd.MMM.yyyy"
+    
+    ///"dd.MMM.yyyy HH:mm"
     case dateTimeDot = "dd.MMM.yyyy HH:mm"
+    
+    ///"dd.MMM.yyyy hh:mm a"
     case dateTimeDotA = "dd.MMM.yyyy hh:mm a"
+    
+    ///"MMM dd, yyyy"
     case monthDateYear = "MMM dd, yyyy"
+    
+    ///"MMM dd, yyyy hh:mm a"
     case monthDateYearTime = "MMM dd, yyyy hh:mm a"
+    
+    ///"yyyyMMdd_HHmmss"
     case time_stamp = "yyyyMMdd_HHmmss"
+    
+    ///"ddMMyyyyHHmmss"
     case ddMMyyyyHHmmss = "ddMMyyyyHHmmss"
+    
+    ///"MMM dd"
+    case month_date = "MMM dd"
+    
+    ///"dd MMM"
+    case dateMonth = "dd MMM"
+    
+    ///"dd MMM, hh:mm a"
+    case dateMonth_time = "dd MMM, hh:mm a"
 }
 
 extension Date {
@@ -114,6 +171,10 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
+    var yearNumber: Int {
+        return NSString(string: self.year).integerValue
+    }
+    
     var time: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm a"
@@ -126,7 +187,23 @@ extension Date {
         return Calendar.current.component(.second, from: self)
     }
     
-    var weekday: Int {
+    var hourNumber: Int {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH"
+        return dateFormatter.string(from: self).toInt
+    }
+    
+    var minuteNumber: Int {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "mm"
+        return dateFormatter.string(from: self).toInt
+    }
+    
+    var weekDay: String {
+        return self.toString(format: .weekday)
+    }
+    
+    var weekNumber: Int {
         return Calendar.current.component(.weekday, from: self)
     }
     
@@ -139,12 +216,133 @@ extension Date {
     /// - Returns: the integer value of time
     var milliseconds:Int64 {
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss +zzzz"
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
-        let date = dateFormatter.date(from: dateFormatter.string(from: self))
-        let nowDouble = date!.timeIntervalSince1970
+        let nowDouble = self.timeIntervalSince1970
         return Int64(nowDouble*1000)
+    }
+    
+    var firstWeekDay: Int {
+        
+        let day = self.firstDayOfTheMonth.weekNumber
+        return day
+    }
+    
+    var numberOfDaysInMonth: Int{
+        guard let days = Calendar.current.range(of: .day, in: .month, for: self) else{return 0}
+        return (days.upperBound-days.lowerBound)
+    }
+    
+    var diffstring: String?{
+        
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .positional
+        formatter.zeroFormattingBehavior = [ .pad ]
+        
+        formatter.allowsFractionalUnits = true
+        formatter.collapsesLargestUnit = true
+        return formatter.string(from: self, to: Date())
+    }
+    
+    ///to provide date as per proper format
+    ///if it is of today show time
+    ///if it is of same year show date and month
+    ///otherwise show whole date without time
+    var processDate: String{
+        
+        if self.isToday{
+            return self.toString(format: .time)
+        }
+        else if self.year == Date().year{
+            return self.toString(format: .dateMonth)
+        }
+        
+        return self.toString(format: .monthName)
+    }
+    
+    //MARK:- Comparison
+    
+    func isEqualTo(_ date: Date) -> Bool {
+        return self == date
+    }
+    
+    func isGreaterThan(_ date: Date) -> Bool {
+        return self > date
+    }
+    
+    func isSmallerThan(_ date: Date) -> Bool {
+        return self < date
+    }
+    
+    //MARK:- Date to Date data
+    
+    /// Returns the amount of years from another date
+    func years(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.year], from: date, to: self).year ?? 0
+    }
+    
+    /// Returns the amount of months from another date
+    func months(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.month], from: date, to: self).month ?? 0
+    }
+    
+    /// Returns the amount of weeks from another date
+    func weeks(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.weekOfMonth], from: date, to: self).weekOfMonth ?? 0
+    }
+    
+    /// Returns the amount of days from another date
+    func days(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.day], from: date, to: self).day ?? 0
+    }
+    
+    /// Returns the amount of hours from another date
+    func hours(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.hour], from: date, to: self).hour ?? 0
+    }
+    
+    /// Returns the amount of minutes from another date
+    func minutes(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.minute], from: date, to: self).minute ?? 0
+    }
+    
+    /// Returns the amount of seconds from another date
+    func seconds(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.second], from: date, to: self).second ?? 0
+    }
+    
+    /// Returns the amount of nanoseconds from another date
+    func nanoseconds(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.nanosecond], from: date, to: self).nanosecond ?? 0
+    }
+    
+    //MARK:- Methods
+    
+    func add(components: Set<Calendar.Component>, values: [Int]) -> Date{
+        guard components.count == values.count else{return self}
+        
+        var date = self
+        
+        for (index, component) in components.enumerated(){
+            
+            if let d = Calendar.current.date(byAdding: component, value: values[index], to: date){
+                date = d
+            }
+        }
+        
+        return date
+    }
+    
+    func between(days: Int, component: Calendar.Component) -> [Date]{
+        
+        var dates = [Date]()
+        
+        for index in 1...abs(days){
+            
+            guard let date = Calendar.current.date(byAdding: .day, value: (days > 0) ? index : -index, to: self) else {continue}
+            dates.append(date)
+        }
+        
+        return dates
     }
     
     func number_of_days(second: String, format: DateFormat) -> Int?{
@@ -166,62 +364,6 @@ extension Date {
         var dateComponents = DateComponents()
         dateComponents.day = days
         return Calendar.current.date(byAdding: dateComponents, to: self)
-    }
-    
-    func targetMonth(from date: Date) -> Int{
-        
-        var count = 0
-        let component = Calendar.current.dateComponents([.month, .day], from: date, to: self)
-        if let month = component.month, let date = component.day{
-            count = month+((date>0) ? 1 : 0)
-        }
-        return count
-    }
-    
-    func isEqualTo(_ date: Date) -> Bool {
-        return self == date
-    }
-    
-    func isGreaterThan(_ date: Date) -> Bool {
-        return self > date
-    }
-    
-    func isSmallerThan(_ date: Date) -> Bool {
-        return self < date
-    }
-    
-    /// Returns the amount of years from another date
-    func years(from date: Date) -> Int {
-        return Calendar.current.dateComponents([.year], from: date, to: self).year ?? 0
-    }
-    /// Returns the amount of months from another date
-    func months(from date: Date) -> Int {
-        return Calendar.current.dateComponents([.month], from: date, to: self).month ?? 0
-    }
-    /// Returns the amount of weeks from another date
-    func weeks(from date: Date) -> Int {
-        return Calendar.current.dateComponents([.weekOfMonth], from: date, to: self).weekOfMonth ?? 0
-    }
-    /// Returns the amount of days from another date
-    func days(from date: Date) -> Int {
-        return Calendar.current.dateComponents([.day], from: date, to: self).day ?? 0
-    }
-    /// Returns the amount of hours from another date
-    func hours(from date: Date) -> Int {
-        return Calendar.current.dateComponents([.hour], from: date, to: self).hour ?? 0
-    }
-    /// Returns the amount of minutes from another date
-    func minutes(from date: Date) -> Int {
-        return Calendar.current.dateComponents([.minute], from: date, to: self).minute ?? 0
-    }
-    /// Returns the amount of seconds from another date
-    func seconds(from date: Date) -> Int {
-        return Calendar.current.dateComponents([.second], from: date, to: self).second ?? 0
-    }
-    
-    /// Returns the amount of nanoseconds from another date
-    func nanoseconds(from date: Date) -> Int {
-        return Calendar.current.dateComponents([.nanosecond], from: date, to: self).nanosecond ?? 0
     }
     
     func fullOffset(from date: Date) -> String{
@@ -262,6 +404,22 @@ extension Date {
         return ""
     }
     
+    func generate(addbyUnit: Calendar.Component, value: Int) -> Date {
+        
+        let date = self
+        let endDate = Calendar.current.date(byAdding: addbyUnit, value: value, to: date)!
+        return endDate
+    }
+    
+    func interval(ofComponent comp: Calendar.Component, fromDate date: Date) -> Int {
+        
+        let currentCalendar = Calendar.current
+        guard let start = currentCalendar.ordinality(of: comp, in: .era, for: date), let end = currentCalendar.ordinality(of: comp, in: .era, for: self) else { return 0 }
+        return end - start
+    }
+    
+    //MARK:- Formatter
+    
     func change(format: DateFormat) -> Date?{
         
         let dateFormatter = DateFormatter()
@@ -285,13 +443,6 @@ extension Date {
         
         dateFormatter.dateFormat = format.rawValue
         return dateFormatter.string(from: self)
-    }
-    
-    func generate(addbyUnit: Calendar.Component, value: Int) -> Date {
-        
-        let date = self
-        let endDate = Calendar.current.date(byAdding: addbyUnit, value: value, to: date)!
-        return endDate
     }
     
     static func change(first: String, fFormat: DateFormat, resultFormat: DateFormat, isTimeZone: Bool = false) -> String?{
@@ -340,18 +491,6 @@ extension Date {
         dateFormatter.dateFormat = format.rawValue
         
         return dateFormatter.date(from: date)
-    }
-    
-    var diffstring: String?{
-        
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.unitsStyle = .positional
-        formatter.zeroFormattingBehavior = [ .pad ]
-        
-        formatter.allowsFractionalUnits = true
-        formatter.collapsesLargestUnit = true
-        return formatter.string(from: self, to: Date())
     }
 }
 

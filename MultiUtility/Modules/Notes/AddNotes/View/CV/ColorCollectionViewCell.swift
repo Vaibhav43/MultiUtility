@@ -13,6 +13,13 @@ class ColorCollectionViewCell: VBVCollectionViewCell {
     @IBOutlet weak var containerView: UIView!{
         didSet{
             containerView.cornerRadius = .light
+            containerView.layer.borderColor = UIColor.darkGray.cgColor
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            setNeedsDisplay()
         }
     }
     
@@ -23,5 +30,10 @@ class ColorCollectionViewCell: VBVCollectionViewCell {
         contentView.backgroundColor = .clear
         backgroundColor = .clear
         // Initialization code
+    }
+
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        containerView.layer.borderWidth = isSelected ? 1 : 0
     }
 }

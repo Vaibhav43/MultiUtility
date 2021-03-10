@@ -102,6 +102,8 @@
 		DF3A0EA725F8B11E00AB7E33 /* NotesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A0EA625F8B11E00AB7E33 /* NotesListViewModel.swift */; };
 		DF3A0EAC25F902F600AB7E33 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A0EAA25F902F600AB7E33 /* ColorCollectionViewCell.swift */; };
 		DF3A0EAD25F902F600AB7E33 /* ColorCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF3A0EAB25F902F600AB7E33 /* ColorCollectionViewCell.xib */; };
+		DF3A0EB225F939ED00AB7E33 /* NotesListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A0EB025F939ED00AB7E33 /* NotesListTableViewCell.swift */; };
+		DF3A0EB325F939ED00AB7E33 /* NotesListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF3A0EB125F939ED00AB7E33 /* NotesListTableViewCell.xib */; };
 		DF805F8625F508C90021ADD3 /* AddNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805F8425F508C90021ADD3 /* AddNotesViewController.swift */; };
 		DF805F8725F508C90021ADD3 /* AddNotesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF805F8525F508C90021ADD3 /* AddNotesViewController.xib */; };
 		DF805F8B25F508DF0021ADD3 /* AddNotesViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805F8A25F508DF0021ADD3 /* AddNotesViewModal.swift */; };
@@ -216,6 +218,8 @@
 		DF3A0EA625F8B11E00AB7E33 /* NotesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListViewModel.swift; sourceTree = "<group>"; };
 		DF3A0EAA25F902F600AB7E33 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
 		DF3A0EAB25F902F600AB7E33 /* ColorCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorCollectionViewCell.xib; sourceTree = "<group>"; };
+		DF3A0EB025F939ED00AB7E33 /* NotesListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListTableViewCell.swift; sourceTree = "<group>"; };
+		DF3A0EB125F939ED00AB7E33 /* NotesListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesListTableViewCell.xib; sourceTree = "<group>"; };
 		DF805F8425F508C90021ADD3 /* AddNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesViewController.swift; sourceTree = "<group>"; };
 		DF805F8525F508C90021ADD3 /* AddNotesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddNotesViewController.xib; sourceTree = "<group>"; };
 		DF805F8A25F508DF0021ADD3 /* AddNotesViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesViewModal.swift; sourceTree = "<group>"; };
@@ -678,6 +682,7 @@
 		DF3A0E9D25F8B0F000AB7E33 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DF3A0EAF25F939D300AB7E33 /* TV */,
 				DF3A0EA025F8B10800AB7E33 /* NotesListViewController.xib */,
 			);
 			path = View;
@@ -698,6 +703,15 @@
 				DF3A0EAB25F902F600AB7E33 /* ColorCollectionViewCell.xib */,
 			);
 			path = CV;
+			sourceTree = "<group>";
+		};
+		DF3A0EAF25F939D300AB7E33 /* TV */ = {
+			isa = PBXGroup;
+			children = (
+				DF3A0EB025F939ED00AB7E33 /* NotesListTableViewCell.swift */,
+				DF3A0EB125F939ED00AB7E33 /* NotesListTableViewCell.xib */,
+			);
+			path = TV;
 			sourceTree = "<group>";
 		};
 		DF805F7925F4C2300021ADD3 /* Controller */ = {
@@ -916,6 +930,7 @@
 				DF13EE1B244A2D93006E3BD0 /* AlarmListViewController.xib in Resources */,
 				DF3A0EAD25F902F600AB7E33 /* ColorCollectionViewCell.xib in Resources */,
 				DF805FAA25F534070021ADD3 /* ExpiredAlarmViewController.xib in Resources */,
+				DF3A0EB325F939ED00AB7E33 /* NotesListTableViewCell.xib in Resources */,
 				DF805F8725F508C90021ADD3 /* AddNotesViewController.xib in Resources */,
 				DF13EDAE244A2823006E3BD0 /* CustomBarChartView.xib in Resources */,
 				DF13EE27244A2D93006E3BD0 /* AlarmViewController.xib in Resources */,
@@ -967,6 +982,7 @@
 				DF13EDB0244A2823006E3BD0 /* LineChart.swift in Sources */,
 				DF13EDE7244A2823006E3BD0 /* VBVTextView.swift in Sources */,
 				DF3A0E7725F891BE00AB7E33 /* WXImageCompress.swift in Sources */,
+				DF3A0EB225F939ED00AB7E33 /* NotesListTableViewCell.swift in Sources */,
 				DF13EDD6244A2823006E3BD0 /* VBVView.swift in Sources */,
 				DF13EDD2244A2823006E3BD0 /* SyncManager.swift in Sources */,
 				DF13EDD1244A2823006E3BD0 /* ENSideMenuNavigationController.swift in Sources */,
@@ -1162,7 +1178,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8HD676733F;
 				INFOPLIST_FILE = MultiUtility/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1183,7 +1199,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8HD676733F;
 				INFOPLIST_FILE = MultiUtility/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

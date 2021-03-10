@@ -49,7 +49,7 @@ class CalendarPopUpVC: UIViewController, UICollectionViewDelegate, UICollectionV
     
     var firstWeekDay: Int {
         
-        let day = DateComponents(calendar: Calendar.current, year: currentYear, month: currentMonthIndex, day: 1).date?.firstDayOfTheMonth.weekday
+        let day = DateComponents(calendar: Calendar.current, year: currentYear, month: currentMonthIndex, day: 1).date?.firstDayOfTheMonth.weekNumber
         return day ?? 1
     }
     

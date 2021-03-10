@@ -56,11 +56,12 @@ class VBVTextView: UITextView {
     }
     
     ///color to show as placeholder
-    @IBInspectable var placeHolderColor: UIColor = UIColor.lightGray{
-        didSet{
-            setPlaceHolder()
-        }
-    }
+    @IBInspectable var placeHolderColor: UIColor = UIColor.lightGray
+//    {
+//        didSet{
+//            setPlaceHolder()
+//        }
+//    }
     
     //MARK:- lifecycle
     
