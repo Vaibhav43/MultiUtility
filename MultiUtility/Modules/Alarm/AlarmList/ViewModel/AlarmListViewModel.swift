@@ -15,7 +15,7 @@ class AlarmListViewModel: NSObject{
     //MARK:- Properties
     
     var recordsFetched: (()->())?
-    var managedContext = CoreData.shared.persistentContainer.newBackgroundContext()
+    var managedContext = CoreData.shared.managedContext
     var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController<Reminder>()
     
     //MARK:- Delete

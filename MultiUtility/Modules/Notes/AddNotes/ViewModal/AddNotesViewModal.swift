@@ -41,12 +41,12 @@ class AddNotesViewModal{
     
     func setNotes(){
         
-        if let notes = notes{
-            selectedBackgroundColor = UIColor.init(hex: notes.color ?? "ffffff")
-            setColor()
-        }
-        else{
+        if notes == nil{
             notes = Notes(context: managedContext)
+        }
+        else if let notes = notes, let color = notes.color{
+            selectedBackgroundColor = UIColor.init(hex: color)
+            setColor()
         }
     }
     
@@ -59,5 +59,12 @@ class AddNotesViewModal{
         notes?.created_time = notes?.created_time ?? Date()
         notes?.updated_time = notes?.updated_time ?? Date()
         notes?.managedObjectContext?.saveContext()
+        reset()
+    }
+    
+    func reset(){
+        notes = nil
+        selectedBackgroundColor = UIColor.Notes.Background.kCream
+        reloadUI?()
     }
 }

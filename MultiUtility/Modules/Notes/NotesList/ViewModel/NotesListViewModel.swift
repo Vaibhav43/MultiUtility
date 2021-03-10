@@ -12,7 +12,7 @@ import CoreData
 class NotesListViewModel{
     
     var recordsFetched: (()->())?
-    var managedContext = CoreData.shared.persistentContainer.newBackgroundContext()
+    var managedContext = CoreData.shared.managedContext
     var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController<Notes>()
     
     //MARK:- Tableview
@@ -28,7 +28,7 @@ class NotesListViewModel{
     //MARK:- fetch
     
     func fetchResults() {
-        let fetchRequest: NSFetchRequest<Notes> = Notes.fetch_request(sort: [NSSortDescriptor(key: "updated_time", ascending: true)], predicate: nil, groupBy: nil)
+        let fetchRequest: NSFetchRequest<Notes> = Notes.fetch_request(sort: [NSSortDescriptor(key: "is_favorite", ascending: false), NSSortDescriptor(key: "updated_time", ascending: false)], predicate: nil, groupBy: nil)
         fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
         
         do {

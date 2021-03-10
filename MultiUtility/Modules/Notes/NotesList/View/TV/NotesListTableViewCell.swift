@@ -79,5 +79,7 @@ class NotesListTableViewCell: VBVTableViewCell {
     
     @IBAction func favoriteClicked(_ sender: UIButton){
         sender.isSelected.toggle()
+        notes?.is_favorite.toggle()
+        notes?.managedObjectContext?.saveContext()
     }
 }

@@ -14,7 +14,7 @@ class ExpiredAlarmViewModal{
     
     //MARK:- Properties
     
-    var managedContext = CoreData.shared.persistentContainer.newBackgroundContext()
+    var managedContext = CoreData.shared.managedContext
     var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController<Reminder>()
     
     func showDeletePopUp(index: Int){
