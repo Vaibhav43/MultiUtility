@@ -17,13 +17,22 @@ extension UIColor{
         static let kappearance =  UIColor.init(hex: "#764134")
         static let ktext = UIColor.init(hex: "33658A")
     }
-
+    
     struct Notes{
         
+        static let kViewBG = UIColor.init(hex: "f5f5f5")
         static let ktheme = UIColor.init(hex: "f3ae87")
-        static let kBackground = UIColor.init(hex: "faedcd")
         static let kElementBackground = UIColor.init(hex: "d4a373")
         static let kText = UIColor.init(hex: "333333")
+        
+        struct Background{
+            static let array = [kCream, kOrange, kLightGray, kBlue, kDarkGreen]
+            static let kCream = UIColor.init(hex: "faedcd")
+            static let kOrange = UIColor.init(hex: "d4a373")
+            static let kLightGray = UIColor.init(hex: "95b8d1")
+            static let kBlue = UIColor.init(hex: "5db7de")
+            static let kDarkGreen = UIColor.init(hex: "66999b")
+        }
     }
     
     

@@ -7,10 +7,18 @@
 //
 
 import Foundation
+import UIKit
 
 class AddNotesViewModal{
     
     var managedContext = CoreData.shared.managedContext
-    var reloadTable: (() -> ())?
+    var reloadUI: (() -> ())?
     var notes: Notes?
+    
+    var selectedBackgroundColor = UIColor.Notes.Background.kCream{
+        didSet{
+            reloadUI?()
+        }
+    }
+    lazy var colorArray = UIColor.Notes.Background.array
 }

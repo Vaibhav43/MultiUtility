@@ -22,7 +22,7 @@ class VBVTextView: UITextView {
     var valueType: ValueType = .none
     
     ///when placeholder is shown previous color is saved for ending
-    var previousTextColor: UIColor?
+    var previousTextColor: UIColor = UIColor.black
     
     /// padding
     var padding: UIEdgeInsets?{
@@ -55,6 +55,13 @@ class VBVTextView: UITextView {
         }
     }
     
+    ///color to show as placeholder
+    @IBInspectable var placeHolderColor: UIColor = UIColor.lightGray{
+        didSet{
+            setPlaceHolder()
+        }
+    }
+    
     //MARK:- lifecycle
     
     override func awakeFromNib() {
@@ -76,17 +83,17 @@ class VBVTextView: UITextView {
     
     func setPlaceHolder(){
         
-        if showPlaceHolder, let holder = placeHolder, self.text.isEmpty {
+        if showPlaceHolder, let holder = placeHolder, (self.text.isEmpty || self.text == holder) {
             self.text = holder
-            self.previousTextColor = self.textColor
-            self.textColor = UIColor.lightGray
+            self.previousTextColor = self.textColor ?? UIColor.black
+            self.textColor = placeHolderColor
         }
         else if let holder = placeHolder, self.text == holder{
             self.text = nil
-            self.textColor = self.previousTextColor ?? UIColor.black
+            self.textColor = self.previousTextColor
         }
         else{
-            self.textColor = self.previousTextColor ?? UIColor.black
+            self.textColor = self.previousTextColor
         }
     }
 }

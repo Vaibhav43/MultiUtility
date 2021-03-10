@@ -100,6 +100,8 @@
 		DF3A0EA125F8B10800AB7E33 /* NotesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A0E9F25F8B10800AB7E33 /* NotesListViewController.swift */; };
 		DF3A0EA225F8B10800AB7E33 /* NotesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF3A0EA025F8B10800AB7E33 /* NotesListViewController.xib */; };
 		DF3A0EA725F8B11E00AB7E33 /* NotesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A0EA625F8B11E00AB7E33 /* NotesListViewModel.swift */; };
+		DF3A0EAC25F902F600AB7E33 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A0EAA25F902F600AB7E33 /* ColorCollectionViewCell.swift */; };
+		DF3A0EAD25F902F600AB7E33 /* ColorCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF3A0EAB25F902F600AB7E33 /* ColorCollectionViewCell.xib */; };
 		DF805F8625F508C90021ADD3 /* AddNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805F8425F508C90021ADD3 /* AddNotesViewController.swift */; };
 		DF805F8725F508C90021ADD3 /* AddNotesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF805F8525F508C90021ADD3 /* AddNotesViewController.xib */; };
 		DF805F8B25F508DF0021ADD3 /* AddNotesViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805F8A25F508DF0021ADD3 /* AddNotesViewModal.swift */; };
@@ -212,6 +214,8 @@
 		DF3A0E9F25F8B10800AB7E33 /* NotesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListViewController.swift; sourceTree = "<group>"; };
 		DF3A0EA025F8B10800AB7E33 /* NotesListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesListViewController.xib; sourceTree = "<group>"; };
 		DF3A0EA625F8B11E00AB7E33 /* NotesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListViewModel.swift; sourceTree = "<group>"; };
+		DF3A0EAA25F902F600AB7E33 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
+		DF3A0EAB25F902F600AB7E33 /* ColorCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorCollectionViewCell.xib; sourceTree = "<group>"; };
 		DF805F8425F508C90021ADD3 /* AddNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesViewController.swift; sourceTree = "<group>"; };
 		DF805F8525F508C90021ADD3 /* AddNotesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddNotesViewController.xib; sourceTree = "<group>"; };
 		DF805F8A25F508DF0021ADD3 /* AddNotesViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesViewModal.swift; sourceTree = "<group>"; };
@@ -687,6 +691,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		DF3A0EA925F902E100AB7E33 /* CV */ = {
+			isa = PBXGroup;
+			children = (
+				DF3A0EAA25F902F600AB7E33 /* ColorCollectionViewCell.swift */,
+				DF3A0EAB25F902F600AB7E33 /* ColorCollectionViewCell.xib */,
+			);
+			path = CV;
+			sourceTree = "<group>";
+		};
 		DF805F7925F4C2300021ADD3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -735,6 +748,7 @@
 		DF805F8225F507F40021ADD3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DF3A0EA925F902E100AB7E33 /* CV */,
 				DF805F8525F508C90021ADD3 /* AddNotesViewController.xib */,
 			);
 			path = View;
@@ -900,6 +914,7 @@
 				DF13EE1C244A2D93006E3BD0 /* AlarmListTableViewCell.xib in Resources */,
 				DF805FBA25F53D480021ADD3 /* OptionsListViewController.xib in Resources */,
 				DF13EE1B244A2D93006E3BD0 /* AlarmListViewController.xib in Resources */,
+				DF3A0EAD25F902F600AB7E33 /* ColorCollectionViewCell.xib in Resources */,
 				DF805FAA25F534070021ADD3 /* ExpiredAlarmViewController.xib in Resources */,
 				DF805F8725F508C90021ADD3 /* AddNotesViewController.xib in Resources */,
 				DF13EDAE244A2823006E3BD0 /* CustomBarChartView.xib in Resources */,
@@ -948,6 +963,7 @@
 				DF13EDBC244A2823006E3BD0 /* Structures.swift in Sources */,
 				DF13EDBD244A2823006E3BD0 /* XMLParsing.swift in Sources */,
 				DF13EDAB244A2823006E3BD0 /* CustomBarChartView.swift in Sources */,
+				DF3A0EAC25F902F600AB7E33 /* ColorCollectionViewCell.swift in Sources */,
 				DF13EDB0244A2823006E3BD0 /* LineChart.swift in Sources */,
 				DF13EDE7244A2823006E3BD0 /* VBVTextView.swift in Sources */,
 				DF3A0E7725F891BE00AB7E33 /* WXImageCompress.swift in Sources */,
