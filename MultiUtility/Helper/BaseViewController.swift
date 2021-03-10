@@ -14,6 +14,7 @@ import MobileCoreServices
 @objc protocol BaseDelegate{
     func selected(image: UIImage, name: String)
     @objc optional func pdf(url: URL?)
+    @objc optional func videoSelected(url: URL?)
 }
 
 class BaseViewController: UIViewController, SFSafariViewControllerDelegate, UIGestureRecognizerDelegate {
@@ -21,14 +22,8 @@ class BaseViewController: UIViewController, SFSafariViewControllerDelegate, UIGe
     /// gesture to remove keyboard when tapped the view
     var tapGesture = UITapGestureRecognizer()
     
-    /// tableview for the management of cells when keyboard appears
-    var topTableView: UITableView?
-    
     /// view for the management of textfields when keyboard appears
     var onView: UIView?
-    
-    /// button bottom constraints for the management of textfields when keyboard appears
-    var keyboardButtonConstraint: NSLayoutConstraint?
     
     /// view for the management of textfields when keyboard appears.. it translates
     var keyboardView: UIView?
@@ -50,8 +45,6 @@ class BaseViewController: UIViewController, SFSafariViewControllerDelegate, UIGe
     //MARK:- lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        print(value: "class name ------>>>> \(self.classForCoder)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,10 +62,6 @@ class BaseViewController: UIViewController, SFSafariViewControllerDelegate, UIGe
         // Dispose of any resources that can be recreated.
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle{
-        return .lightContent
-    }
-    
     //MARK:- keyboard functions
     
     /// initialize the view to manage for the keyboard
@@ -82,11 +71,9 @@ class BaseViewController: UIViewController, SFSafariViewControllerDelegate, UIGe
     ///   - onView: for the textfield
     ///   - buttonView: button on which transformation will work
     ///   - buttonConstraint: button whose bottom constrainsts will be managed
-    func initiateKeyboard(tableView: UITableView? = nil, onView: UIView? = nil, buttonView: UIView? = nil, buttonConstraint: NSLayoutConstraint? = nil, addGesture: Bool = true){
+    func initiateKeyboard(onView: UIView? = nil, buttonView: UIView? = nil, addGesture: Bool = true){
         
         self.keyboardView = buttonView
-        self.keyboardButtonConstraint = buttonConstraint
-        self.topTableView = tableView
         self.onView = onView
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -101,9 +88,6 @@ class BaseViewController: UIViewController, SFSafariViewControllerDelegate, UIGe
             if onView != nil{
                 onView?.addGestureRecognizer(tapGesture)
             }
-            else if topTableView != nil{
-                self.topTableView?.addGestureRecognizer(tapGesture)
-            }
         }
     }
     
@@ -116,19 +100,16 @@ class BaseViewController: UIViewController, SFSafariViewControllerDelegate, UIGe
         
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        self.topTableView?.removeGestureRecognizer(tapGesture)
         self.onView?.removeGestureRecognizer(tapGesture)
     }
-    
     
     /// notification of keyboardWillShow will be received here
     @objc func keyboardWillShow(notification: NSNotification){
         
         let userInfo = notification.userInfo!
-        let curFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardFrame.height, right: 0.0)
-        var height = keyboardFrame.height
+        let height = keyboardFrame.height
         
         if keyboardView != nil{
             
@@ -136,40 +117,15 @@ class BaseViewController: UIViewController, SFSafariViewControllerDelegate, UIGe
                 self.keyboardView?.transform = CGAffineTransform(translationX: 0, y: -height)
             }
         }
-        else if keyboardButtonConstraint != nil && (keyboardButtonConstraint?.constant)! < height{
-            
-            if let heightBtn = keyboardButtonConstraint?.identifier, let doubleValue = Double(heightBtn){
-                self.keyboardButtonConstraint?.constant = CGFloat(doubleValue).finiteValue
-                height += CGFloat(doubleValue)
-            }
-            else{
-                keyboardButtonConstraint?.identifier = "\(keyboardButtonConstraint?.constant ?? 0)"
-                height += (keyboardButtonConstraint?.constant ?? 0)
-            }
-            
-            DispatchQueue.main.async {
-                
-                UIView.animate(withDuration: 0.3) {
-                    self.keyboardButtonConstraint?.constant = height.finiteValue
-                    self.view.layoutIfNeeded()
-                }
-            }
-        }
         
-        if topTableView != nil {
+        if let onview = onView as? UIScrollView{
             
-            topTableView?.contentInset = contentInsets
-            topTableView?.scrollIndicatorInsets = contentInsets;
+            onview.contentInset = contentInsets
+            onview.scrollIndicatorInsets = contentInsets;
         }
-        else if onView is UIScrollView{
+        else if let onview = self.onView{
             
-            (onView as! UIScrollView).contentInset = contentInsets
-            (onView as! UIScrollView).scrollIndicatorInsets = contentInsets;
-        }
-        else if self.onView != nil{
-            
-            let new = (height - curFrame.height)
-            self.onView?.transform = CGAffineTransform(translationX: 0, y: -new)
+            onview.transform = CGAffineTransform(translationX: 0, y: -height)
             UIView.animate(withDuration: 0.2) {
                 self.view.layoutIfNeeded()
             }
@@ -178,41 +134,21 @@ class BaseViewController: UIViewController, SFSafariViewControllerDelegate, UIGe
     
     /// notification of keyboardWillHide will be received here
     @objc func keyboardWillHide(notification: NSNotification){
-        let contentInsets = UIEdgeInsets.zero as UIEdgeInsets
         
-        if keyboardButtonConstraint != nil{
-            
-            if let height = keyboardButtonConstraint?.identifier{
-                let float = CGFloat(Double(height) ?? 0)
-                keyboardButtonConstraint?.identifier = nil
-                UIView.animate(withDuration: 0.3) {
-                    self.keyboardButtonConstraint?.constant = float.finiteValue
-                    self.view.layoutIfNeeded()
-                }
-            }
-            else{
-                keyboardButtonConstraint?.constant = 0
-            }
-        }
-        else if keyboardView != nil{
+        if keyboardView != nil{
             
             UIView.animate(withDuration: 0.3) {
                 self.keyboardView?.transform = .identity
             }
         }
         
-        if topTableView != nil{
-            topTableView?.contentInset = contentInsets
-            topTableView?.scrollIndicatorInsets = contentInsets;
-        }
-        else if onView is UIScrollView{
-            
-            (onView as! UIScrollView).contentInset = contentInsets
-            (onView as! UIScrollView).scrollIndicatorInsets = contentInsets;
+        if let onview = self.onView as? UIScrollView{
+            let contentInsets = UIEdgeInsets.zero as UIEdgeInsets
+            onview.contentInset = contentInsets
+            onview.scrollIndicatorInsets = contentInsets;
         }
         else{
             self.onView?.transform = .identity
-            //            self.onView?.frame.origin.y = 0
         }
     }
     
@@ -222,25 +158,13 @@ class BaseViewController: UIViewController, SFSafariViewControllerDelegate, UIGe
     
     //MARK: header view
     
-    func backButton(title: String?, image: String? = nil, tintColor: UIColor = UIColor.lightGray) {
-        
-        let backButton = UIBarButtonItem()
-        backButton.title = title
-        backButton.tintColor = tintColor
-        backButton.target = self
-        backButton.action = #selector(backPressed)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-    }
-    
     func showHideHeader(hide: Bool = true){
-        self.navigationController?.setNavigationBarHidden(hide, animated: false)
+        self.navigationController?.navigationBar.isHidden = hide
     }
     
     //MARK: button handling
     
     @IBAction func backPressed(){
-        
         if self.navigationController?.presentingViewController?.presentedViewController == self.navigationController{
             self.dismiss(animated: true, completion: nil)
         }
@@ -279,18 +203,18 @@ class BaseViewController: UIViewController, SFSafariViewControllerDelegate, UIGe
 
 extension BaseViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
-    func showAlertForImage(sender: UIView? = nil, viewController: UIViewController? = nil){
+    func showAlertForImage(sender: UIView? = nil, viewController: UIViewController? = nil,cameraCaptureMode: UIImagePickerController.CameraCaptureMode? = nil){
         
-        let alert:UIAlertController = UIAlertController(title: "Choose Image", message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+        let alert:UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
         
         let cameraAction = UIAlertAction(title: "Camera", style: UIAlertAction.Style.default){
             UIAlertAction in
-            self.askForCameraPermission()
+            self.askForCameraPermission(cameraCaptureMode: cameraCaptureMode)
         }
         
         let gallaryAction = UIAlertAction(title: "Gallery", style: UIAlertAction.Style.default){
             UIAlertAction in
-            self.openGallery()
+            self.openGallery(cameraCaptureMode: cameraCaptureMode)
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel){
@@ -316,10 +240,20 @@ extension BaseViewController: UIImagePickerControllerDelegate, UINavigationContr
         }
     }
     
-    func showPicker(source: UIImagePickerController.SourceType){
+    func showPicker(source: UIImagePickerController.SourceType, captureMode: UIImagePickerController.CameraCaptureMode?){
         picker = UIImagePickerController()
         picker?.delegate = self
         picker?.sourceType = source
+        
+        ////this is the conditon when we have to open camera in video mode. Implemented in record screen for doctor app.
+        if captureMode == .video{
+            picker?.mediaTypes = [kUTTypeMovie as String]
+            if source == .camera{
+                picker?.cameraCaptureMode = .video
+                picker?.videoQuality = .typeHigh
+            }
+           picker?.videoExportPreset = AVAssetExportPresetPassthrough
+        }
         
         if self.navigationController != nil{
             self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -344,7 +278,7 @@ extension BaseViewController: UIImagePickerControllerDelegate, UINavigationContr
         picker = nil
     }
     
-    func openCamera(){
+    func openCamera(cameraCaptureMode: UIImagePickerController.CameraCaptureMode? = nil){
         
         DispatchQueue.main.async {
             
@@ -353,18 +287,20 @@ extension BaseViewController: UIImagePickerControllerDelegate, UINavigationContr
                 return
             }
             
-            self.showPicker(source: .camera)
+            self.showPicker(source: .camera, captureMode: cameraCaptureMode)
         }
     }
     
-    func openGallery(){
-        self.showPicker(source: .photoLibrary)
+    func openGallery(cameraCaptureMode: UIImagePickerController.CameraCaptureMode? = nil){
+        self.showPicker(source: .photoLibrary, captureMode: cameraCaptureMode)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let image = info[.originalImage] as? UIImage{
             baseDelegate?.selected(image: image.wxCompress(type: .timeline), name: "image.jpg")
+        } else if let videoURL = info[.mediaURL] as? URL{
+            baseDelegate?.videoSelected?(url: videoURL)
         }
         
         self.resetPicker()
@@ -374,27 +310,26 @@ extension BaseViewController: UIImagePickerControllerDelegate, UINavigationContr
         self.resetPicker()
     }
     
-    func askForCameraPermission(){
+    func askForCameraPermission(cameraCaptureMode: UIImagePickerController.CameraCaptureMode? = nil){
         let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
         
         switch (status){
-        case .authorized:
-            self.openCamera()
-            
-        case .notDetermined:
-            
-            AVCaptureDevice.requestAccess(for: AVMediaType.video) { (granted) in
-                guard granted else{return}
-                self.openCamera()
-            }
-            
-        case .denied:
-            self.camDenied(type: "Camera")
-            
-        case .restricted:
-            Toast.show(message: "Not able to access camera")
-
-        @unknown default: break
+            case .authorized:
+                self.openCamera(cameraCaptureMode: cameraCaptureMode)
+                
+            case .notDetermined:
+                
+                AVCaptureDevice.requestAccess(for: AVMediaType.video) { (granted) in
+                    guard granted else{return}
+                    self.openCamera(cameraCaptureMode: cameraCaptureMode)
+                }
+                
+            case .denied:
+                self.camDenied(type: "Camera")
+                
+            case .restricted:
+                Toast.show(message: "Not able to access camera")
+            @unknown default: break
         }
     }
     
@@ -404,21 +339,21 @@ extension BaseViewController: UIImagePickerControllerDelegate, UINavigationContr
         
         switch status {
             
-        case .authorized:
-            completion?(true)
-            
-        case .denied:
-            self.camDenied(type: "Photos")
-            completion?(nil)
-            
-        case .notDetermined:
-            // Access has not been determined.
-            PHPhotoLibrary.requestAuthorization({ (newStatus) in
-                completion?((newStatus == PHAuthorizationStatus.authorized))
-            })
-            
-        default:
-            completion?(nil)
+            case .authorized:
+                completion?(true)
+                
+            case .denied:
+                self.camDenied(type: "Photos")
+                completion?(nil)
+                
+            case .notDetermined:
+                // Access has not been determined.
+                PHPhotoLibrary.requestAuthorization({ (newStatus) in
+                    completion?((newStatus == PHAuthorizationStatus.authorized))
+                })
+                
+            default:
+                completion?(nil)
         }
     }
     
@@ -426,7 +361,7 @@ extension BaseViewController: UIImagePickerControllerDelegate, UINavigationContr
         
         DispatchQueue.main.async{
             guard UIApplication.shared.canOpenURL(URL(string: UIApplication.openSettingsURLString)!) else {return}
-                        
+            
             self.alert(title: "Requires Permission", message: "Seems like you have initially denied \(type) permission. Please click on Go to allow app to access your \(type).\n\n1. Touch the Go button below to open the Settings app.\n\n2. Turn the \(type) on.\n\n3. Open this app and try again.", defaultButton: "Go", cancelButton: "Cancel") { (value) in
                 
                 guard value else{return}
@@ -435,6 +370,60 @@ extension BaseViewController: UIImagePickerControllerDelegate, UINavigationContr
             }
         }
     }
+}
+
+//MARK:- Compression
+
+extension BaseViewController{
+    
+    func compressURL(outputFileURL: URL, completion: @escaping ((Data?)->())) {
+        guard let data = try? Data(contentsOf: outputFileURL) else {
+            return
+        }
+        
+        print(value: "File size before compression: \(Double(data.count / 1048576)) mb")
+        
+        let compressedURL = NSURL.fileURL(withPath: NSTemporaryDirectory() + UUID().uuidString + ".mp4")
+        
+        compressVideo(inputURL: outputFileURL as URL, outputURL: compressedURL) { exportSession in
+           
+            guard let session = exportSession else {
+                completion(nil)
+                return
+            }
+            
+            switch session.status {
+            
+            case .completed:
+                guard let compressedData = try? Data(contentsOf: compressedURL) else {
+                    return
+                }
+                
+                print(value: "File size after compression: \(Double(compressedData.count / 1048576)) mb")
+                completion(compressedData)
+            default:
+                completion(nil)
+                break
+            }
+        }
+    }
+    
+      func compressVideo(inputURL: URL,
+                         outputURL: URL,
+                         handler:@escaping (_ exportSession: AVAssetExportSession?) -> Void) {
+        let urlAsset = AVURLAsset(url: inputURL, options: nil)
+        guard let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPresetMediumQuality) else {
+            handler(nil)
+            
+            return
+        }
+        
+        exportSession.outputURL = outputURL
+        exportSession.outputFileType = .mp4
+        exportSession.exportAsynchronously {
+            handler(exportSession)
+        }
+      }
 }
 
 //MARK:- document reading functions

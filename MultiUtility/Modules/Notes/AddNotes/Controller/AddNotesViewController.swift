@@ -10,6 +10,7 @@ import UIKit
 
 class AddNotesViewController: BaseViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var textView: VBVTextView!{
         didSet{
             textView.placeHolder = "Enter the notes here"
@@ -42,8 +43,7 @@ class AddNotesViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.title = "Add Notes"
-        self.initiateKeyboard(buttonView: submitButton)
+        setHeader()
     }
 
     //MARK:- Instance
@@ -55,6 +55,11 @@ class AddNotesViewController: BaseViewController {
     }
     
     //MARK:- Setup
+    
+    func setHeader(){
+        self.navigationController?.navigationBar.tintColor = UIColor.Notes.ktheme
+        self.title = "Add Notes"
+    }
     
     //MARK:- Action
     
