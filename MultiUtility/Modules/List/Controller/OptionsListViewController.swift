@@ -66,7 +66,7 @@ extension OptionsListViewController: UITableViewDataSource, UITableViewDelegate{
             AlarmTabViewController.instance(navigation: self.navigationController!)
             
         case .notes:
-            AddNotesViewController.instance(navigation: self.navigationController!)
+            NotesTabViewController.instance(navigation: self.navigationController!)
         }
     }
 }

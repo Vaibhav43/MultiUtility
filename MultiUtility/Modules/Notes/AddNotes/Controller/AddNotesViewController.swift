@@ -57,8 +57,7 @@ class AddNotesViewController: BaseViewController {
     //MARK:- Setup
     
     func setHeader(){
-        self.navigationController?.navigationBar.tintColor = UIColor.Notes.ktheme
-        self.title = "Add Notes"
+        self.tabBarController?.navigationItem.title = "Add Notes"
     }
     
     //MARK:- Action
