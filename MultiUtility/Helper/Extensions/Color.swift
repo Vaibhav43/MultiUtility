@@ -23,7 +23,7 @@ extension UIColor{
         static let ktheme = UIColor.init(hex: "f3ae87")
         static let kBackground = UIColor.init(hex: "faedcd")
         static let kElementBackground = UIColor.init(hex: "d4a373")
-        static let kText = UIColor.init(hex: "e9edc9")
+        static let kText = UIColor.init(hex: "333333")
     }
     
     

@@ -10,18 +10,20 @@ import UIKit
 
 class AddNotesViewController: BaseViewController {
     
-    @IBOutlet weak var textView: UITextView!{
+    @IBOutlet weak var textView: VBVTextView!{
         didSet{
+            textView.placeHolder = "Enter the notes here"
+            textView.showPlaceHolder = true
             textView.textColor = .black
             textView.text = ""
             textView.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-            textView.set(cornerRadius: .mild, borderWidth: 1, borderColor: UIColor.clear, backgroundColor: UIColor.Notes.kBackground.withAlphaComponent(0.6))
-            textView.addShadow(radius: 5, opacity: 0.5)
+            textView.set(cornerRadius: .none, borderWidth: 2, borderColor: UIColor.Notes.kBackground, backgroundColor: UIColor.Notes.kBackground.withAlphaComponent(0.6))
         }
     }
     @IBOutlet weak var submitButton: UIButton!{
         didSet{
             submitButton.setTitle("Submit", for: .normal)
+            submitButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
             submitButton.setTitleColor(UIColor.Notes.kText, for: .normal)
             submitButton.backgroundColor = UIColor.Notes.kElementBackground
             submitButton.cornerRadius = .light
@@ -34,13 +36,14 @@ class AddNotesViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.lightGray.withAlphaComponent(0.6)
+        self.view.backgroundColor = UIColor.init(hex: "f5f5f5")//.withAlphaComponent(0.6)
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.title = "Add Notes"
+        self.initiateKeyboard(buttonView: submitButton)
     }
 
     //MARK:- Instance
