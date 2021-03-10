@@ -48,6 +48,7 @@ class NotesListViewController: UIViewController {
         }
         
         notesListViewModel.fetchResults()
+        notesListViewModel.fetchedResultController.delegate = self
     }
 }
 

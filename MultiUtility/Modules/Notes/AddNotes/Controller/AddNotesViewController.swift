@@ -130,7 +130,13 @@ class AddNotesViewController: BaseViewController {
         }
         
         addNotesViewModal.saveNotes()
-        self.tabBarController?.selectedIndex = 0
+        
+        if self.tabBarController == nil{
+            backPressed()
+        }
+        else{
+            self.tabBarController?.selectedIndex = 0
+        }
     }
 }
 
