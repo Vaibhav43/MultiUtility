@@ -11,6 +11,16 @@ import CoreData
 
 class AlarmListViewController: UIViewController {
     
+    @IBOutlet weak var noRecordLabel: UILabel!{
+        didSet{
+            noRecordLabel.textAlignment = .center
+            noRecordLabel.numberOfLines = 0
+            noRecordLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+            noRecordLabel.textColor = UIColor.Alarm.ktheme
+            noRecordLabel.text = "Please click on + to add."
+            noRecordLabel.isHidden = true
+        }
+    }
     @IBOutlet weak var tableView: VBVTableView!{
         didSet{
             tableView.register(types: [AlarmListTableViewCell.self])
@@ -37,6 +47,10 @@ class AlarmListViewController: UIViewController {
     //MARK:- Setup
     
     func setProperties(){
+        alarmListViewModel.recordsFetched = { [weak self] in
+            self?.noRecordLabel.isHidden = !(self?.alarmListViewModel.fetchedResultController.sections?.isEmpty ?? false)
+        }
+        
         alarmListViewModel.fetchResults()
         alarmListViewModel.fetchedResultController.delegate = self
     }

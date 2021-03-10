@@ -14,6 +14,7 @@ class AlarmListViewModel: NSObject{
     
     //MARK:- Properties
     
+    var recordsFetched: (()->())?
     var managedContext = CoreData.shared.persistentContainer.newBackgroundContext()
     var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController<Reminder>()
     
@@ -59,9 +60,11 @@ class AlarmListViewModel: NSObject{
         
         do {
             try fetchedResultController.performFetch()
+            recordsFetched?()
         }
         catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
+            recordsFetched?()
         }
     }
 }

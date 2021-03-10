@@ -14,6 +14,7 @@ class OptionsListViewController: UIViewController {
         didSet{
             tableView.delegate = self
             tableView.dataSource = self
+            tableView.tableFooterView = UIView()
         }
     }
     
