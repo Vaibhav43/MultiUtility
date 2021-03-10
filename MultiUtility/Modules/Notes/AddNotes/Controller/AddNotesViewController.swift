@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddNotesViewController: UIViewController {
+class AddNotesViewController: BaseViewController {
     
     @IBOutlet weak var textView: UITextView!{
         didSet{

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AlarmViewController: UIViewController {
+class AlarmViewController: BaseViewController {
     
     @IBOutlet weak var resetButton: UIButton!{
         didSet{

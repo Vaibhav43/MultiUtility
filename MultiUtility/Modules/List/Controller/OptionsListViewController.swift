@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OptionsListViewController: UIViewController {
+class OptionsListViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!{
         didSet{

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AlarmListViewController: UIViewController {
+class AlarmListViewController: BaseViewController {
     
     @IBOutlet weak var noRecordLabel: UILabel!{
         didSet{
