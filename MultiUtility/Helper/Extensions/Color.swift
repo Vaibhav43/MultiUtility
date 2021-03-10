@@ -21,8 +21,9 @@ extension UIColor{
     struct Notes{
         
         static let ktheme = UIColor.init(hex: "f3ae87")
-        static let background = UIColor.init(hex: "ddd3cf")
-        static let selected = UIColor.init(hex: "ee7943")
+        static let kBackground = UIColor.init(hex: "faedcd")
+        static let kElementBackground = UIColor.init(hex: "d4a373")
+        static let kText = UIColor.init(hex: "e9edc9")
     }
     
     

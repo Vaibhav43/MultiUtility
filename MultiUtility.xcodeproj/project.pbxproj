@@ -94,6 +94,8 @@
 		DF13EE23244A2D93006E3BD0 /* AlarmViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13EE0F244A2D93006E3BD0 /* AlarmViewModel.swift */; };
 		DF13EE24244A2D93006E3BD0 /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13EE11244A2D93006E3BD0 /* AlarmViewController.swift */; };
 		DF13EE27244A2D93006E3BD0 /* AlarmViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF13EE16244A2D93006E3BD0 /* AlarmViewController.xib */; };
+		DF3A0E7425F8917600AB7E33 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A0E7325F8917600AB7E33 /* BaseViewController.swift */; };
+		DF3A0E7725F891BE00AB7E33 /* WXImageCompress.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A0E7625F891BE00AB7E33 /* WXImageCompress.swift */; };
 		DF805F8625F508C90021ADD3 /* AddNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805F8425F508C90021ADD3 /* AddNotesViewController.swift */; };
 		DF805F8725F508C90021ADD3 /* AddNotesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF805F8525F508C90021ADD3 /* AddNotesViewController.xib */; };
 		DF805F8B25F508DF0021ADD3 /* AddNotesViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805F8A25F508DF0021ADD3 /* AddNotesViewModal.swift */; };
@@ -200,6 +202,8 @@
 		DF13EE0F244A2D93006E3BD0 /* AlarmViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmViewModel.swift; sourceTree = "<group>"; };
 		DF13EE11244A2D93006E3BD0 /* AlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
 		DF13EE16244A2D93006E3BD0 /* AlarmViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlarmViewController.xib; sourceTree = "<group>"; };
+		DF3A0E7325F8917600AB7E33 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		DF3A0E7625F891BE00AB7E33 /* WXImageCompress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXImageCompress.swift; sourceTree = "<group>"; };
 		DF805F8425F508C90021ADD3 /* AddNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesViewController.swift; sourceTree = "<group>"; };
 		DF805F8525F508C90021ADD3 /* AddNotesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddNotesViewController.xib; sourceTree = "<group>"; };
 		DF805F8A25F508DF0021ADD3 /* AddNotesViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesViewModal.swift; sourceTree = "<group>"; };
@@ -271,6 +275,7 @@
 		DF13ED5E244A2823006E3BD0 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				DF3A0E7325F8917600AB7E33 /* BaseViewController.swift */,
 				DF13ED5F244A2823006E3BD0 /* Database */,
 				DF13ED61244A2823006E3BD0 /* Charts */,
 				DF13ED6B244A2823006E3BD0 /* Extensions */,
@@ -324,6 +329,7 @@
 		DF13ED6B244A2823006E3BD0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DF3A0E7625F891BE00AB7E33 /* WXImageCompress.swift */,
 				DF13ED6C244A2823006E3BD0 /* Date.swift */,
 				DF13ED6D244A2823006E3BD0 /* Extensions.swift */,
 				DF13ED6E244A2823006E3BD0 /* UIDevice.swift */,
@@ -875,6 +881,7 @@
 				DF13EDB0244A2823006E3BD0 /* LineChart.swift in Sources */,
 				DF13ED48244A277F006E3BD0 /* ViewController.swift in Sources */,
 				DF13EDE7244A2823006E3BD0 /* VBVTextView.swift in Sources */,
+				DF3A0E7725F891BE00AB7E33 /* WXImageCompress.swift in Sources */,
 				DF13EDD6244A2823006E3BD0 /* VBVView.swift in Sources */,
 				DF13EDD2244A2823006E3BD0 /* SyncManager.swift in Sources */,
 				DF13EDD1244A2823006E3BD0 /* ENSideMenuNavigationController.swift in Sources */,
@@ -918,6 +925,7 @@
 				DF13EDCB244A2823006E3BD0 /* RotatingBall.swift in Sources */,
 				DF13EDD4244A2823006E3BD0 /* API.swift in Sources */,
 				DF13EDB8244A2823006E3BD0 /* UIElements.swift in Sources */,
+				DF3A0E7425F8917600AB7E33 /* BaseViewController.swift in Sources */,
 				DF13EDCF244A2823006E3BD0 /* PulsatingLoader.swift in Sources */,
 				DF13EDC2244A2823006E3BD0 /* LocationManager.swift in Sources */,
 				DF13EDBE244A2823006E3BD0 /* Enums.swift in Sources */,
