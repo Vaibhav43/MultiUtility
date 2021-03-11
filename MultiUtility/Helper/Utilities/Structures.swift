@@ -15,9 +15,14 @@ struct Messages {
     static let PLEASE_TRY_AGAIN = "Please try again."
     static let LOCATION_NOT_ALLOWED = "Dear User, you have not been registered as you have denied the request to access location."
     
-    struct AlarmM {
-        static let alarm = "Alarm"
-        static let delete_alarm = "Are you sure you want to delete the alarm?"
+    struct Alarm {
+        static let title = "Alarm"
+        static let delete = "Are you sure you want to delete the alarm?"
+    }
+    
+    struct Notes{
+        static let title = "Notes"
+        static let delete = "Are you sure you want to delete this note?"
     }
 }
 

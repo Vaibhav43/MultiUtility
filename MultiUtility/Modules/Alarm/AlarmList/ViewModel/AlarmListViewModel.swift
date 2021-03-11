@@ -37,7 +37,7 @@ class AlarmListViewModel: NSObject{
     
     func showDeletePopUp(index: Int){
         
-        UIApplication.topViewController?.alert(title: Messages.AlarmM.alarm, message: Messages.AlarmM.delete_alarm, defaultButton: "Yes", cancelButton: "No", completion: { (success) in
+        UIApplication.topViewController?.alert(title: Messages.Alarm.title, message: Messages.Alarm.delete, defaultButton: "Yes", cancelButton: "No", completion: { (success) in
             
             if success{
                 guard let objects = self.fetchedResultController.fetchedObjects else {return}

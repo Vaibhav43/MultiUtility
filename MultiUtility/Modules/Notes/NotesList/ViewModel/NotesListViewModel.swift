@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import CoreData
 
 class NotesListViewModel{
@@ -39,5 +40,16 @@ class NotesListViewModel{
             print("Could not fetch \(error), \(error.userInfo)")
             recordsFetched?()
         }
+    }
+    
+    func showDeletePopUp(index: Int){
+        
+        UIApplication.topViewController?.alert(title: Messages.Notes.title, message: Messages.Notes.delete, defaultButton: "Yes", cancelButton: "No", completion: { (success) in
+            
+            if success{
+                guard let objects = self.fetchedResultController.fetchedObjects else {return}
+                objects[index].delete(context: self.managedContext)
+            }
+        })
     }
 }
