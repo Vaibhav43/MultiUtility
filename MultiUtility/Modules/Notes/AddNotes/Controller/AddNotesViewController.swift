@@ -84,6 +84,13 @@ class AddNotesViewController: BaseViewController {
         return vc
     }
     
+    class func instance(notes: Notes?) -> AddNotesViewController{
+        
+        let vc = AddNotesViewController()
+        vc.addNotesViewModal.notes = notes
+        return vc
+    }
+    
     //MARK:- Setup
     
     func setProperties(){
@@ -101,14 +108,14 @@ class AddNotesViewController: BaseViewController {
         let isUpdate = !(addNotesViewModal.notes?.updated_time == nil)
         let rightBarButtonItem = UIBarButtonItem(title: isUpdate ? "Update" : "Save", style: UIBarButtonItem.Style.done, target: self, action: #selector(submitClicked(_:)))
         
-        if isUpdate{
+//        if isUpdate{
             self.navigationItem.title = "Add Notes"
             self.navigationItem.rightBarButtonItem = rightBarButtonItem
-        }
-        else{
-            self.tabBarController?.navigationItem.title = "Add Notes"
-            self.tabBarController?.navigationItem.rightBarButtonItem = rightBarButtonItem
-        }
+//        }
+//        else{
+//            self.tabBarController?.navigationItem.title = "Add Notes"
+//            self.tabBarController?.navigationItem.rightBarButtonItem = rightBarButtonItem
+//        }
         
         initiateKeyboard(onView: scrollView)
     }

@@ -12,7 +12,7 @@ import UIKit
 class AddNotesViewModal{
     
     var reloadUI: (() -> ())?
-    var managedContext = CoreData.shared.managedContext
+    var managedContext = CoreData.shared.managedContext.newContext(mergeWithParent: true)
     var notes: Notes?{
         didSet{
             setNotes()

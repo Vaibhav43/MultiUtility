@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF05700425FA815000947607 /* NotesSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF05700225FA815000947607 /* NotesSplitViewController.swift */; };
+		DF05700525FA815000947607 /* NotesSplitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF05700325FA815000947607 /* NotesSplitViewController.xib */; };
 		DF13ED44244A277F006E3BD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13ED43244A277F006E3BD0 /* AppDelegate.swift */; };
 		DF13ED46244A277F006E3BD0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13ED45244A277F006E3BD0 /* SceneDelegate.swift */; };
 		DF13ED4E244A277F006E3BD0 /* MultiUtility.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DF13ED4C244A277F006E3BD0 /* MultiUtility.xcdatamodeld */; };
@@ -120,6 +122,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DF05700225FA815000947607 /* NotesSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesSplitViewController.swift; sourceTree = "<group>"; };
+		DF05700325FA815000947607 /* NotesSplitViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesSplitViewController.xib; sourceTree = "<group>"; };
 		DF13ED40244A277F006E3BD0 /* MultiUtility.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiUtility.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF13ED43244A277F006E3BD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF13ED45244A277F006E3BD0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -246,6 +250,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DF05700125FA813000947607 /* Split */ = {
+			isa = PBXGroup;
+			children = (
+				DF05700225FA815000947607 /* NotesSplitViewController.swift */,
+				DF05700325FA815000947607 /* NotesSplitViewController.xib */,
+			);
+			path = Split;
+			sourceTree = "<group>";
+		};
 		DF13ED37244A277F006E3BD0 = {
 			isa = PBXGroup;
 			children = (
@@ -733,6 +746,7 @@
 		DF805F7E25F507D80021ADD3 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				DF05700125FA813000947607 /* Split */,
 				DF3A0E9B25F8B0E300AB7E33 /* NotesList */,
 				DF3A0E9225F8AF8C00AB7E33 /* Tab */,
 				DF805F7F25F507E10021ADD3 /* AddNotes */,
@@ -925,6 +939,7 @@
 				DF13EDD7244A2823006E3BD0 /* CalendarPopUp.xib in Resources */,
 				DF13EDDA244A2823006E3BD0 /* DateCVCell.xib in Resources */,
 				DF13EDF1244A2D6D006E3BD0 /* breakTime.aiff in Resources */,
+				DF05700525FA815000947607 /* NotesSplitViewController.xib in Resources */,
 				DF13EE1C244A2D93006E3BD0 /* AlarmListTableViewCell.xib in Resources */,
 				DF805FBA25F53D480021ADD3 /* OptionsListViewController.xib in Resources */,
 				DF13EE1B244A2D93006E3BD0 /* AlarmListViewController.xib in Resources */,
@@ -1011,6 +1026,7 @@
 				DF13EDCC244A2823006E3BD0 /* PulsatingBall.swift in Sources */,
 				DF13EDAA244A2823006E3BD0 /* CoreData.swift in Sources */,
 				DF805F9625F50A920021ADD3 /* Notes+CoreDataProperties.swift in Sources */,
+				DF05700425FA815000947607 /* NotesSplitViewController.swift in Sources */,
 				DF13EDC7244A2823006E3BD0 /* Spinner.swift in Sources */,
 				DF13EDD8244A2823006E3BD0 /* DateCVCell.swift in Sources */,
 				DF13EDB5244A2823006E3BD0 /* String.swift in Sources */,
