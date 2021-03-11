@@ -16,7 +16,7 @@ class NotesListTableViewCell: VBVTableViewCell {
             favoriteButton.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .medium)
             favoriteButton.setImage(UIImage(systemName: "suit.heart"), for: .normal)
             favoriteButton.setImage(UIImage(systemName: "suit.heart.fill"), for: .selected)
-            favoriteButton.tintColor = UIColor.Notes.ktheme
+            favoriteButton.tintColor = UIColor.init(hex: "502419")
         }
     }
     @IBOutlet weak var titleLabel: UILabel!{
@@ -67,7 +67,7 @@ class NotesListTableViewCell: VBVTableViewCell {
     func setData(){
         
         guard let notes = notes else {return}
-        let color = UIColor.init(hex: notes.color ?? "ffffff")
+        let color = UIColor.init(hex: notes.color ?? "f5f5f5")
         containerView.set(cornerRadius: .light, borderWidth: 1, borderColor: color, backgroundColor: color.withAlphaComponent(0.6))
         titleLabel.text = notes.title
         descriptionLabel.text = notes.notes

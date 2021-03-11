@@ -127,10 +127,7 @@ extension NotesListViewController: NSFetchedResultsControllerDelegate{
             }
             
         case .update, .move:
-            
-            if let indexPath = indexPath {
-                tableView.reloadRows(at: [indexPath], with: .automatic)
-            }
+            tableView.reloadData()
             
         default:
             break
