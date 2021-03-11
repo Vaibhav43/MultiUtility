@@ -20,7 +20,7 @@ class NotesListViewController: UIViewController {
     }
     
     var notesListViewModel = NotesListViewModel()
-
+    
     //MARK:- lifecycle
     
     override func viewDidLoad() {
@@ -28,7 +28,7 @@ class NotesListViewController: UIViewController {
         setClosure()
         // Do any additional setup after loading the view.
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setHeader()
@@ -61,7 +61,7 @@ extension NotesListViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if (editingStyle == .delete) {
-//            self.notesListViewModel.sho
+            self.notesListViewModel.showDeletePopUp(index: indexPath.row)
         }
     }
     
@@ -93,7 +93,7 @@ extension NotesListViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         guard let sections = notesListViewModel.fetchedResultController.sections, let objects = sections[indexPath.section].objects, let data = objects[indexPath.row] as? Notes else { return }
-            
+        
         AddNotesViewController.instance(navigation: self.navigationController!, notes: data)
     }
 }
