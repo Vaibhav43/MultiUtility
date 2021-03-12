@@ -106,6 +106,10 @@
 		DF3A0EAD25F902F600AB7E33 /* ColorCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF3A0EAB25F902F600AB7E33 /* ColorCollectionViewCell.xib */; };
 		DF3A0EB225F939ED00AB7E33 /* NotesListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A0EB025F939ED00AB7E33 /* NotesListTableViewCell.swift */; };
 		DF3A0EB325F939ED00AB7E33 /* NotesListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF3A0EB125F939ED00AB7E33 /* NotesListTableViewCell.xib */; };
+		DF4FF5A825FB523D000C61C2 /* iPhoneOptionListViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4FF5A725FB523D000C61C2 /* iPhoneOptionListViewModal.swift */; };
+		DF4FF5AB25FB524B000C61C2 /* iPadOptionListViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4FF5AA25FB524B000C61C2 /* iPadOptionListViewModal.swift */; };
+		DF4FF5B425FB582B000C61C2 /* AlarmSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4FF5B225FB582B000C61C2 /* AlarmSplitViewController.swift */; };
+		DF4FF5B525FB582B000C61C2 /* AlarmSplitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF4FF5B325FB582B000C61C2 /* AlarmSplitViewController.xib */; };
 		DF805F8625F508C90021ADD3 /* AddNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805F8425F508C90021ADD3 /* AddNotesViewController.swift */; };
 		DF805F8725F508C90021ADD3 /* AddNotesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF805F8525F508C90021ADD3 /* AddNotesViewController.xib */; };
 		DF805F8B25F508DF0021ADD3 /* AddNotesViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805F8A25F508DF0021ADD3 /* AddNotesViewModal.swift */; };
@@ -224,6 +228,10 @@
 		DF3A0EAB25F902F600AB7E33 /* ColorCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorCollectionViewCell.xib; sourceTree = "<group>"; };
 		DF3A0EB025F939ED00AB7E33 /* NotesListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListTableViewCell.swift; sourceTree = "<group>"; };
 		DF3A0EB125F939ED00AB7E33 /* NotesListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesListTableViewCell.xib; sourceTree = "<group>"; };
+		DF4FF5A725FB523D000C61C2 /* iPhoneOptionListViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPhoneOptionListViewModal.swift; sourceTree = "<group>"; };
+		DF4FF5AA25FB524B000C61C2 /* iPadOptionListViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadOptionListViewModal.swift; sourceTree = "<group>"; };
+		DF4FF5B225FB582B000C61C2 /* AlarmSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSplitViewController.swift; sourceTree = "<group>"; };
+		DF4FF5B325FB582B000C61C2 /* AlarmSplitViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlarmSplitViewController.xib; sourceTree = "<group>"; };
 		DF805F8425F508C90021ADD3 /* AddNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesViewController.swift; sourceTree = "<group>"; };
 		DF805F8525F508C90021ADD3 /* AddNotesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddNotesViewController.xib; sourceTree = "<group>"; };
 		DF805F8A25F508DF0021ADD3 /* AddNotesViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesViewModal.swift; sourceTree = "<group>"; };
@@ -253,8 +261,8 @@
 		DF05700125FA813000947607 /* Split */ = {
 			isa = PBXGroup;
 			children = (
-				DF05700225FA815000947607 /* NotesSplitViewController.swift */,
-				DF05700325FA815000947607 /* NotesSplitViewController.xib */,
+				DF4FF5AE25FB57F9000C61C2 /* View */,
+				DF4FF5AD25FB57F2000C61C2 /* Controller */,
 			);
 			path = Split;
 			sourceTree = "<group>";
@@ -489,6 +497,7 @@
 		DF13EDF3244A2D93006E3BD0 /* Alarm */ = {
 			isa = PBXGroup;
 			children = (
+				DF4FF5AF25FB5802000C61C2 /* Split */,
 				DF805FA325F533DD0021ADD3 /* Resources */,
 				DF805FA225F533D60021ADD3 /* Expired */,
 				DF13EDF4244A2D93006E3BD0 /* Tab */,
@@ -727,6 +736,47 @@
 			path = TV;
 			sourceTree = "<group>";
 		};
+		DF4FF5AD25FB57F2000C61C2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DF05700225FA815000947607 /* NotesSplitViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DF4FF5AE25FB57F9000C61C2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DF05700325FA815000947607 /* NotesSplitViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DF4FF5AF25FB5802000C61C2 /* Split */ = {
+			isa = PBXGroup;
+			children = (
+				DF4FF5B125FB580E000C61C2 /* View */,
+				DF4FF5B025FB5806000C61C2 /* Controller */,
+			);
+			path = Split;
+			sourceTree = "<group>";
+		};
+		DF4FF5B025FB5806000C61C2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DF4FF5B225FB582B000C61C2 /* AlarmSplitViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DF4FF5B125FB580E000C61C2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DF4FF5B325FB582B000C61C2 /* AlarmSplitViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		DF805F7925F4C2300021ADD3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -871,6 +921,8 @@
 			isa = PBXGroup;
 			children = (
 				DF805FBD25F53DA70021ADD3 /* OptionsListViewModal.swift */,
+				DF4FF5A725FB523D000C61C2 /* iPhoneOptionListViewModal.swift */,
+				DF4FF5AA25FB524B000C61C2 /* iPadOptionListViewModal.swift */,
 			);
 			path = ViewModal;
 			sourceTree = "<group>";
@@ -936,6 +988,7 @@
 				DF3A0EA225F8B10800AB7E33 /* NotesListViewController.xib in Resources */,
 				DF13EE21244A2D93006E3BD0 /* AlarmNameTableViewCell.xib in Resources */,
 				DF3A0E9825F8AFC400AB7E33 /* NotesTabViewController.xib in Resources */,
+				DF4FF5B525FB582B000C61C2 /* AlarmSplitViewController.xib in Resources */,
 				DF13EDD7244A2823006E3BD0 /* CalendarPopUp.xib in Resources */,
 				DF13EDDA244A2823006E3BD0 /* DateCVCell.xib in Resources */,
 				DF13EDF1244A2D6D006E3BD0 /* breakTime.aiff in Resources */,
@@ -969,6 +1022,7 @@
 				DF13EDAD244A2823006E3BD0 /* CustomGridView.swift in Sources */,
 				DF13EDCE244A2823006E3BD0 /* SpinnerDot.swift in Sources */,
 				DF805FAF25F534190021ADD3 /* ExpiredAlarmViewModal.swift in Sources */,
+				DF4FF5B425FB582B000C61C2 /* AlarmSplitViewController.swift in Sources */,
 				DF13EDC6244A2823006E3BD0 /* BallClipRotate.swift in Sources */,
 				DF13EDB9244A2823006E3BD0 /* Constants.swift in Sources */,
 				DF13EE17244A2D93006E3BD0 /* AlarmTabViewController.swift in Sources */,
@@ -1026,6 +1080,7 @@
 				DF13EDCC244A2823006E3BD0 /* PulsatingBall.swift in Sources */,
 				DF13EDAA244A2823006E3BD0 /* CoreData.swift in Sources */,
 				DF805F9625F50A920021ADD3 /* Notes+CoreDataProperties.swift in Sources */,
+				DF4FF5AB25FB524B000C61C2 /* iPadOptionListViewModal.swift in Sources */,
 				DF05700425FA815000947607 /* NotesSplitViewController.swift in Sources */,
 				DF13EDC7244A2823006E3BD0 /* Spinner.swift in Sources */,
 				DF13EDD8244A2823006E3BD0 /* DateCVCell.swift in Sources */,
@@ -1038,6 +1093,7 @@
 				DF13EE22244A2D93006E3BD0 /* AlarmNameTableViewCell.swift in Sources */,
 				DF13EDD0244A2823006E3BD0 /* ENSideMenu.swift in Sources */,
 				DF13EDC3244A2823006E3BD0 /* Toast.swift in Sources */,
+				DF4FF5A825FB523D000C61C2 /* iPhoneOptionListViewModal.swift in Sources */,
 				DF13EDBF244A2823006E3BD0 /* GenericObserver.swift in Sources */,
 				DF13EDC8244A2823006E3BD0 /* BallClipPulsatingMultiple.swift in Sources */,
 				DF13EDDE244A2823006E3BD0 /* VBVCollectionView.swift in Sources */,

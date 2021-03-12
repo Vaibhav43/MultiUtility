@@ -10,17 +10,22 @@ import UIKit
 
 class NotesSplitViewController: UISplitViewController {
 
+    //MARK:- lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         // Do any additional setup after loading the view.
     }
     
+    //MARK:- instance
+    
     class func instance(){
-        
         let vc = NotesSplitViewController()
         AppDelegate.rootWindow?.rootViewController = vc
     }
+    
+    //MARK:- setup
     
     func setup(){
         preferredDisplayMode = .allVisible

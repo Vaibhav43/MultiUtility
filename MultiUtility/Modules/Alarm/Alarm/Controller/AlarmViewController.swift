@@ -60,8 +60,16 @@ class AlarmViewController: BaseViewController {
     //MARK:- Setup
     
     func setHeader(){
-        self.tabBarController?.navigationItem.rightBarButtonItem = nil
-        self.tabBarController?.navigationItem.title = "Alarm"
+        
+        if tabBarController == nil{
+            self.navigationItem.title = "Alarm"
+            let backToList = UIBarButtonItem(title: "Options", style: .plain, target: self, action: #selector(backToOptions(_:)))
+            self.navigationItem.leftBarButtonItem = backToList
+        }
+        else{
+            self.tabBarController?.navigationItem.rightBarButtonItem = nil
+            self.tabBarController?.navigationItem.title = "Alarm"
+        }
     }
     
     func setup(){
@@ -121,5 +129,9 @@ class AlarmViewController: BaseViewController {
     
     @IBAction func resetClicked(_ sender: UIButton){
         resetValues()
+    }
+    
+    @objc func backToOptions(_ sender: UIBarButtonItem){
+        Session.setSession()
     }
 }

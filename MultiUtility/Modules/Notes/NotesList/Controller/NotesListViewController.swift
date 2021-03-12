@@ -37,8 +37,17 @@ class NotesListViewController: UIViewController {
     //MARK:- setup
     
     func setHeader(){
-        self.tabBarController?.navigationItem.title = "List"
-        self.tabBarController?.navigationItem.rightBarButtonItem = nil
+        
+        if UIDevice.current.isIPhone{
+            self.tabBarController?.navigationItem.title = "List"
+            self.tabBarController?.navigationItem.rightBarButtonItem = nil
+        }
+        else{
+            
+            self.navigationItem.title = "List"
+            let backToList = UIBarButtonItem(title: "Options", style: .plain, target: self, action: #selector(backToOptions(_:)))
+            self.navigationItem.leftBarButtonItem = backToList
+        }
     }
     
     func setClosure(){
@@ -49,6 +58,10 @@ class NotesListViewController: UIViewController {
         
         notesListViewModel.fetchResults()
         notesListViewModel.fetchedResultController.delegate = self
+    }
+    
+    @objc func backToOptions(_ sender: UIBarButtonItem){
+        Session.setSession()
     }
 }
 

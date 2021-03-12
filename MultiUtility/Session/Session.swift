@@ -17,4 +17,10 @@ class Session{
         let navigation = UINavigationController(rootViewController: vc)
         return navigation
     }
+    
+    static func setSession(){
+        
+        AppDelegate.rootWindow?.rootViewController = Session.initiate()
+        AppDelegate.rootWindow?.makeKeyAndVisible()
+    }
 }

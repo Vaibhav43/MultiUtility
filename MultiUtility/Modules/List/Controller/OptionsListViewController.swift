@@ -19,12 +19,12 @@ class OptionsListViewController: BaseViewController {
     }
     
     var optionsListViewModal = OptionsListViewModal()
-
+    
     //MARK:- lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -32,7 +32,7 @@ class OptionsListViewController: BaseViewController {
         super.viewWillAppear(animated)
         self.title = "All Options"
     }
-
+    
     //MARK:- instance
     
     //MARK:- Setup
@@ -57,17 +57,6 @@ extension OptionsListViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let data = optionsListViewModal.optionsArray[indexPath.row]
-        
-        switch data {
-        
-        case .alarm:
-            AlarmTabViewController.instance(navigation: self.navigationController!)
-            
-        case .notes:
-            NotesSplitViewController.instance()
-//            NotesTabViewController.instance(navigation: self.navigationController!)
-        }
+        optionsListViewModal.navigate(indexPath: indexPath)
     }
 }

@@ -71,17 +71,10 @@ class AddNotesViewController: BaseViewController {
     //MARK:- Instance
     
     class func instance(navigation: UINavigationController, notes: Notes){
-        
+
         let vc = AddNotesViewController()
         vc.addNotesViewModal.notes = notes
         navigation.pushViewController(vc, animated: true)
-    }
-    
-    class var instance: AddNotesViewController{
-        
-        let vc = AddNotesViewController()
-        vc.addNotesViewModal.notes = nil
-        return vc
     }
     
     class func instance(notes: Notes?) -> AddNotesViewController{

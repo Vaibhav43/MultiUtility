@@ -42,7 +42,7 @@ class NotesTabViewController: UITabBarController {
     func setup(){
         
         let homeVC = NotesListViewController.initFromNib
-        let alarmVC = AddNotesViewController.instance
+        let alarmVC = AddNotesViewController.instance(notes: nil)
         self.viewControllers = [homeVC, alarmVC]
         setItems()
     }

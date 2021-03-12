@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class OptionsListViewModal{
     
@@ -17,4 +18,16 @@ class OptionsListViewModal{
     }
     
     let optionsArray: [Options] = Options.allCases
+    
+    //MARK:- Other
+    
+    func navigate(indexPath: IndexPath){
+        
+        if UIDevice.current.isIPhone{
+            self.iPhone_navigation(indexPath: indexPath)
+        }
+        else{
+            self.ipad_navigation(indexPath: indexPath)
+        }
+    }
 }

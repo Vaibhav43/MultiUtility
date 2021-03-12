@@ -67,8 +67,14 @@ class AlarmListViewController: BaseViewController {
         let addItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addClicked(_:)))
         rightItemsArray.append(addItem)
         
-        self.tabBarController?.navigationItem.rightBarButtonItems = rightItemsArray
-        self.tabBarController?.navigationItem.title = "Alarm List"
+        if tabBarController == nil{
+            self.navigationItem.rightBarButtonItems = rightItemsArray
+            self.navigationItem.title = "Alarm List"
+        }
+        else{
+            self.tabBarController?.navigationItem.rightBarButtonItems = rightItemsArray
+            self.tabBarController?.navigationItem.title = "Alarm List"
+        }
     }
     
     //MARK:- Action handling

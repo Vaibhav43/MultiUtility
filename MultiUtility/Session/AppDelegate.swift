@@ -28,8 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard #available(iOS 13.0, *) else {
             
             window = UIWindow()
-            window?.rootViewController = Session.initiate()
-            window?.makeKeyAndVisible()
+            Session.setSession()
             return
         }
     }

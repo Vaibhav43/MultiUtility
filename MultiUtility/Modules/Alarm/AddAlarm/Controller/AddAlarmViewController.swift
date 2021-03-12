@@ -52,7 +52,7 @@ class AddAlarmViewController: VBVViewController {
     
     func setHeader(){
         
-        self.navigationItem.title = "Add Alarm"
+        self.navigationItem.title = addAlarmViewModel.alarm?.created_time == nil ? "Add Alarm" : "Edit Alarm"
         
         let saveItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveClicked))
         self.navigationItem.rightBarButtonItem = saveItem
@@ -121,6 +121,7 @@ extension AddAlarmViewController: VBVTextfieldDelegate{
             return false
         }
         else if indexPath.row == 3{
+            hideKeyboard()
             self.addAlarmViewModel.showDate()
             return false
         }
