@@ -106,6 +106,7 @@
 		DF3A0EAD25F902F600AB7E33 /* ColorCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF3A0EAB25F902F600AB7E33 /* ColorCollectionViewCell.xib */; };
 		DF3A0EB225F939ED00AB7E33 /* NotesListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3A0EB025F939ED00AB7E33 /* NotesListTableViewCell.swift */; };
 		DF3A0EB325F939ED00AB7E33 /* NotesListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF3A0EB125F939ED00AB7E33 /* NotesListTableViewCell.xib */; };
+		DF4AE362260E258C00602802 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4AE361260E258C00602802 /* ImagePickerController.swift */; };
 		DF4FF5A825FB523D000C61C2 /* iPhoneOptionListViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4FF5A725FB523D000C61C2 /* iPhoneOptionListViewModal.swift */; };
 		DF4FF5AB25FB524B000C61C2 /* iPadOptionListViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4FF5AA25FB524B000C61C2 /* iPadOptionListViewModal.swift */; };
 		DF4FF5B425FB582B000C61C2 /* AlarmSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4FF5B225FB582B000C61C2 /* AlarmSplitViewController.swift */; };
@@ -228,6 +229,7 @@
 		DF3A0EAB25F902F600AB7E33 /* ColorCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorCollectionViewCell.xib; sourceTree = "<group>"; };
 		DF3A0EB025F939ED00AB7E33 /* NotesListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListTableViewCell.swift; sourceTree = "<group>"; };
 		DF3A0EB125F939ED00AB7E33 /* NotesListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesListTableViewCell.xib; sourceTree = "<group>"; };
+		DF4AE361260E258C00602802 /* ImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
 		DF4FF5A725FB523D000C61C2 /* iPhoneOptionListViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPhoneOptionListViewModal.swift; sourceTree = "<group>"; };
 		DF4FF5AA25FB524B000C61C2 /* iPadOptionListViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadOptionListViewModal.swift; sourceTree = "<group>"; };
 		DF4FF5B225FB582B000C61C2 /* AlarmSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSplitViewController.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				DF3A0E8F25F8AD5A00AB7E33 /* BaseViewController.swift */,
+				DF4AE360260E253200602802 /* Protocols */,
 				DF13ED5F244A2823006E3BD0 /* Database */,
 				DF13ED61244A2823006E3BD0 /* Charts */,
 				DF13ED6B244A2823006E3BD0 /* Extensions */,
@@ -736,6 +739,14 @@
 			path = TV;
 			sourceTree = "<group>";
 		};
+		DF4AE360260E253200602802 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				DF4AE361260E258C00602802 /* ImagePickerController.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		DF4FF5AD25FB57F2000C61C2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -954,7 +965,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Vaibhav Agarwal";
 				TargetAttributes = {
 					DF13ED3F244A277F006E3BD0 = {
@@ -1061,6 +1072,7 @@
 				DF13EDB3244A2823006E3BD0 /* Extensions.swift in Sources */,
 				DF805FA925F534070021ADD3 /* ExpiredAlarmViewController.swift in Sources */,
 				DF13ED44244A277F006E3BD0 /* AppDelegate.swift in Sources */,
+				DF4AE362260E258C00602802 /* ImagePickerController.swift in Sources */,
 				DF13EDDC244A2823006E3BD0 /* ProgressView.swift in Sources */,
 				DF13EDE5244A2823006E3BD0 /* VBVViewController.swift in Sources */,
 				DF13EE1F244A2D93006E3BD0 /* AddAlarmViewController.swift in Sources */,
@@ -1154,6 +1166,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1214,6 +1227,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

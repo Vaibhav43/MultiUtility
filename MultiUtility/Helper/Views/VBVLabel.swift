@@ -68,7 +68,7 @@ import UIKit
     
     override func copy(_ sender: Any?) {
         UIPasteboard.general.string = text
-        UIMenuController.shared.setMenuVisible(false, animated: true)
+//        UIMenuController.shared.showMenu(from: sender, rect: sender.)
     }
     
     @objc func showCopyMenu(sender: Any?) {
@@ -76,8 +76,8 @@ import UIKit
         let menuController = UIMenuController.shared
         
         if !menuController.isMenuVisible {
-            menuController.setTargetRect(bounds, in: self)
-            menuController.setMenuVisible(true, animated: true)
+//            menuController.setTargetRect(bounds, in: self)
+//            menuController.setMenuVisible(true, animated: true)
         }
     }
     

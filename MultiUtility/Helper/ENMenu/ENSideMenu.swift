@@ -101,7 +101,8 @@ public extension UIViewController {
     }
     
     internal func topMostController () -> ENSideMenuProtocol? {
-        var topController : UIViewController? = UIApplication.shared.keyWindow?.rootViewController
+        
+        var topController : UIViewController? = UIApplication.shared.windows.first?.rootViewController
         if (topController is UITabBarController) {
             topController = (topController as! UITabBarController).selectedViewController
         }
@@ -245,16 +246,7 @@ open class ENSideMenu : NSObject, UIGestureRecognizerDelegate {
     }
     
     fileprivate func adjustFrameDimensions( _ width: CGFloat, height: CGFloat ) -> (CGFloat,CGFloat) {
-        if floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1 &&
-            (UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.landscapeRight ||
-                UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.landscapeLeft) {
-            // iOS 7.1 or lower and landscape mode -> interchange width and height
-            return (height, width)
-        }
-        else {
-            return (width, height)
-        }
-        
+        return (width, height)
     }
     
     func updateOuterViewFrame() {

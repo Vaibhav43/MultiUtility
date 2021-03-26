@@ -12,9 +12,7 @@ import Photos
 import MobileCoreServices
 
 @objc protocol BaseDelegate{
-    func selected(image: UIImage, name: String)
     @objc optional func pdf(url: URL?)
-    @objc optional func videoSelected(url: URL?)
 }
 
 class BaseViewController: UIViewController, SFSafariViewControllerDelegate, UIGestureRecognizerDelegate {
@@ -30,9 +28,6 @@ class BaseViewController: UIViewController, SFSafariViewControllerDelegate, UIGe
     
     /// to allow sidemenu to open or not
     var shouldOpenSideMenu = true
-    
-    /// image picker to allow user to pick images
-    var picker: UIImagePickerController?
     
     /// a delegate of the Baseviewcontroller to provide its functions espeacially imagepicker
     var baseDelegate: BaseDelegate?
@@ -173,14 +168,6 @@ class BaseViewController: UIViewController, SFSafariViewControllerDelegate, UIGe
         }
     }
     
-    @objc func popToRoot(){
-        
-        #if PATIENT
-        GlobalFunctions.Landing.popToRoot()
-        #endif
-        
-    }
-    
     //MARK:- safari functions
     
     func showSafari(url: URL?){
@@ -199,184 +186,12 @@ class BaseViewController: UIViewController, SFSafariViewControllerDelegate, UIGe
     }
 }
 
-//MARK:- image functions
-
-extension BaseViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-    
-    func showAlertForImage(sender: UIView? = nil, viewController: UIViewController? = nil,cameraCaptureMode: UIImagePickerController.CameraCaptureMode? = nil){
-        
-        let alert:UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
-        
-        let cameraAction = UIAlertAction(title: "Camera", style: UIAlertAction.Style.default){
-            UIAlertAction in
-            self.askForCameraPermission(cameraCaptureMode: cameraCaptureMode)
-        }
-        
-        let gallaryAction = UIAlertAction(title: "Gallery", style: UIAlertAction.Style.default){
-            UIAlertAction in
-            self.openGallery(cameraCaptureMode: cameraCaptureMode)
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel){
-            UIAlertAction in
-        }
-        
-        // Add the actions
-        alert.addAction(cameraAction)
-        alert.addAction(gallaryAction)
-        alert.addAction(cancelAction)
-        
-        
-        if UIDevice.current.isIPad, let sender = sender, let popoverController = alert.popoverPresentationController {
-            popoverController.sourceView = sender
-            popoverController.sourceRect = sender.bounds
-        }
-        
-        if let presentingCon = viewController{
-            presentingCon.present(alert, animated: true, completion: nil)
-        }
-        else{
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    func showPicker(source: UIImagePickerController.SourceType, captureMode: UIImagePickerController.CameraCaptureMode?){
-        picker = UIImagePickerController()
-        picker?.delegate = self
-        picker?.sourceType = source
-        
-        ////this is the conditon when we have to open camera in video mode. Implemented in record screen for doctor app.
-        if captureMode == .video{
-            picker?.mediaTypes = [kUTTypeMovie as String]
-            if source == .camera{
-                picker?.cameraCaptureMode = .video
-                picker?.videoQuality = .typeHigh
-            }
-           picker?.videoExportPreset = AVAssetExportPresetPassthrough
-        }
-        
-        if self.navigationController != nil{
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
-        }
-        
-        if let top = UIApplication.topViewController(){
-            top.present(self.picker!, animated: true, completion: nil)
-        }
-        else{
-            self.present(self.picker!, animated: true, completion: nil)
-        }
-    }
-    
-    func resetPicker(){
-        
-        if self.navigationController != nil{
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-        }
-        
-        picker?.dismiss(animated: true, completion: nil)
-        picker?.delegate = nil
-        picker = nil
-    }
-    
-    func openCamera(cameraCaptureMode: UIImagePickerController.CameraCaptureMode? = nil){
-        
-        DispatchQueue.main.async {
-            
-            guard (UIImagePickerController.isSourceTypeAvailable(.camera)) else {
-                Toast.show(message: "Not able to access camera")
-                return
-            }
-            
-            self.showPicker(source: .camera, captureMode: cameraCaptureMode)
-        }
-    }
-    
-    func openGallery(cameraCaptureMode: UIImagePickerController.CameraCaptureMode? = nil){
-        self.showPicker(source: .photoLibrary, captureMode: cameraCaptureMode)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        if let image = info[.originalImage] as? UIImage{
-            baseDelegate?.selected(image: image.wxCompress(type: .timeline), name: "image.jpg")
-        } else if let videoURL = info[.mediaURL] as? URL{
-            baseDelegate?.videoSelected?(url: videoURL)
-        }
-        
-        self.resetPicker()
-    }
-    
-    @objc func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
-        self.resetPicker()
-    }
-    
-    func askForCameraPermission(cameraCaptureMode: UIImagePickerController.CameraCaptureMode? = nil){
-        let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
-        
-        switch (status){
-            case .authorized:
-                self.openCamera(cameraCaptureMode: cameraCaptureMode)
-                
-            case .notDetermined:
-                
-                AVCaptureDevice.requestAccess(for: AVMediaType.video) { (granted) in
-                    guard granted else{return}
-                    self.openCamera(cameraCaptureMode: cameraCaptureMode)
-                }
-                
-            case .denied:
-                self.camDenied(type: "Camera")
-                
-            case .restricted:
-                Toast.show(message: "Not able to access camera")
-            @unknown default: break
-        }
-    }
-    
-    func askForGalleryPhotos(completion: ((Bool?)->())? = nil){
-        // Get the current authorization state.
-        let status = PHPhotoLibrary.authorizationStatus()
-        
-        switch status {
-            
-            case .authorized:
-                completion?(true)
-                
-            case .denied:
-                self.camDenied(type: "Photos")
-                completion?(nil)
-                
-            case .notDetermined:
-                // Access has not been determined.
-                PHPhotoLibrary.requestAuthorization({ (newStatus) in
-                    completion?((newStatus == PHAuthorizationStatus.authorized))
-                })
-                
-            default:
-                completion?(nil)
-        }
-    }
-    
-    func camDenied(type: String){
-        
-        DispatchQueue.main.async{
-            guard UIApplication.shared.canOpenURL(URL(string: UIApplication.openSettingsURLString)!) else {return}
-            
-            self.alert(title: "Requires Permission", message: "Seems like you have initially denied \(type) permission. Please click on Go to allow app to access your \(type).\n\n1. Touch the Go button below to open the Settings app.\n\n2. Turn the \(type) on.\n\n3. Open this app and try again.", defaultButton: "Go", cancelButton: "Cancel") { (value) in
-                
-                guard value else{return}
-                
-                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
-            }
-        }
-    }
-}
-
 //MARK:- Compression
 
 extension BaseViewController{
     
     func compressURL(outputFileURL: URL, completion: @escaping ((Data?)->())) {
+        
         guard let data = try? Data(contentsOf: outputFileURL) else {
             return
         }
@@ -408,9 +223,8 @@ extension BaseViewController{
         }
     }
     
-      func compressVideo(inputURL: URL,
-                         outputURL: URL,
-                         handler:@escaping (_ exportSession: AVAssetExportSession?) -> Void) {
+    func compressVideo(inputURL: URL, outputURL: URL, handler: @escaping (_ exportSession: AVAssetExportSession?) -> Void) {
+        
         let urlAsset = AVURLAsset(url: inputURL, options: nil)
         guard let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPresetMediumQuality) else {
             handler(nil)
@@ -423,7 +237,7 @@ extension BaseViewController{
         exportSession.exportAsynchronously {
             handler(exportSession)
         }
-      }
+    }
 }
 
 //MARK:- document reading functions

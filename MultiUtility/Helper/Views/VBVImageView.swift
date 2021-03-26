@@ -16,7 +16,7 @@ class VBVImageView: UIImageView{
     private var imageEndPoint: String?
     
     private let activityIndicatorView: UIActivityIndicatorView = {
-        let aiv = UIActivityIndicatorView(style: .whiteLarge)
+        let aiv = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
         aiv.color = UIColor.darkGray
         aiv.hidesWhenStopped = true
         aiv.translatesAutoresizingMaskIntoConstraints = false

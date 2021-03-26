@@ -330,7 +330,7 @@ extension UIApplication {
     
     class var topViewController: UIViewController?{
         
-        let controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController
+        let controller: UIViewController? = UIApplication.shared.windows.first?.rootViewController
         if let navigationController = controller as? UINavigationController {
             return topViewController(controller: navigationController.visibleViewController)
         }
@@ -354,12 +354,10 @@ extension UIApplication {
             }
             
             self.shared.open(settingsUrl, options: [:], completionHandler: nil)
-            //            self.shared.open(settingsUrl, completionHandler: { (success) in
-            //            })
         }
     }
     
-    class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+    class func topViewController(controller: UIViewController? = UIApplication.shared.windows.first?.rootViewController) -> UIViewController? {
         if let navigationController = controller as? UINavigationController {
             return topViewController(controller: navigationController.visibleViewController)
         }
