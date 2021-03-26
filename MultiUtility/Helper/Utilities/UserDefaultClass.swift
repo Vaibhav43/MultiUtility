@@ -8,10 +8,9 @@
 
 import Foundation
 
-
-let userDefault = UserDefaults.standard
-
 class UserDefaultsClass{
+    
+    static let userDefault = UserDefaults.standard
     
     enum UDKeys: String {
         case alarmTime = "alarmTime"

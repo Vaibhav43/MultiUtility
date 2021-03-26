@@ -30,7 +30,7 @@
 		DF13EDB6244A2823006E3BD0 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13ED70244A2823006E3BD0 /* Types.swift */; };
 		DF13EDB7244A2823006E3BD0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13ED71244A2823006E3BD0 /* Color.swift */; };
 		DF13EDB8244A2823006E3BD0 /* UIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13ED72244A2823006E3BD0 /* UIElements.swift */; };
-		DF13EDB9244A2823006E3BD0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13ED74244A2823006E3BD0 /* Constants.swift */; };
+		DF13EDB9244A2823006E3BD0 /* AsyncOpeartion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13ED74244A2823006E3BD0 /* AsyncOpeartion.swift */; };
 		DF13EDBA244A2823006E3BD0 /* UserDefaultClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13ED75244A2823006E3BD0 /* UserDefaultClass.swift */; };
 		DF13EDBB244A2823006E3BD0 /* Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13ED76244A2823006E3BD0 /* Conversion.swift */; };
 		DF13EDBC244A2823006E3BD0 /* Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF13ED77244A2823006E3BD0 /* Structures.swift */; };
@@ -152,7 +152,7 @@
 		DF13ED70244A2823006E3BD0 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		DF13ED71244A2823006E3BD0 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		DF13ED72244A2823006E3BD0 /* UIElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIElements.swift; sourceTree = "<group>"; };
-		DF13ED74244A2823006E3BD0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		DF13ED74244A2823006E3BD0 /* AsyncOpeartion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOpeartion.swift; sourceTree = "<group>"; };
 		DF13ED75244A2823006E3BD0 /* UserDefaultClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultClass.swift; sourceTree = "<group>"; };
 		DF13ED76244A2823006E3BD0 /* Conversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversion.swift; sourceTree = "<group>"; };
 		DF13ED77244A2823006E3BD0 /* Structures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Structures.swift; sourceTree = "<group>"; };
@@ -380,7 +380,7 @@
 		DF13ED73244A2823006E3BD0 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				DF13ED74244A2823006E3BD0 /* Constants.swift */,
+				DF13ED74244A2823006E3BD0 /* AsyncOpeartion.swift */,
 				DF13ED75244A2823006E3BD0 /* UserDefaultClass.swift */,
 				DF13ED76244A2823006E3BD0 /* Conversion.swift */,
 				DF13ED77244A2823006E3BD0 /* Structures.swift */,
@@ -1024,7 +1024,7 @@
 				DF805FAF25F534190021ADD3 /* ExpiredAlarmViewModal.swift in Sources */,
 				DF4FF5B425FB582B000C61C2 /* AlarmSplitViewController.swift in Sources */,
 				DF13EDC6244A2823006E3BD0 /* BallClipRotate.swift in Sources */,
-				DF13EDB9244A2823006E3BD0 /* Constants.swift in Sources */,
+				DF13EDB9244A2823006E3BD0 /* AsyncOpeartion.swift in Sources */,
 				DF13EE17244A2D93006E3BD0 /* AlarmTabViewController.swift in Sources */,
 				DF13ED5D244A2818006E3BD0 /* Session.swift in Sources */,
 				DF805FBE25F53DA70021ADD3 /* OptionsListViewModal.swift in Sources */,

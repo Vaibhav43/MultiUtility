@@ -14,8 +14,7 @@ enum Path: String{
 }
 
 enum UploadType: String{
-    case documents
-    case profile_image
+    case none
 }
 
 enum CellType{
@@ -105,7 +104,6 @@ enum ValueType: Int {
     }
 }
 
-
 enum Keyboard{
     
     case number
@@ -127,16 +125,5 @@ enum Keyboard{
         default:
             return .asciiCapable
         }
-    }
-}
-
-enum AlarmType: String{
-    
-    case timeBreak
-    case reminder
-    case task
-    
-    static func fetchString() -> [String]{
-        return [timeBreak.rawValue.capitalized, reminder.rawValue.capitalized, task.rawValue.capitalized]
     }
 }

@@ -27,15 +27,13 @@ struct Messages {
 }
 
 struct Global {
-    static let debug = true
     
     struct TypeAlias {
-       typealias dictionary = Dictionary<String, Any>
+        typealias dictionary = Dictionary<String, Any>
     }
-}
-
-struct Symbol {
     
-    static let degree = "\u{00B0}"
-    static let currency = "\u{20B9}"
+    struct Symbol {        
+        static let degree = "\u{00B0}"
+        static let currency = "\u{20B9}"
+    }
 }

@@ -10,6 +10,18 @@ import Foundation
 import CoreData
 import UIKit
 
+enum AlarmType: String{
+    
+    case timeBreak
+    case reminder
+    case task
+    
+    static func fetchString() -> [String]{
+        return [timeBreak.rawValue.capitalized, reminder.rawValue.capitalized, task.rawValue.capitalized]
+    }
+}
+
+
 class AddAlarmViewModel{
     
     //MARK:- Properties

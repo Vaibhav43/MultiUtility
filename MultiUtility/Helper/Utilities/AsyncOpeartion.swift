@@ -13,9 +13,7 @@ import CoreLocation
 
 
 func print<T: Any>(value: T){
-    if Global.debug{
-        print(value)
-    }
+    debugPrint(value)
 }
 
 //let menuItem1: UIMenuItem = UIMenuItem(title: "Menu 1", action: #selector(onMenu1(sender:)))

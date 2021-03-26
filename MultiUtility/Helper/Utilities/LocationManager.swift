@@ -11,7 +11,6 @@ import UIKit
 
 protocol LocationServiceDelegate {
     func tracingLocation()
-
 }
 
 struct Location {
@@ -26,11 +25,27 @@ struct Location {
 
 class LocationService: NSObject, CLLocationManagerDelegate {
     
-    static var locationService: LocationService?
+    //MARK:- Instance
+    
+    private static var privateShared: LocationService?
+    
+    class var shared: LocationService { // change class to final to prevent override
+        guard let uwShared = privateShared else {
+            privateShared = LocationService.init()
+            return privateShared!
+        }
+        return uwShared
+    }
+    
+    class func destroy() {
+        privateShared = nil
+    }
+    
+    //MARK:- Properties
+    
     var locationManager: CLLocationManager?
     var delegate: LocationServiceDelegate?
-    var
-    location = Location()
+    lazy var location = Location()
     
     var notdeterminedRequest: Bool{
         return CLLocationManager.authorizationStatus() == .notDetermined
@@ -44,15 +59,65 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         return !CLLocationManager.locationServicesEnabled()
     }
     
-    override init() {
+    private override init() {
         super.init()
         self.locationManager = CLLocationManager()
         authorizeLocation()
     }
     
-    class func instance(){
-        self.locationService = LocationService.init()
+    func setupLocationServices(){
+        
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest // The accuracy of the location data
+        locationManager?.distanceFilter = 400 // The minimum distance (measured in meters) a device must move horizontally before an update event is generated.
+        locationManager?.delegate = self
     }
+        
+    //MARK:- Location Manager
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
+        if (status == CLAuthorizationStatus.denied) {
+            // The user denied authorization
+        } else if (status == CLAuthorizationStatus.authorizedAlways) || status == .authorizedWhenInUse {
+            // The user accepted authorization
+            startUpdating()
+        }
+    }
+    
+    // CLLocationManagerDelegate
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        if location.latitude == nil, let last = locations.last{
+            
+            location = Location()
+            location.latitude = last.coordinate.latitude
+            location.longitude = last.coordinate.longitude
+            locationManager?.stopMonitoringSignificantLocationChanges()
+            updateLocation()
+            stopUpdating()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(value:"error in  location")
+    }
+    
+    //MARK:- Update
+    
+    // Private function
+    private func updateLocation(){
+        fetchCityAndCountry()
+    }
+    
+    func startUpdating() {
+        self.locationManager?.startUpdatingLocation()
+    }
+    
+    func stopUpdating() {
+        self.locationManager?.stopUpdatingLocation()
+    }
+    
+    //MARK:- Authorization
     
     func authorizeLocation(){
         
@@ -80,72 +145,6 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         setupLocationServices()
     }
     
-    func setupLocationServices(){
-        
-        location = Location()
-        locationManager?.desiredAccuracy = kCLLocationAccuracyBest // The accuracy of the location data
-        locationManager?.distanceFilter = 400 // The minimum distance (measured in meters) a device must move horizontally before an update event is generated.
-        locationManager?.delegate = self
-    }
-    
-    func startUpdating() {
-        location = Location()
-        self.locationManager?.startUpdatingLocation()
-    }
-    
-    func stopUpdating() {
-        self.locationManager?.stopUpdatingLocation()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        
-        if (status == CLAuthorizationStatus.denied) {
-            // The user denied authorization
-        } else if (status == CLAuthorizationStatus.authorizedAlways) || status == .authorizedWhenInUse {
-            // The user accepted authorization
-            startUpdating()
-        }
-    }
-    
-    // CLLocationManagerDelegate
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    
-        if location.latitude == nil, let last = locations.last{
-            
-            location = Location()
-            location.latitude = last.coordinate.latitude
-            location.longitude = last.coordinate.longitude
-            locationManager?.stopMonitoringSignificantLocationChanges()
-            updateLocation()
-            stopUpdating()
-        }
-    }
-    
-    func fetchCityAndCountry() {
-        
-        if let lat = location.latitude, let long = location.longitude{
-            
-            let loc: CLLocation = CLLocation(latitude: lat, longitude: long)
-            CLGeocoder().reverseGeocodeLocation(loc) { placemarks, error in
-                
-                self.location.city = placemarks?.first?.locality
-                self.location.state = placemarks?.first?.administrativeArea
-                self.location.country = placemarks?.first?.country
-                self.location.pincode = placemarks?.first?.postalCode
-                self.delegate?.tracingLocation()
-            }
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-         print(value:"error in  location")
-    }
-    
-    // Private function
-    private func updateLocation(){
-        fetchCityAndCountry()
-    }
-    
     func checkForAuthorization(completion: @escaping ((Bool)->())){
         
         guard let top = UIApplication.topViewController else {
@@ -155,7 +154,7 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         
         if deviceLocationEnabled{
             
-            top.alert(title: "Evolko Patient", message: "Please enable location to proceed for registration.", defaultButton: "Okay", cancelButton: nil) { (finished) in
+            top.alert(title: "", message: "Please enable location to proceed for registration.", defaultButton: "Okay", cancelButton: nil) { (finished) in
                 completion(true)
             }
         }
@@ -163,7 +162,7 @@ class LocationService: NSObject, CLLocationManagerDelegate {
             
             if deniedRequest{
                 
-                top.alert(title: "Evolko Patient", message: "Please allow app to access your location for registration.", defaultButton: "Allow", cancelButton: "Deny") { (finished) in
+                top.alert(title: "", message: "Please allow app to access your location for registration.", defaultButton: "Allow", cancelButton: "Deny") { (finished) in
                     
                     if finished{
                         UIApplication.openAppSetting()
@@ -181,6 +180,24 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         }
         else{
             completion(true)
+        }
+    }
+    
+    //MARK:- Other
+    
+    func fetchCityAndCountry() {
+        
+        if let lat = location.latitude, let long = location.longitude{
+            
+            let loc: CLLocation = CLLocation(latitude: lat, longitude: long)
+            CLGeocoder().reverseGeocodeLocation(loc) { placemarks, error in
+                
+                self.location.city = placemarks?.first?.locality
+                self.location.state = placemarks?.first?.administrativeArea
+                self.location.country = placemarks?.first?.country
+                self.location.pincode = placemarks?.first?.postalCode
+                self.delegate?.tracingLocation()
+            }
         }
     }
 }

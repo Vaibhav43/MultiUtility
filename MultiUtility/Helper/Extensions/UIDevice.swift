@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 extension UIDevice {
     
     static var modelName: String {
