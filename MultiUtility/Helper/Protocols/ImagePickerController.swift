@@ -37,15 +37,25 @@ class ImagePickerController: NSObject, UIImagePickerControllerDelegate, UINaviga
     
     //MARK:- Picker Actions
     
-    func imagePicker(cameraCaptureMode: UIImagePickerController.CameraCaptureMode, sender: UIView? = nil, completion: ((UIImage?, URL?)->())?){
+    func imagePicker(cameraCaptureMode: UIImagePickerController.CameraCaptureMode, source: UIImagePickerController.SourceType? = nil, sender: UIView? = nil, completion: ((UIImage?, URL?)->())?){
         
         if Thread.isMainThread{
-            self.openImagePicker(cameraCaptureMode: cameraCaptureMode, sender: sender, completion: completion)
+            showPickerBy(cameraCaptureMode: cameraCaptureMode, source: source, sender: sender, completion: completion)
         }
         else{
             DispatchQueue.main.async {
-                self.openImagePicker(cameraCaptureMode: cameraCaptureMode, sender: sender, completion: completion)
+                self.showPickerBy(cameraCaptureMode: cameraCaptureMode, source: source, sender: sender, completion: completion)
             }
+        }
+    }
+    
+    fileprivate func showPickerBy(cameraCaptureMode: UIImagePickerController.CameraCaptureMode, source: UIImagePickerController.SourceType? = nil, sender: UIView? = nil, completion: ((UIImage?, URL?)->())?){
+        
+        if let source = source{
+            showPicker(source: source, captureMode: cameraCaptureMode)
+        }
+        else{
+            self.openImagePicker(cameraCaptureMode: cameraCaptureMode, sender: sender, completion: completion)
         }
     }
     
@@ -134,10 +144,13 @@ class ImagePickerController: NSObject, UIImagePickerControllerDelegate, UINaviga
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let image = info[.originalImage] as? UIImage{
-            self.completion?(image, nil)
+            completion?(image, nil)
         }
         else if let videoURL = info[.mediaURL] as? URL{
-            self.completion?(nil, videoURL)
+            completion?(nil, videoURL)
+        }
+        else{
+            completion?(nil, nil)
         }
         
         dismiss()
