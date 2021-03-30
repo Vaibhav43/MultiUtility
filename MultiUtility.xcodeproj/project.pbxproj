@@ -124,6 +124,7 @@
 		DF805FB925F53D480021ADD3 /* OptionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805FB725F53D480021ADD3 /* OptionsListViewController.swift */; };
 		DF805FBA25F53D480021ADD3 /* OptionsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF805FB825F53D480021ADD3 /* OptionsListViewController.xib */; };
 		DF805FBE25F53DA70021ADD3 /* OptionsListViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF805FBD25F53DA70021ADD3 /* OptionsListViewModal.swift */; };
+		DF8A1B622612DD7E00605825 /* SafariWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8A1B612612DD7E00605825 /* SafariWebController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -247,6 +248,7 @@
 		DF805FB725F53D480021ADD3 /* OptionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsListViewController.swift; sourceTree = "<group>"; };
 		DF805FB825F53D480021ADD3 /* OptionsListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionsListViewController.xib; sourceTree = "<group>"; };
 		DF805FBD25F53DA70021ADD3 /* OptionsListViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsListViewModal.swift; sourceTree = "<group>"; };
+		DF8A1B612612DD7E00605825 /* SafariWebController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -314,7 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				DF3A0E8F25F8AD5A00AB7E33 /* BaseViewController.swift */,
-				DF4AE360260E253200602802 /* Protocols */,
+				DF4AE360260E253200602802 /* CustomControllers */,
 				DF13ED5F244A2823006E3BD0 /* Database */,
 				DF13ED61244A2823006E3BD0 /* Charts */,
 				DF13ED6B244A2823006E3BD0 /* Extensions */,
@@ -739,12 +741,13 @@
 			path = TV;
 			sourceTree = "<group>";
 		};
-		DF4AE360260E253200602802 /* Protocols */ = {
+		DF4AE360260E253200602802 /* CustomControllers */ = {
 			isa = PBXGroup;
 			children = (
 				DF4AE361260E258C00602802 /* ImagePickerController.swift */,
+				DF8A1B612612DD7E00605825 /* SafariWebController.swift */,
 			);
-			path = Protocols;
+			path = CustomControllers;
 			sourceTree = "<group>";
 		};
 		DF4FF5AD25FB57F2000C61C2 /* Controller */ = {
@@ -1104,6 +1107,7 @@
 				DF13EDBB244A2823006E3BD0 /* Conversion.swift in Sources */,
 				DF13EE22244A2D93006E3BD0 /* AlarmNameTableViewCell.swift in Sources */,
 				DF13EDD0244A2823006E3BD0 /* ENSideMenu.swift in Sources */,
+				DF8A1B622612DD7E00605825 /* SafariWebController.swift in Sources */,
 				DF13EDC3244A2823006E3BD0 /* Toast.swift in Sources */,
 				DF4FF5A825FB523D000C61C2 /* iPhoneOptionListViewModal.swift in Sources */,
 				DF13EDBF244A2823006E3BD0 /* GenericObserver.swift in Sources */,

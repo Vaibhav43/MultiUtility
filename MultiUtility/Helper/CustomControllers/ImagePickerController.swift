@@ -35,6 +35,10 @@ class ImagePickerController: NSObject, UIImagePickerControllerDelegate, UINaviga
         privateShared = nil
     }
     
+    private override init() {
+        super.init()
+    }
+    
     //MARK:- Picker Actions
     
     func imagePicker(cameraCaptureMode: UIImagePickerController.CameraCaptureMode, source: UIImagePickerController.SourceType? = nil, sender: UIView? = nil, completion: ((UIImage?, URL?)->())?){

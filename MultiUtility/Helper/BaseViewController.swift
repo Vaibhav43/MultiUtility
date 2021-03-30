@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SafariServices
 import Photos
 import MobileCoreServices
 
@@ -15,7 +14,7 @@ import MobileCoreServices
     @objc optional func pdf(url: URL?)
 }
 
-class BaseViewController: UIViewController, SFSafariViewControllerDelegate, UIGestureRecognizerDelegate {
+class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
     
     /// gesture to remove keyboard when tapped the view
     var tapGesture = UITapGestureRecognizer()
@@ -32,7 +31,7 @@ class BaseViewController: UIViewController, SFSafariViewControllerDelegate, UIGe
     /// a delegate of the Baseviewcontroller to provide its functions espeacially imagepicker
     var baseDelegate: BaseDelegate?
     
-    var safari: SFSafariViewController?
+    
     
     /// a delegate of the UIDocumentInteractionController to provide its functions espeacially documents
     var documentInteractionController: UIDocumentInteractionController?
@@ -166,23 +165,6 @@ class BaseViewController: UIViewController, SFSafariViewControllerDelegate, UIGe
         else{
             self.navigationController?.popViewController(animated: true)
         }
-    }
-    
-    //MARK:- safari functions
-    
-    func showSafari(url: URL?){
-        
-        if let url = url, safari == nil{
-            
-            safari = SFSafariViewController(url: url)
-            safari?.delegate = self
-            self.present(safari!, animated: true, completion: nil)
-        }
-    }
-    
-    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        controller.dismiss(animated: true, completion: nil)
-        safari = nil
     }
 }
 
