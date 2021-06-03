@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ExpiredAlarmViewController: BaseViewController {
+class ExpiredAlarmViewController: VBVBaseViewController {
     
     @IBOutlet weak var tableView: VBVTableView!{
         didSet{

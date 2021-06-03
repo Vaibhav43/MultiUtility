@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddNotesViewController: BaseViewController {
+class AddNotesViewController: VBVBaseViewController {
     
     @IBOutlet weak var titleTextfield: VBVTextfield!{
         didSet{

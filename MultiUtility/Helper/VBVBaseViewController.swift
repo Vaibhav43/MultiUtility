@@ -1,5 +1,5 @@
 //
-//  BaseViewController.swift
+//  VBVBaseViewController.swift
 //  EcommerceFashionDesign
 //
 //  Created by Vaibhav Agarwal on 14/06/18.
@@ -14,10 +14,10 @@ import MobileCoreServices
     @objc optional func pdf(url: URL?)
 }
 
-class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
+class VBVBaseViewController: UIViewController, UIGestureRecognizerDelegate {
     
     /// gesture to remove keyboard when tapped the view
-    var tapGesture = UITapGestureRecognizer()
+    var tapGesture: UITapGestureRecognizer?
     
     /// view for the management of textfields when keyboard appears
     var onView: UIView?
@@ -76,11 +76,11 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
         if addGesture{
             
             tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-            tapGesture.cancelsTouchesInView = false
-            tapGesture.delegate = self
+            tapGesture?.cancelsTouchesInView = false
+            tapGesture?.delegate = self
             
             if onView != nil{
-                onView?.addGestureRecognizer(tapGesture)
+                onView?.addGestureRecognizer(tapGesture!)
             }
         }
     }
@@ -94,7 +94,8 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
         
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        self.onView?.removeGestureRecognizer(tapGesture)
+        self.onView?.removeGestureRecognizer(tapGesture!)
+        tapGesture = nil
     }
     
     /// notification of keyboardWillShow will be received here
@@ -170,7 +171,7 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
 
 //MARK:- Compression
 
-extension BaseViewController{
+extension VBVBaseViewController{
     
     func compressURL(outputFileURL: URL, completion: @escaping ((Data?)->())) {
         
@@ -224,7 +225,7 @@ extension BaseViewController{
 
 //MARK:- document reading functions
 
-extension BaseViewController: UIDocumentPickerDelegate, UIDocumentInteractionControllerDelegate{
+extension VBVBaseViewController: UIDocumentPickerDelegate, UIDocumentInteractionControllerDelegate{
     
     func documentController(url: URL, view: UIView?) {
         
